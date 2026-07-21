@@ -1,0 +1,2218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="description"
+content="Autonomous UAV behavioural flight-control architecture developed by Ninad Bhave using MATLAB, Simulink, flight dynamics, autonomous systems and AI-inspired supervisory control.">
+
+<title>
+Autonomous UAV Behavioural Flight Architecture | Ninad Bhave
+</title>
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#eef2f6;
+    color:#1f2937;
+    line-height:1.7;
+}
+
+a{
+    text-decoration:none;
+}
+
+
+/* NAVIGATION */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(15,23,42,0.97);
+    border-bottom:1px solid rgba(255,255,255,0.12);
+}
+
+.nav-container{
+    width:90%;
+    max-width:1150px;
+    margin:auto;
+    min-height:66px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:24px;
+}
+
+.nav-name{
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.nav-links a{
+    color:#cbd5e1;
+    font-size:14px;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+
+/* HERO */
+
+.hero{
+    background:
+    linear-gradient(
+        135deg,
+        rgba(8,20,39,0.99),
+        rgba(15,67,86,0.97)
+    );
+
+    color:white;
+    padding:88px 20px;
+}
+
+.hero-content{
+    width:90%;
+    max-width:1150px;
+    margin:auto;
+}
+
+.hero-label{
+    display:inline-block;
+    background:rgba(255,255,255,0.10);
+    border:1px solid rgba(255,255,255,0.22);
+    color:#cffafe;
+    padding:7px 13px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    max-width:970px;
+    font-size:50px;
+    line-height:1.15;
+    margin-bottom:18px;
+}
+
+.hero-role{
+    color:#a5f3fc;
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:22px;
+}
+
+.hero-description{
+    max-width:970px;
+    color:#e2e8f0;
+    font-size:17px;
+}
+
+.hero-tags{
+    margin-top:28px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.hero-tag{
+    background:rgba(255,255,255,0.10);
+    border:1px solid rgba(255,255,255,0.18);
+    color:white;
+    padding:8px 12px;
+    border-radius:22px;
+    font-size:13px;
+}
+
+
+/* GENERAL PAGE */
+
+.container{
+    width:90%;
+    max-width:1150px;
+    margin:auto;
+    padding:45px 0;
+}
+
+.section{
+    background:white;
+    margin-bottom:30px;
+    padding:34px;
+    border-radius:16px;
+    box-shadow:0 8px 26px rgba(15,23,42,0.08);
+}
+
+.section h2{
+    color:#0f172a;
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.section-intro{
+    color:#475569;
+    max-width:920px;
+    margin-bottom:26px;
+}
+
+
+/* INFORMATION CARDS */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.info-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:12px;
+    padding:20px;
+}
+
+.info-card span{
+    display:block;
+    color:#64748b;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-bottom:8px;
+}
+
+.info-card strong{
+    color:#0f172a;
+    font-size:16px;
+}
+
+
+/* PROBLEM AND SOLUTION */
+
+.problem-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.problem-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:14px;
+    padding:25px;
+}
+
+.problem-card h3{
+    color:#0f172a;
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+.problem-card p{
+    color:#475569;
+}
+
+.problem-card.solution{
+    border-left:5px solid #0f766e;
+}
+
+
+/* OBJECTIVES */
+
+.objectives-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.objective-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:12px;
+    padding:20px;
+}
+
+.objective-card h3{
+    color:#0f172a;
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.objective-card p{
+    color:#475569;
+}
+
+
+/* ARCHITECTURE IMAGE */
+
+.architecture-image{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:14px;
+    padding:14px;
+    margin-bottom:24px;
+}
+
+.architecture-image img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:9px;
+}
+
+
+/* ARCHITECTURE MODULES */
+
+.module-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.module-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:23px;
+}
+
+.module-card h3{
+    color:#0f172a;
+    font-size:19px;
+    margin-bottom:9px;
+}
+
+.module-card p{
+    color:#475569;
+}
+
+
+/* WORKFLOW */
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.workflow-step{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    border-radius:10px;
+    padding:20px 14px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+
+/* ENGINEERING SKILLS */
+
+.skills-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.skill-card{
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:24px;
+    background:#f8fafc;
+}
+
+.skill-card h3{
+    color:#0f172a;
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.skill-card p{
+    color:#475569;
+}
+
+.skill-evidence{
+    margin-top:14px;
+    padding:12px 14px;
+    background:#e8eef4;
+    border-radius:9px;
+    color:#334155;
+    font-size:14px;
+}
+
+.skill-evidence strong{
+    color:#0f172a;
+}
+
+
+/* RESULTS */
+
+.results-list{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+.result-item{
+    display:grid;
+    grid-template-columns:minmax(0,1.1fr) minmax(300px,0.9fr);
+    gap:28px;
+    align-items:center;
+    border:1px solid #dbe3ec;
+    background:#f8fafc;
+    border-radius:15px;
+    padding:24px;
+}
+
+.result-item:nth-child(even) .result-image{
+    order:2;
+}
+
+.result-item:nth-child(even) .result-content{
+    order:1;
+}
+
+.result-image{
+    background:white;
+    border:1px solid #dbe3ec;
+    border-radius:12px;
+    padding:12px;
+}
+
+.result-image img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:8px;
+}
+
+.result-label{
+    display:inline-block;
+    background:#dce9ea;
+    color:#164e63;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-bottom:12px;
+}
+
+.result-content h3{
+    color:#0f172a;
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.result-content p{
+    color:#475569;
+    margin-bottom:12px;
+}
+
+.key-result{
+    background:#e7eff1;
+    border-left:4px solid #0f766e;
+    padding:13px 15px;
+    border-radius:0 9px 9px 0;
+    color:#334155;
+    font-size:14px;
+}
+
+
+/* ENGINEERING QUESTIONS */
+
+.question-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.question-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:23px;
+}
+
+.question-card h3{
+    color:#0f172a;
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.question-card p{
+    color:#475569;
+}
+
+
+/* APPLICATIONS */
+
+.application-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.application-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:24px;
+}
+
+.application-card h3{
+    color:#0f172a;
+    font-size:21px;
+    margin-bottom:10px;
+}
+
+.application-card p{
+    color:#475569;
+}
+
+
+/* ETHICS */
+
+.ethics-box{
+    background:#f8fafc;
+    border-left:5px solid #0f766e;
+    padding:24px;
+    border-radius:0 13px 13px 0;
+}
+
+.ethics-box p{
+    color:#475569;
+    margin-bottom:14px;
+}
+
+.ethics-list{
+    margin-left:20px;
+    color:#334155;
+}
+
+.ethics-list li{
+    margin-bottom:9px;
+}
+
+
+/* EMPLOYER VALUE */
+
+.value-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.value-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:23px;
+}
+
+.value-card h3{
+    color:#0f172a;
+    margin-bottom:10px;
+    font-size:20px;
+}
+
+.value-card p{
+    color:#475569;
+}
+
+
+/* SUPPORTING FILES */
+
+.files-description{
+    max-width:920px;
+    color:#475569;
+    margin-bottom:22px;
+}
+
+.file-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:#0f172a;
+    color:white;
+    padding:12px 21px;
+    border-radius:9px;
+    font-size:14px;
+    font-weight:bold;
+    transition:0.2s;
+}
+
+.button:hover{
+    background:#155e75;
+    transform:translateY(-2px);
+}
+
+.button.secondary{
+    background:#e2e8f0;
+    color:#0f172a;
+}
+
+.button.secondary:hover{
+    background:#cbd5e1;
+}
+
+
+/* FOOTER */
+
+footer{
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:28px 20px;
+    margin-top:45px;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .info-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .module-grid,
+    .application-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .workflow{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .result-item{
+        grid-template-columns:1fr;
+    }
+
+    .result-item:nth-child(even) .result-image,
+    .result-item:nth-child(even) .result-content{
+        order:initial;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .hero{
+        padding:60px 20px;
+    }
+
+    .hero h1{
+        font-size:36px;
+    }
+
+    .nav-container{
+        padding:14px 0;
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .nav-links{
+        gap:12px;
+    }
+
+    .info-grid,
+    .problem-grid,
+    .objectives-grid,
+    .module-grid,
+    .workflow,
+    .skills-grid,
+    .question-grid,
+    .application-grid,
+    .value-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section{
+        padding:24px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+<div class="nav-container">
+
+<a class="nav-name" href="index.html">
+Ninad Bhave
+</a>
+
+<div class="nav-links">
+
+<a href="#problem">Problem</a>
+
+<a href="#architecture">Architecture</a>
+
+<a href="#skills">Skills</a>
+
+<a href="#nominal">Nominal Case</a>
+
+<a href="#disturbance">Disturbance Case</a>
+
+<a href="#applications">Applications</a>
+
+<a href="#files">Files</a>
+
+</div>
+
+</div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<header class="hero">
+
+<div class="hero-content">
+
+<div class="hero-label">
+Personal Autonomous Aerospace Systems Project
+</div>
+
+<h1>
+Autonomous UAV Behavioural Flight-Control Architecture
+</h1>
+
+<div class="hero-role">
+Role: Autonomous Systems &amp; Behavioural-Control Developer
+</div>
+
+<p class="hero-description">
+
+This project investigates how an autonomous UAV could navigate through
+mountainous terrain, maintain stable flight and alter its mission priorities
+when a predefined environmental hazard is detected.
+
+The prototype integrates flight dynamics, lateral and longitudinal control,
+map-based guidance, virtual sensing and an AI-inspired behavioural supervisor
+within one MATLAB and Simulink simulation environment.
+
+</p>
+
+<div class="hero-tags">
+
+<span class="hero-tag">Flight Dynamics</span>
+
+<span class="hero-tag">Autonomous Systems</span>
+
+<span class="hero-tag">Behavioural AI</span>
+
+<span class="hero-tag">MATLAB</span>
+
+<span class="hero-tag">Simulink</span>
+
+<span class="hero-tag">Flight Control</span>
+
+<span class="hero-tag">Systems Engineering</span>
+
+</div>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- PROJECT INFORMATION -->
+
+<section class="section">
+
+<h2>Project Information</h2>
+
+<p class="section-intro">
+
+An independent aerospace concept demonstrator developed to combine multiple
+engineering disciplines within one integrated autonomous-flight simulation.
+
+</p>
+
+<div class="info-grid">
+
+<div class="info-card">
+
+<span>Project Type</span>
+
+<strong>
+Personal Aerospace R&amp;D Concept
+</strong>
+
+</div>
+
+
+<div class="info-card">
+
+<span>Role</span>
+
+<strong>
+Autonomous Systems Developer
+</strong>
+
+</div>
+
+
+<div class="info-card">
+
+<span>Platform</span>
+
+<strong>
+Simplified 3-DoF UAV
+</strong>
+
+</div>
+
+
+<div class="info-card">
+
+<span>Environment</span>
+
+<strong>
+MATLAB and Simulink
+</strong>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PROBLEM AND SOLUTION -->
+
+<section class="section" id="problem">
+
+<h2>Engineering Problem and Proposed Solution</h2>
+
+<div class="problem-grid">
+
+
+<div class="problem-card">
+
+<h3>The Operational Problem</h3>
+
+<p>
+
+Autonomous UAVs operating through mountainous terrain cannot rely only on
+basic waypoint following. Narrow flight corridors, terrain hazards, changing
+mission priorities and limited operator intervention require the aircraft to
+interpret its operating condition while continuing to maintain stable flight.
+
+A conventional controller can track altitude, speed and heading commands, but
+it does not independently decide when those commands should change.
+
+</p>
+
+</div>
+
+
+<div class="problem-card solution">
+
+<h3>My Proposed Solution</h3>
+
+<p>
+
+I developed a map-informed autonomous UAV architecture in which a behavioural
+supervisor monitors navigation errors, environmental disturbances and mission
+status before modifying altitude, speed and lateral-control priorities.
+
+The supervisory layer does not replace the flight controller. Instead, it
+changes the mission objective while the low-level controllers and flight
+dynamics determine the physically achievable aircraft response.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- OBJECTIVES -->
+
+<section class="section">
+
+<h2>Engineering Objectives</h2>
+
+<div class="objectives-grid">
+
+
+<div class="objective-card">
+
+<h3>Autonomous Valley Navigation</h3>
+
+<p>
+Follow a mapped valley route without continuous pilot steering.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Lateral Containment</h3>
+
+<p>
+Remain within a preferred ±250 m corridor and a maximum ±500 m safe corridor.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Altitude Regulation</h3>
+
+<p>
+Maintain a nominal mission altitude of approximately 100 m above ground level.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Environmental Response</h3>
+
+<p>
+Detect a predefined hazard region and change mission priorities accordingly.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Stable Aircraft Dynamics</h3>
+
+<p>
+Maintain bounded actuator, angle-of-attack, roll and yaw-rate responses.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Mission Completion</h3>
+
+<p>
+Recognise the end of the mapped route and transition into a completed state.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ARCHITECTURE -->
+
+<section class="section" id="architecture">
+
+<h2>Integrated System Architecture</h2>
+
+<p class="section-intro">
+
+The prototype was divided into modular sensing, guidance, control, behavioural
+and aircraft-dynamics subsystems. This separation allowed each engineering
+function to be developed and evaluated independently before complete system
+integration.
+
+</p>
+
+<div class="architecture-image">
+
+<a
+href="assets/Autonomous UAV - 1.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Autonomous UAV - 1.png"
+alt="Integrated Simulink architecture for autonomous UAV behavioural flight control">
+
+</a>
+
+</div>
+
+
+<div class="module-grid">
+
+
+<div class="module-card">
+
+<h3>Environment Map</h3>
+
+<p>
+
+Defines the valley centreline, corridor limits, directional guidance
+information and predefined disturbance locations.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Lateral Guidance Controller</h3>
+
+<p>
+
+Uses heading error and cross-track error to generate coordinated aileron and
+rudder commands for route following.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Longitudinal Controller</h3>
+
+<p>
+
+Regulates altitude and speed through elevator and throttle commands while
+responding to behavioural gain changes.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Behavioural Supervisor</h3>
+
+<p>
+
+Selects normal tracking, disturbance/climb priority, lateral recovery or
+mission-complete behaviour according to the interpreted operating condition.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Custom UAV Model</h3>
+
+<p>
+
+Represents the simplified three-degree-of-freedom aircraft response and
+translates control commands into aircraft position and motion states.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Virtual Sensor Pack</h3>
+
+<p>
+
+Estimates angle of attack, roll response and yaw rate and assigns a sensor
+status for supervisory monitoring.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- WORKFLOW -->
+
+<section class="section">
+
+<h2>Engineering Workflow</h2>
+
+<div class="workflow">
+
+<div class="workflow-step">
+Identify Operational Problem
+</div>
+
+<div class="workflow-step">
+Define Mission Requirements
+</div>
+
+<div class="workflow-step">
+Create Valley Environment
+</div>
+
+<div class="workflow-step">
+Develop UAV Model
+</div>
+
+<div class="workflow-step">
+Design Guidance Controllers
+</div>
+
+<div class="workflow-step">
+Integrate Behaviour Logic
+</div>
+
+<div class="workflow-step">
+Run Nominal Simulation
+</div>
+
+<div class="workflow-step">
+Validate Disturbance Response
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SKILLS -->
+
+<section class="section" id="skills">
+
+<h2>Engineering Skills Demonstrated</h2>
+
+<p class="section-intro">
+
+The project demonstrates engineering ability through implemented subsystems,
+simulation evidence and technical interpretation rather than software labels
+alone.
+
+</p>
+
+<div class="skills-grid">
+
+
+<div class="skill-card">
+
+<h3>Flight-Dynamics Modelling</h3>
+
+<p>
+
+Developed and integrated a simplified three-degree-of-freedom UAV model capable
+of translating control commands into longitudinal and lateral aircraft motion.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+stable position, altitude, speed, roll, yaw-rate and angle-of-attack responses
+across nominal and disturbance simulations.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Autonomous Systems Engineering</h3>
+
+<p>
+
+Designed a system capable of map-based guidance, mode selection, disturbance
+response and mission-completion recognition without continuous pilot steering.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+autonomous valley traversal and transitions between normal tracking, recovery,
+climb priority and mission complete.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>AI-Inspired Behavioural Control</h3>
+
+<p>
+
+Implemented a transparent rule-based supervisory controller that interpreted
+mission conditions and changed altitude, speed and lateral-control priorities.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+automatic gain scheduling and command modification when a predefined hazard was
+detected.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Flight-Control Integration</h3>
+
+<p>
+
+Separated lateral and longitudinal control functions while coordinating them
+through a common behavioural supervisory layer.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+bounded aileron, rudder, elevator and throttle commands during curved-route and
+climb-priority manoeuvres.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>MATLAB Programming</h3>
+
+<p>
+
+Developed scripts for telemetry extraction, signal alignment, mission-summary
+generation, requirement evaluation and Excel-based data export.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+automated processing of aircraft states, controller commands, behaviour modes
+and mission-performance metrics.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Simulink Architecture Development</h3>
+
+<p>
+
+Integrated navigation, control, behavioural logic, sensing and aircraft
+dynamics within one modular simulation environment.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+complete subsystem architecture with independently logged interfaces and output
+signals.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Systems Engineering</h3>
+
+<p>
+
+Translated an operational need into mission requirements, subsystem functions,
+interfaces, simulation cases and validation criteria.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+traceable progression from valley-navigation problem to integrated nominal and
+disturbance testing.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Verification and Technical Analysis</h3>
+
+<p>
+
+Used simulation outputs to assess path containment, altitude regulation,
+control authority, virtual-sensor limits and behaviour-mode operation.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+separate nominal and disturbance cases supported by quantitative mission
+metrics and response plots.
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- NOMINAL RESULTS -->
+
+<section class="section" id="nominal">
+
+<h2>Nominal Mission Validation</h2>
+
+<p class="section-intro">
+
+The baseline simulation was conducted without an active centreline disturbance.
+It established whether the behavioural additions could operate without
+degrading normal route-following and altitude-control performance.
+
+</p>
+
+<div class="results-list">
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Valley path line follow.jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Valley path line follow.jpeg"
+alt="Autonomous UAV following a mapped valley centreline">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Nominal Navigation
+</span>
+
+<h3>Autonomous Valley-Centreline Following</h3>
+
+<p>
+
+The UAV followed the general curvature of the mapped valley from the initial
+position to the final waypoint without direct pilot steering.
+
+The centreline was used as a guidance reference rather than a mandatory
+zero-error path, allowing the aircraft to demonstrate realistic bounded
+tracking behaviour.
+
+</p>
+
+<div class="key-result">
+
+<strong>Validation outcome:</strong>
+the UAV remained within the ±500 m safe corridor throughout the valid nominal
+mission and operated predominantly within the preferred ±250 m corridor.
+
+</div>
+
+</div>
+
+</article>
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Altitude hold-no disturbances.jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Altitude hold-no disturbances.jpeg"
+alt="Nominal autonomous UAV altitude-hold response">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Longitudinal Control
+</span>
+
+<h3>Nominal Altitude Hold</h3>
+
+<p>
+
+The longitudinal controller maintained the aircraft close to the scheduled
+mission altitude of 100 m above ground level throughout the baseline route.
+
+The close agreement between actual altitude and required altitude demonstrated
+that the behavioural layer did not degrade the underlying altitude-hold
+function.
+
+</p>
+
+<div class="key-result">
+
+<strong>Validation outcome:</strong>
+stable nominal altitude regulation with only limited elevator correction.
+
+</div>
+
+</div>
+
+</article>
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Control surfaces response.jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Control surfaces response.jpeg"
+alt="Nominal control-command and virtual-sensor telemetry">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Aircraft Response
+</span>
+
+<h3>Control Commands and Virtual Sensors</h3>
+
+<p>
+
+Aileron and rudder commands changed direction according to the alternating
+curvature of the valley route, while throttle adjusted to support changes in
+manoeuvring demand.
+
+The estimated angle of attack, roll state and yaw rate remained bounded and
+returned toward zero after the final manoeuvring segment.
+
+</p>
+
+<div class="key-result">
+
+<strong>Validation outcome:</strong>
+finite actuator commands and controlled virtual-sensor responses throughout the
+nominal flight.
+
+</div>
+
+</div>
+
+</article>
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Behavioural feed back errors-no disturbances.jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Behavioural feed back errors-no disturbances.jpeg"
+alt="Nominal UAV tracking errors and behavioural controller outputs">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Supervisory Control
+</span>
+
+<h3>Tracking Errors and Behavioural Feedback</h3>
+
+<p>
+
+The supervisor alternated primarily between normal tracking and lateral
+recovery when additional heading or cross-track correction was required.
+
+Gain scaling changed according to the current navigation workload while
+preserving stable aircraft response.
+
+</p>
+
+<div class="key-result">
+
+<strong>Validation outcome:</strong>
+behavioural supervision supported route correction without destabilising the
+core guidance system.
+
+</div>
+
+</div>
+
+</article>
+
+
+</div>
+
+</section>
+
+
+<!-- DISTURBANCE RESULTS -->
+
+<section class="section" id="disturbance">
+
+<h2>Disturbance-Response Validation</h2>
+
+<p class="section-intro">
+
+A predefined centreline hazard was activated to determine whether the UAV could
+detect the changed mission condition, reprioritise its response and preserve
+controlled flight.
+
+</p>
+
+<div class="results-list">
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Valley path-disturbances on.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Valley path-disturbances on.png"
+alt="Autonomous UAV valley-following path with disturbance response active">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Hazard-Response Navigation
+</span>
+
+<h3>Valley Tracking During Disturbance</h3>
+
+<p>
+
+The lateral guidance controller remained active while the behavioural
+supervisor changed the longitudinal mission priorities.
+
+This allowed the UAV to continue following the mapped valley while initiating
+the climb-priority response.
+
+</p>
+
+<div class="key-result">
+
+<strong>Validation outcome:</strong>
+maximum cross-track error during the active disturbance was approximately
+147.43 m, remaining inside the preferred ±250 m corridor.
+
+</div>
+
+</div>
+
+</article>
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Altitude response-disturbance on centerline.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Altitude response-disturbance on centerline.png"
+alt="Autonomous UAV altitude response to behavioural disturbance command">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Behavioural Priority Change
+</span>
+
+<h3>Emergency Altitude Response</h3>
+
+<p>
+
+When the hazard was detected, the behavioural supervisor increased the required
+altitude from 100 m to a deliberately large conceptual emergency command of
+1000 m.
+
+The actual UAV climbed progressively rather than instantaneously because the
+low-level aircraft model remained constrained by elevator authority, throttle,
+forward speed, inertia and achievable climb rate.
+
+</p>
+
+<div class="key-result">
+
+<strong>Validation outcome:</strong>
+the UAV reached approximately 157.73 m during the active event and about
+160.16 m over the full simulation, demonstrating separation between supervisory
+intent and physically achievable aircraft response.
+
+</div>
+
+</div>
+
+</article>
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Control surface response-disturbance on centerline.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Control surface response-disturbance on centerline.png"
+alt="Control-command and virtual-sensor response during UAV disturbance case">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Dynamic Stability
+</span>
+
+<h3>Control and Sensor Response</h3>
+
+<p>
+
+Control commands remained finite during disturbance entry, climb response and
+recovery. Elevator behaviour changed during the climb phase and subsequently
+reversed as the UAV returned toward the nominal altitude.
+
+Angle of attack, roll and yaw-rate estimates also remained bounded throughout
+the manoeuvre.
+
+</p>
+
+<div class="key-result">
+
+<strong>Validation outcome:</strong>
+maximum absolute aileron, elevator and rudder commands remained approximately
+0.075, 0.030 and 0.080 respectively, while the virtual-sensor status remained
+normal.
+
+</div>
+
+</div>
+
+</article>
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Behaviour controller and errors-disturbance on centerline.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Behaviour controller and errors-disturbance on centerline.png"
+alt="Behaviour-controller outputs and tracking errors during disturbance case">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+AI-Inspired Supervision
+</span>
+
+<h3>Behavioural Controller Reprioritisation</h3>
+
+<p>
+
+During the active hazard interval, the behavioural controller increased the
+altitude-control gain, reduced the speed scale and retained sufficient lateral
+control authority.
+
+This demonstrates the intended AI-inspired behaviour: the system interpreted a
+mission condition and changed the relative priorities of the aircraft rather
+than merely responding to a single tracking error.
+
+</p>
+
+<div class="key-result">
+
+<strong>Validation outcome:</strong>
+the controller detected the hazard, entered climb-priority mode, reduced speed
+demand and preserved lateral containment until the disturbance cleared.
+
+</div>
+
+</div>
+
+</article>
+
+
+</div>
+
+</section>
+
+
+<!-- ENGINEERING QUESTIONS -->
+
+<section class="section">
+
+<h2>Engineering Design Questions</h2>
+
+<p class="section-intro">
+
+The following decisions explain why the prototype was structured in this form
+and how each architectural choice supports the engineering objective.
+
+</p>
+
+<div class="question-grid">
+
+
+<div class="question-card">
+
+<h3>Why did I choose this architecture?</h3>
+
+<p>
+
+A modular architecture allows the environment map, guidance, flight control,
+behavioural logic, sensors and aircraft model to be developed and tested
+independently.
+
+It also provides clear interfaces for future upgrades such as improved sensors,
+new flight behaviours or higher-fidelity aircraft dynamics.
+
+</p>
+
+</div>
+
+
+<div class="question-card">
+
+<h3>Why use a behavioural supervisor?</h3>
+
+<p>
+
+A flight controller determines how to track a command. A behavioural supervisor
+determines which command should be prioritised according to the interpreted
+mission condition.
+
+This separation allows the aircraft to retain stable low-level control while
+changing its operational objective.
+
+</p>
+
+</div>
+
+
+<div class="question-card">
+
+<h3>Why split lateral and longitudinal control?</h3>
+
+<p>
+
+Lateral motion involves heading, roll, yaw and cross-track correction, while
+longitudinal motion involves altitude, speed, pitch, elevator and throttle.
+
+Separating these functions simplifies controller development and allows one
+axis to change priority without unnecessarily replacing the complete flight
+control system.
+
+</p>
+
+</div>
+
+
+<div class="question-card">
+
+<h3>Why use virtual sensors?</h3>
+
+<p>
+
+Virtual sensors provide estimated aircraft-state information for development
+and supervisory monitoring before physical hardware is available.
+
+The concept allows angle of attack, roll and yaw-rate limits to be assessed
+within the simulation and prepares the architecture for future physical sensor
+integration.
+
+</p>
+
+</div>
+
+
+<div class="question-card">
+
+<h3>How does the disturbance logic work?</h3>
+
+<p>
+
+The environment map identifies whether the aircraft has entered a predefined
+hazard region. Once active, the supervisor changes behaviour mode, raises the
+altitude objective, increases altitude priority and reduces speed demand.
+
+After the hazard clears, the nominal altitude command is restored and the
+aircraft gradually recovers according to its dynamics.
+
+</p>
+
+</div>
+
+
+<div class="question-card">
+
+<h3>Why MATLAB and Simulink instead of Python?</h3>
+
+<p>
+
+MATLAB and Simulink allowed the aircraft model, control loops, decision logic
+and telemetry interfaces to be integrated within one time-based dynamic
+simulation.
+
+The graphical subsystem structure also supported signal tracing, controller
+development, logged-output analysis and future hardware-in-the-loop expansion.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- APPLICATIONS -->
+
+<section class="section" id="applications">
+
+<h2>Potential Real-World Applications</h2>
+
+<p class="section-intro">
+
+The current model is a conceptual prototype, but the underlying architecture
+could be adapted to several real aerospace missions requiring autonomous
+navigation and transparent behavioural decision-making.
+
+</p>
+
+<div class="application-grid">
+
+
+<div class="application-card">
+
+<h3>Defence Reconnaissance</h3>
+
+<p>
+
+A map-informed UAV could support surveillance and reconnaissance through
+difficult terrain while reducing continuous operator workload.
+
+Behavioural control could prioritise altitude, speed or route containment when
+environmental or mission conditions change.
+
+</p>
+
+</div>
+
+
+<div class="application-card">
+
+<h3>Emergency Medical Logistics</h3>
+
+<p>
+
+Autonomous UAVs could transport blood, medicines, vaccines or emergency
+equipment to remote communities and disaster-affected areas where terrain
+restricts conventional access.
+
+The behavioural layer could alter flight priorities in response to hazardous
+route conditions.
+
+</p>
+
+</div>
+
+
+<div class="application-card">
+
+<h3>Forest and Environmental Services</h3>
+
+<p>
+
+The system could support bushfire observation, forest-health monitoring,
+wildlife surveys, illegal-logging detection and environmental mapping.
+
+Map-based corridor navigation could help maintain repeatable monitoring routes
+across remote regions.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ETHICS -->
+
+<section class="section">
+
+<h2>AI, Autonomy and Engineering Ethics</h2>
+
+<div class="ethics-box">
+
+<p>
+
+Autonomous aerospace systems must be designed with safety, accountability and
+predictability as fundamental engineering requirements.
+
+The behavioural supervisor in this prototype uses transparent rule-based logic.
+Its decisions can therefore be inspected and traced to specific mission
+conditions, unlike an opaque system whose reasoning cannot easily be verified.
+
+</p>
+
+<p>
+
+In real operations, autonomous behaviour should remain constrained by approved
+flight envelopes, validated mission rules and appropriate human oversight.
+
+</p>
+
+<ul class="ethics-list">
+
+<li>
+Safety-critical limits must override mission objectives.
+</li>
+
+<li>
+Autonomous decisions should remain explainable and traceable.
+</li>
+
+<li>
+Human operators must retain appropriate authority and accountability.
+</li>
+
+<li>
+Sensor failures and uncertain data must be handled conservatively.
+</li>
+
+<li>
+Defence and surveillance applications require proportionality, lawful use and
+clear rules of engagement.
+</li>
+
+<li>
+Medical and civil applications require strong reliability, privacy and public
+trust.
+</li>
+
+</ul>
+
+</div>
+
+</section>
+
+
+<!-- EMPLOYER VALUE -->
+
+<section class="section">
+
+<h2>What I Bring to an Engineering Team</h2>
+
+<div class="value-grid">
+
+
+<div class="value-card">
+
+<h3>Problem-to-System Thinking</h3>
+
+<p>
+
+I can begin with an operational aerospace problem and translate it into mission
+requirements, subsystem functions, interfaces and measurable validation cases.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Multidisciplinary Integration</h3>
+
+<p>
+
+I am comfortable combining flight dynamics, control systems, autonomous
+behaviour, virtual sensing and software-based analysis within one coherent
+architecture.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>MATLAB and Simulink Strength</h3>
+
+<p>
+
+I can use MATLAB and Simulink not only to produce plots, but to develop
+integrated dynamic models, controller logic, telemetry pipelines and validation
+workflows.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Engineering Communication</h3>
+
+<p>
+
+I can interpret simulation outputs, identify what they prove, acknowledge model
+limitations and explain technical decisions to multidisciplinary stakeholders.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Systems Engineering Mindset</h3>
+
+<p>
+
+I approach complex designs through modular development, requirement
+traceability, interface definition, integration testing and progressive
+verification.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Responsible Autonomy</h3>
+
+<p>
+
+I recognise that intelligent aerospace systems require more than technical
+performance. They also require transparent logic, safety constraints, human
+oversight and ethical judgement.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REFLECTION -->
+
+<section class="section">
+
+<h2>Engineering Reflection</h2>
+
+<p>
+
+This project allowed me to connect flight dynamics, autonomous systems,
+behaviour-based AI and MATLAB/Simulink development within a single aerospace
+problem.
+
+The most important lesson was that autonomous intelligence should not replace
+the aircraft dynamics or low-level control system. Instead, it should modify
+mission priorities while allowing the aircraft model and flight controller to
+determine the physically achievable response.
+
+The project also strengthened my ability to move from an operational problem
+to a modular system architecture, create measurable requirements, test nominal
+and abnormal cases and communicate the engineering meaning of the results.
+
+</p>
+
+</section>
+
+
+<!-- SUPPORTING FILES -->
+
+<section class="section" id="files">
+
+<h2>Supporting Project Files</h2>
+
+<p class="files-description">
+
+The portfolio page above provides the primary explanation of the engineering
+problem, system architecture, implementation and validation results.
+
+The original simulation model and results document are available below for
+readers who would like to examine the prototype in greater technical detail.
+
+</p>
+
+<div class="file-buttons">
+
+
+<a
+class="button"
+href="assets/Results of Autonomous UAV _1593.pdf"
+target="_blank"
+rel="noopener">
+
+View Detailed Results
+
+</a>
+
+
+<a
+class="button"
+href="assets/UAV_3dof_Autonomus.slx"
+download>
+
+Download Simulink Model
+
+</a>
+
+
+<a
+class="button secondary"
+href="index.html">
+
+Return to Portfolio
+
+</a>
+
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+© 2026 Ninad Bhave | Aerospace Engineering Portfolio
+
+</footer>
+
+
+</body>
+
+</html>
