@@ -2,10 +2,19 @@
 <html lang="en">
 
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Flight Control System Optimisation | Ninad Bhave</title>
+<meta
+name="description"
+content="Flight Control System Optimisation for a Cessna 182 — aerospace engineering capstone portfolio project by Ninad Bhave.">
+
+<title>
+Flight Control System Optimisation | Ninad Bhave
+</title>
+
 
 <style>
 
@@ -15,81 +24,177 @@
     box-sizing:border-box;
 }
 
+html{
+    scroll-behavior:smooth;
+}
+
 body{
     font-family:Arial, Helvetica, sans-serif;
-    background:#f4f6f8;
-    color:#222;
+    background:#eef2f6;
+    color:#1f2937;
     line-height:1.7;
 }
 
-header{
-    background:#0f172a;
-    color:white;
-    padding:70px 20px;
+a{
+    text-decoration:none;
 }
 
-.hero{
+
+/* NAVIGATION */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(15,23,42,0.96);
+    border-bottom:1px solid rgba(255,255,255,0.12);
+}
+
+.nav-container{
     width:90%;
-    max-width:1100px;
+    max-width:1150px;
+    margin:auto;
+    min-height:66px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:24px;
+}
+
+.nav-name{
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.nav-links a{
+    color:#cbd5e1;
+    font-size:14px;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+
+/* HERO */
+
+.hero{
+    background:
+    linear-gradient(
+        135deg,
+        rgba(15,23,42,0.98),
+        rgba(30,58,95,0.96)
+    );
+
+    color:white;
+    padding:85px 20px;
+}
+
+.hero-content{
+    width:90%;
+    max-width:1150px;
     margin:auto;
 }
 
 .hero-label{
     display:inline-block;
-    background:#1e293b;
-    padding:7px 12px;
-    border-radius:20px;
-    font-size:14px;
-    margin-bottom:18px;
-}
-
-header h1{
-    font-size:46px;
-    line-height:1.2;
-    margin-bottom:15px;
-}
-
-.role{
-    font-size:20px;
-    color:#cbd5e1;
+    background:rgba(255,255,255,0.10);
+    border:1px solid rgba(255,255,255,0.22);
+    color:#dbeafe;
+    padding:7px 13px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
     margin-bottom:20px;
 }
 
-.hero p{
-    max-width:900px;
-    font-size:17px;
-    color:#e2e8f0;
+.hero h1{
+    max-width:950px;
+    font-size:50px;
+    line-height:1.15;
+    margin-bottom:18px;
 }
+
+.hero-role{
+    color:#bfdbfe;
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:22px;
+}
+
+.hero-description{
+    max-width:950px;
+    color:#e2e8f0;
+    font-size:17px;
+}
+
+.hero-tags{
+    margin-top:28px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.hero-tag{
+    background:rgba(255,255,255,0.10);
+    border:1px solid rgba(255,255,255,0.18);
+    color:white;
+    padding:8px 12px;
+    border-radius:22px;
+    font-size:13px;
+}
+
+
+/* PAGE STRUCTURE */
 
 .container{
     width:90%;
-    max-width:1100px;
+    max-width:1150px;
     margin:auto;
     padding:45px 0;
 }
 
 .section{
     background:white;
-    padding:32px;
-    border-radius:14px;
-    margin-bottom:28px;
-    box-shadow:0 6px 20px rgba(0,0,0,0.08);
+    margin-bottom:30px;
+    padding:34px;
+    border-radius:16px;
+    box-shadow:0 8px 26px rgba(15,23,42,0.08);
 }
 
 .section h2{
     color:#0f172a;
-    margin-bottom:18px;
+    font-size:30px;
+    margin-bottom:12px;
 }
+
+.section-intro{
+    color:#475569;
+    max-width:900px;
+    margin-bottom:26px;
+}
+
+
+/* PROJECT INFORMATION */
 
 .info-grid{
     display:grid;
-    grid-template-columns:repeat(4, 1fr);
+    grid-template-columns:repeat(4,1fr);
     gap:18px;
 }
 
 .info-card{
     background:#f8fafc;
-    border:1px solid #dbe2ea;
+    border:1px solid #dbe3ec;
     border-radius:12px;
     padding:20px;
 }
@@ -97,122 +202,403 @@ header h1{
 .info-card span{
     display:block;
     color:#64748b;
-    font-size:13px;
+    font-size:12px;
+    font-weight:bold;
     text-transform:uppercase;
-    margin-bottom:6px;
+    letter-spacing:0.06em;
+    margin-bottom:8px;
 }
 
 .info-card strong{
     color:#0f172a;
+    font-size:16px;
 }
 
-ul{
-    margin-left:20px;
-}
 
-li{
-    margin-bottom:10px;
-}
+/* ENGINEERING CHALLENGE */
 
-.tech-grid{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:18px;
-}
-
-.tech-card{
+.challenge-box{
     background:#f8fafc;
-    border:1px solid #dbe2ea;
-    border-radius:12px;
+    border-left:5px solid #1e3a5f;
+    border-radius:0 12px 12px 0;
     padding:22px;
 }
 
-.tech-card h3{
-    color:#0f172a;
-    margin-bottom:10px;
+.challenge-box p{
+    color:#334155;
 }
 
-.workflow{
+
+/* RESPONSIBILITIES */
+
+.responsibility-grid{
     display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:14px;
-}
-
-.step{
-    background:#0f172a;
-    color:white;
-    padding:20px;
-    border-radius:10px;
-    text-align:center;
-}
-
-.gallery-grid{
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
+    grid-template-columns:repeat(2,1fr);
     gap:18px;
 }
 
-.gallery-box{
-    min-height:230px;
-    border:2px dashed #cbd5e1;
-    border-radius:12px;
+.responsibility-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:23px;
+}
+
+.responsibility-card h3{
+    color:#0f172a;
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.responsibility-card p{
+    color:#475569;
+}
+
+
+/* TECHNICAL APPROACH */
+
+.approach-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.approach-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:23px;
+}
+
+.approach-number{
+    width:38px;
+    height:38px;
     display:flex;
     align-items:center;
     justify-content:center;
-    text-align:center;
-    color:#64748b;
-    background:#f8fafc;
-    padding:20px;
+    background:#0f172a;
+    color:white;
+    border-radius:50%;
+    font-weight:bold;
+    margin-bottom:15px;
 }
 
-.tags{
-    margin-top:10px;
-}
-
-.tag{
-    display:inline-block;
-    background:#e2e8f0;
+.approach-card h3{
     color:#0f172a;
-    padding:7px 11px;
+    margin-bottom:10px;
+    font-size:19px;
+}
+
+.approach-card p{
+    color:#475569;
+}
+
+
+/* WORKFLOW */
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.workflow-step{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    border-radius:10px;
+    padding:20px 14px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+
+/* SKILLS */
+
+.skills-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.skill-card{
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:24px;
+    background:#f8fafc;
+}
+
+.skill-card h3{
+    color:#0f172a;
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.skill-card p{
+    color:#475569;
+}
+
+.skill-evidence{
+    margin-top:14px;
+    padding:12px 14px;
+    background:#e9eef5;
+    border-radius:9px;
+    color:#334155;
+    font-size:14px;
+}
+
+.skill-evidence strong{
+    color:#0f172a;
+}
+
+
+/* RESULTS */
+
+.results-list{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+.result-item{
+    display:grid;
+    grid-template-columns:minmax(0,1.1fr) minmax(300px,0.9fr);
+    gap:28px;
+    align-items:center;
+    border:1px solid #dbe3ec;
+    background:#f8fafc;
+    border-radius:15px;
+    padding:24px;
+}
+
+.result-item:nth-child(even) .result-image{
+    order:2;
+}
+
+.result-item:nth-child(even) .result-content{
+    order:1;
+}
+
+.result-image{
+    background:white;
+    border:1px solid #dbe3ec;
+    border-radius:12px;
+    padding:12px;
+}
+
+.result-image img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:8px;
+}
+
+.result-label{
+    display:inline-block;
+    background:#dfe7f1;
+    color:#334155;
+    padding:6px 10px;
     border-radius:20px;
-    margin:5px 5px 0 0;
-    font-size:13px;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-bottom:12px;
+}
+
+.result-content h3{
+    color:#0f172a;
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.result-content p{
+    color:#475569;
+    margin-bottom:12px;
+}
+
+.key-result{
+    background:#e9eef5;
+    border-left:4px solid #1e3a5f;
+    padding:13px 15px;
+    border-radius:0 9px 9px 0;
+    color:#334155;
+    font-size:14px;
+}
+
+
+/* POSTER */
+
+.poster-layout{
+    display:grid;
+    grid-template-columns:minmax(300px,0.8fr) minmax(0,1.2fr);
+    gap:30px;
+    align-items:center;
+}
+
+.poster-image{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    padding:12px;
+    border-radius:13px;
+}
+
+.poster-image img{
+    width:100%;
+    display:block;
+    border-radius:8px;
+}
+
+.poster-content h3{
+    color:#0f172a;
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.poster-content p{
+    color:#475569;
+    margin-bottom:14px;
+}
+
+
+/* ENGINEERING DECISIONS */
+
+.decision-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.decision-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:23px;
+}
+
+.decision-card h3{
+    color:#0f172a;
+    margin-bottom:10px;
+    font-size:20px;
+}
+
+.decision-card p{
+    color:#475569;
+}
+
+
+/* SUPPORTING FILES */
+
+.files-description{
+    max-width:900px;
+    color:#475569;
+    margin-bottom:22px;
+}
+
+.file-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
 }
 
 .button{
-    display:inline-block;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
     background:#0f172a;
     color:white;
-    padding:12px 22px;
-    text-decoration:none;
-    border-radius:8px;
-    margin-right:10px;
-    margin-top:10px;
+    padding:12px 21px;
+    border-radius:9px;
+    font-size:14px;
+    font-weight:bold;
+    transition:0.2s;
 }
 
 .button:hover{
-    background:#1e293b;
+    background:#1e3a5f;
+    transform:translateY(-2px);
 }
+
+.button.secondary{
+    background:#e2e8f0;
+    color:#0f172a;
+}
+
+.button.secondary:hover{
+    background:#cbd5e1;
+}
+
+
+/* FOOTER */
 
 footer{
     background:#0f172a;
-    color:white;
+    color:#cbd5e1;
     text-align:center;
-    padding:25px;
-    margin-top:50px;
+    padding:28px 20px;
+    margin-top:45px;
 }
 
-@media(max-width:850px){
 
-    header h1{
+/* RESPONSIVE DESIGN */
+
+@media(max-width:900px){
+
+    .info-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .approach-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .workflow{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .result-item,
+    .poster-layout{
+        grid-template-columns:1fr;
+    }
+
+    .result-item:nth-child(even) .result-image,
+    .result-item:nth-child(even) .result-content{
+        order:initial;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .hero{
+        padding:60px 20px;
+    }
+
+    .hero h1{
         font-size:36px;
     }
 
+    .nav-container{
+        padding:14px 0;
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .nav-links{
+        gap:12px;
+    }
+
     .info-grid,
-    .tech-grid,
+    .responsibility-grid,
+    .approach-grid,
+    .skills-grid,
     .workflow,
-    .gallery-grid{
+    .decision-grid{
         grid-template-columns:1fr;
+    }
+
+    .section{
+        padding:24px;
     }
 
 }
@@ -221,11 +607,44 @@ footer{
 
 </head>
 
+
 <body>
 
-<header>
 
-<div class="hero">
+<!-- NAVIGATION -->
+
+<nav>
+
+<div class="nav-container">
+
+<a class="nav-name" href="index.html">
+Ninad Bhave
+</a>
+
+<div class="nav-links">
+
+<a href="#overview">Overview</a>
+
+<a href="#role">My Role</a>
+
+<a href="#skills">Skills</a>
+
+<a href="#results">Results</a>
+
+<a href="#files">Files</a>
+
+</div>
+
+</div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<header class="hero">
+
+<div class="hero-content">
 
 <div class="hero-label">
 Engineering Capstone Project
@@ -235,186 +654,352 @@ Engineering Capstone Project
 Flight Control System Optimisation for a Cessna 182
 </h1>
 
-<div class="role">
-Role: Flight Dynamics & Simulation Engineer
+<div class="hero-role">
+Role: Flight Dynamics &amp; Simulation Engineer
 </div>
 
-<p>
-This engineering capstone investigated the optimisation of a Cessna 182 flight
-control system using MATLAB and Simulink. Working within a multidisciplinary
-engineering team, the project integrated nonlinear flight dynamics, simulation,
-manual Genetic Algorithm optimisation and atmospheric disturbance modelling
-to evaluate aircraft performance under varying operating conditions.
+<p class="hero-description">
+
+This multidisciplinary aerospace engineering capstone investigated the
+development, optimisation and verification of a Cessna 182 longitudinal
+flight-control simulation using MATLAB and Simulink.
+
+My primary contribution was the development and implementation of the
+nonlinear flight-dynamics model, together with aircraft trim analysis,
+manual Genetic Algorithm integration, atmospheric disturbance modelling
+and interpretation of the resulting aircraft responses.
+
 </p>
+
+<div class="hero-tags">
+
+<span class="hero-tag">Flight Dynamics</span>
+
+<span class="hero-tag">MATLAB</span>
+
+<span class="hero-tag">Simulink</span>
+
+<span class="hero-tag">Manual Genetic Algorithm</span>
+
+<span class="hero-tag">Dryden Gust Modelling</span>
+
+<span class="hero-tag">Verification &amp; Validation</span>
+
+</div>
 
 </div>
 
 </header>
 
 
-<div class="container">
+<main class="container">
 
 
-<section class="section">
+<!-- OVERVIEW -->
+
+<section class="section" id="overview">
 
 <h2>Project Information</h2>
+
+<p class="section-intro">
+
+A concise overview of the project context, personal responsibility and
+engineering scope.
+
+</p>
 
 <div class="info-grid">
 
 <div class="info-card">
+
 <span>Project Type</span>
-<strong>Final-Year Engineering Capstone</strong>
+
+<strong>
+Final-Year Engineering Capstone
+</strong>
+
 </div>
 
+
 <div class="info-card">
+
 <span>Role</span>
-<strong>Flight Dynamics & Simulation Engineer</strong>
+
+<strong>
+Flight Dynamics &amp; Simulation Engineer
+</strong>
+
 </div>
 
+
 <div class="info-card">
+
 <span>Aircraft</span>
-<strong>Cessna 182</strong>
+
+<strong>
+Cessna 182
+</strong>
+
 </div>
 
+
 <div class="info-card">
+
 <span>Outcome</span>
-<strong>High Distinction</strong>
+
+<strong>
+High Distinction
+</strong>
+
 </div>
 
 </div>
 
 </section>
 
+
+<!-- ENGINEERING CHALLENGE -->
 
 <section class="section">
 
 <h2>Engineering Challenge</h2>
 
+<div class="challenge-box">
+
 <p>
-Develop a simulation-driven workflow capable of evaluating aircraft controller
-performance while maintaining stable longitudinal flight characteristics under
-realistic atmospheric disturbances.
+
+The project required a simulation-driven method capable of evaluating
+flight-control parameters while preserving stable longitudinal aircraft
+behaviour across different operating conditions.
+
+The simulation also needed to demonstrate realistic response under
+atmospheric turbulence, provide repeatable trim conditions and generate
+sufficient evidence for verification of aircraft stability, control authority
+and propulsion behaviour.
+
 </p>
 
-</section>
-
-
-<section class="section">
-
-<h2>My Responsibilities</h2>
-
-<ul>
-
-<li>
-Developed the nonlinear three-degree-of-freedom longitudinal flight dynamics model.
-</li>
-
-<li>
-Implemented the aircraft simulation environment in MATLAB and Simulink.
-</li>
-
-<li>
-Developed and refined custom MATLAB S-functions.
-</li>
-
-<li>
-Performed aircraft trim analysis for steady-state operating conditions.
-</li>
-
-<li>
-Integrated a manually implemented Genetic Algorithm workflow with the flight simulator.
-</li>
-
-<li>
-Implemented Dryden atmospheric gust modelling.
-</li>
-
-<li>
-Analysed aircraft stability and dynamic response.
-</li>
-
-<li>
-Supported project integration, verification and validation within the engineering team.
-</li>
-
-</ul>
+</div>
 
 </section>
 
+
+<!-- MY ROLE -->
+
+<section class="section" id="role">
+
+<h2>My Engineering Responsibilities</h2>
+
+<p class="section-intro">
+
+The project was completed by a multidisciplinary engineering team. The
+responsibilities below describe the areas that I personally developed,
+implemented or directly supported.
+
+</p>
+
+<div class="responsibility-grid">
+
+
+<div class="responsibility-card">
+
+<h3>Flight-Dynamics Development</h3>
+
+<p>
+
+Developed the nonlinear three-degree-of-freedom longitudinal flight-dynamics
+model representing aircraft airspeed, angle of attack, pitch attitude, pitch
+rate, altitude and range.
+
+</p>
+
+</div>
+
+
+<div class="responsibility-card">
+
+<h3>MATLAB and Simulink Implementation</h3>
+
+<p>
+
+Implemented the aircraft simulation environment in MATLAB and Simulink and
+developed custom MATLAB S-functions for calculation of the aircraft dynamic
+response.
+
+</p>
+
+</div>
+
+
+<div class="responsibility-card">
+
+<h3>Aircraft Trim Analysis</h3>
+
+<p>
+
+Established steady-state cruise conditions so that controller evaluation and
+disturbance testing began from physically consistent equilibrium points.
+
+</p>
+
+</div>
+
+
+<div class="responsibility-card">
+
+<h3>Manual Genetic Algorithm Integration</h3>
+
+<p>
+
+Integrated a manually implemented Genetic Algorithm workflow with the flight
+simulator to evaluate candidate parameter sets through repeated simulation and
+performance comparison.
+
+</p>
+
+</div>
+
+
+<div class="responsibility-card">
+
+<h3>Atmospheric Disturbance Modelling</h3>
+
+<p>
+
+Implemented Dryden gust disturbances to assess aircraft response under
+stochastic turbulence rather than ideal still-air conditions.
+
+</p>
+
+</div>
+
+
+<div class="responsibility-card">
+
+<h3>Verification and Interpretation</h3>
+
+<p>
+
+Analysed aircraft state, control-surface and propulsion responses and supported
+integration, verification and validation of the complete simulation framework.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- TECHNICAL APPROACH -->
 
 <section class="section">
 
 <h2>Technical Approach</h2>
 
-<div class="tech-grid">
+<p class="section-intro">
 
-<div class="tech-card">
+The project combined mathematical modelling, simulation, optimisation and
+verification within one structured aerospace engineering workflow.
 
-<h3>Flight Dynamics Model</h3>
+</p>
+
+<div class="approach-grid">
+
+
+<div class="approach-card">
+
+<div class="approach-number">1</div>
+
+<h3>Aircraft Mathematical Model</h3>
 
 <p>
-Developed a nonlinear longitudinal model representing aircraft airspeed,
-angle of attack, pitch attitude, pitch rate, altitude and range.
+
+The aircraft was represented through nonlinear longitudinal equations of
+motion and aerodynamic relationships appropriate for the Cessna 182 cruise
+regime.
+
 </p>
 
 </div>
 
 
-<div class="tech-card">
+<div class="approach-card">
 
-<h3>MATLAB and Simulink</h3>
+<div class="approach-number">2</div>
+
+<h3>Simulation Architecture</h3>
 
 <p>
-Used MATLAB for mathematical implementation, parameter evaluation and data
-analysis, while Simulink provided the integrated dynamic simulation environment.
+
+The mathematical model was implemented through MATLAB S-functions and
+integrated within Simulink to enable repeatable simulation and state monitoring.
+
 </p>
 
 </div>
 
 
-<div class="tech-card">
+<div class="approach-card">
 
-<h3>Aircraft Trim</h3>
+<div class="approach-number">3</div>
+
+<h3>Trim Establishment</h3>
 
 <p>
-Established steady-state flight conditions before optimisation and disturbance
-testing to support stable and repeatable simulation runs.
+
+Trim values were identified before disturbance testing to ensure that thrust,
+drag, lift, weight and pitching moments were balanced at the initial condition.
+
 </p>
 
 </div>
 
 
-<div class="tech-card">
+<div class="approach-card">
 
-<h3>Manual Genetic Algorithm</h3>
+<div class="approach-number">4</div>
+
+<h3>Parameter Evaluation</h3>
 
 <p>
-Integrated a manually implemented Genetic Algorithm workflow to evaluate,
-compare and refine candidate parameter sets through iterative simulation.
+
+The manual Genetic Algorithm workflow generated and compared candidate
+parameter combinations through successive flight-simulation runs.
+
 </p>
 
 </div>
 
 
-<div class="tech-card">
+<div class="approach-card">
 
-<h3>Dryden Gust Model</h3>
+<div class="approach-number">5</div>
+
+<h3>Dryden Gust Testing</h3>
 
 <p>
-Applied atmospheric turbulence inputs to evaluate aircraft response beyond
-ideal still-air operating conditions.
+
+Stochastic gust inputs were introduced to assess whether the aircraft remained
+bounded and dynamically stable under mild atmospheric disturbances.
+
 </p>
 
 </div>
 
 
-<div class="tech-card">
+<div class="approach-card">
 
-<h3>Verification and Validation</h3>
+<div class="approach-number">6</div>
+
+<h3>Verification</h3>
 
 <p>
-Checked aircraft state behaviour, trim conditions and simulation outputs
-through progressive subsystem and integrated-system testing.
+
+Aircraft responses were examined against stability, control-authority,
+cruise-performance and propulsion requirements.
+
 </p>
 
 </div>
@@ -423,6 +1008,8 @@ through progressive subsystem and integrated-system testing.
 
 </section>
 
+
+<!-- WORKFLOW -->
 
 <section class="section">
 
@@ -430,76 +1017,36 @@ through progressive subsystem and integrated-system testing.
 
 <div class="workflow">
 
-<div class="step">System Requirements</div>
-
-<div class="step">Aircraft Mathematical Model</div>
-
-<div class="step">MATLAB Implementation</div>
-
-<div class="step">Simulink Integration</div>
-
-<div class="step">Aircraft Trim</div>
-
-<div class="step">Manual GA Evaluation</div>
-
-<div class="step">Dryden Gust Testing</div>
-
-<div class="step">Verification & Validation</div>
-
+<div class="workflow-step">
+System Requirements
 </div>
 
-</section>
-
-
-<section class="section">
-
-<h2>Software and Engineering Skills</h2>
-
-<div class="tags">
-
-<span class="tag">MATLAB</span>
-
-<span class="tag">Simulink</span>
-
-<span class="tag">Flight Dynamics</span>
-
-<span class="tag">Aircraft Stability and Control</span>
-
-<span class="tag">Genetic Algorithm</span>
-
-<span class="tag">Dryden Gust Modelling</span>
-
-<span class="tag">Aircraft Trim Analysis</span>
-
-<span class="tag">Systems Engineering</span>
-
-<span class="tag">Verification and Validation</span>
-
+<div class="workflow-step">
+Aircraft Mathematical Model
 </div>
 
-</section>
-
-
-<section class="section">
-
-<h2>Project Gallery</h2>
-
-<div class="gallery-grid">
-
-<div class="gallery-box">
-<strong>Simulink Flight Dynamics Model</strong>
+<div class="workflow-step">
+MATLAB Implementation
 </div>
 
-<div class="gallery-box">
-<strong>MATLAB Simulation Results</strong>
+<div class="workflow-step">
+Simulink Integration
 </div>
 
-<div class="gallery-box">
-<strong>Aircraft Response Plots</strong>
+<div class="workflow-step">
+Aircraft Trim
 </div>
 
-<div class="gallery-box">
-<strong>Project Poster</strong>
+<div class="workflow-step">
+Manual GA Evaluation
+</div>
+
+<div class="workflow-step">
+Dryden Gust Testing
+</div>
+
+<div class="workflow-step">
+Verification &amp; Validation
 </div>
 
 </div>
@@ -507,45 +1054,795 @@ through progressive subsystem and integrated-system testing.
 </section>
 
 
-<section class="section">
+<!-- SKILLS -->
 
-<h2>Reflection</h2>
+<section class="section" id="skills">
+
+<h2>Engineering Skills Demonstrated</h2>
+
+<p class="section-intro">
+
+Each skill below is supported by a specific engineering task or technical
+outcome from the project.
+
+</p>
+
+<div class="skills-grid">
+
+
+<div class="skill-card">
+
+<h3>Aircraft Flight Dynamics</h3>
 
 <p>
-Developing the flight dynamics and simulation environment reinforced the
-importance of accurate mathematical modelling as the foundation of flight
-control system design. Integrating optimisation and atmospheric disturbance
-modelling also demonstrated the value of iterative simulation, subsystem
-verification and multidisciplinary collaboration within aerospace engineering.
+
+Applied nonlinear longitudinal equations of motion and aerodynamic
+relationships to simulate the behaviour of a Cessna 182 in cruise flight.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+development of the three-degree-of-freedom aircraft model and interpretation
+of angle-of-attack, velocity and altitude responses.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>MATLAB Programming</h3>
+
+<p>
+
+Used MATLAB to implement mathematical relationships, perform parameter
+evaluation, process simulation data and support iterative testing.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+custom S-functions, trim calculations and repeatable simulation workflows.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Simulink Modelling</h3>
+
+<p>
+
+Built the integrated simulation architecture connecting control inputs,
+aircraft equations and output states within a modular dynamic-system model.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+top-level Simulink flight-dynamics model used for trim and gust-response tests.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Optimisation Methodology</h3>
+
+<p>
+
+Applied a manually implemented Genetic Algorithm process to compare candidate
+parameters through successive simulations rather than relying solely on
+trial-and-error tuning.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+integration of candidate parameter evaluation with the flight simulator.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Aircraft Stability and Control</h3>
+
+<p>
+
+Evaluated short-period behaviour, phugoid response, control-surface motion and
+cruise-state stability under atmospheric disturbances.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+bounded angle of attack, limited elevator motion and near-steady cruise speed.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Verification and Validation</h3>
+
+<p>
+
+Compared simulation behaviour with technical requirements and expected
+Cessna-class aircraft characteristics to assess model credibility.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+verification of aerodynamic damping, trim equilibrium, control authority and
+propulsive stability.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Systems Engineering</h3>
+
+<p>
+
+Supported subsystem development and integration within the wider flight-control
+optimisation framework while maintaining traceability to project requirements.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+structured workflow from requirements and modelling through integration,
+testing and verification.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Technical Communication</h3>
+
+<p>
+
+Converted mathematical and simulation outputs into engineering conclusions
+that could be reviewed by multidisciplinary team members and academic assessors.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+technical report contributions, response interpretation and capstone poster.
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- RESULTS -->
+
+<section class="section" id="results">
+
+<h2>Simulation Architecture and Key Results</h2>
+
+<p class="section-intro">
+
+The selected figures below demonstrate how the flight model was implemented
+and how its longitudinal response was verified under Dryden gust disturbances.
+Click any image to open the full-resolution version.
+
+</p>
+
+<div class="results-list">
+
+
+<!-- SIMULINK MODEL -->
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/IMG_4140.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/IMG_4140.png"
+alt="Cessna 182 Simulink flight dynamics model">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Simulation Architecture
+</span>
+
+<h3>
+Simulink Flight-Dynamics Model
+</h3>
+
+<p>
+
+The nonlinear longitudinal aircraft model was implemented in Simulink using a
+custom MATLAB S-function. Control inputs were combined before entering the
+aircraft model, while the calculated aircraft states were separated into
+individual outputs for evaluation.
+
+</p>
+
+<p>
+
+This architecture provided the simulation foundation for trim analysis,
+manual Genetic Algorithm parameter evaluation and Dryden gust-response testing.
+
+</p>
+
+<div class="key-result">
+
+<strong>Engineering skill demonstrated:</strong>
+translation of nonlinear flight-dynamics equations into a functional,
+modular MATLAB/Simulink simulation environment.
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- ANGLE OF ATTACK -->
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Angle of attack response .jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Angle of attack response .jpeg"
+alt="Angle of attack response under Dryden gust disturbances">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Short-Period Stability
+</span>
+
+<h3>
+Angle-of-Attack Response
+</h3>
+
+<p>
+
+The angle-of-attack signal remained bounded during the 100-second Dryden gust
+simulation, with variation remaining within approximately ±0.8 degrees of the
+nominal trim condition.
+
+</p>
+
+<p>
+
+The absence of divergence or sustained bias indicated adequate aerodynamic
+damping and a dynamically stable short-period response under mild atmospheric
+turbulence.
+
+</p>
+
+<div class="key-result">
+
+<strong>Verification outcome:</strong>
+bounded angle-of-attack response with no divergent longitudinal behaviour.
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- VELOCITY -->
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Velocity response .jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Velocity response .jpeg"
+alt="Cessna 182 cruise velocity response">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Cruise Performance
+</span>
+
+<h3>
+Velocity Response
+</h3>
+
+<p>
+
+The aircraft maintained a cruise velocity close to the trim value of
+approximately 167.1 ft/s throughout the gust simulation.
+
+</p>
+
+<p>
+
+The relatively small fluctuations demonstrated that the selected trim condition
+maintained an effective balance between thrust and drag and remained
+representative of steady cruise flight.
+
+</p>
+
+<div class="key-result">
+
+<strong>Verification outcome:</strong>
+near-constant cruise speed with no evidence of airspeed divergence.
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- ALTITUDE -->
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Altitude response.jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Altitude response.jpeg"
+alt="Cessna 182 altitude response under gust disturbances">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Long-Period Stability
+</span>
+
+<h3>
+Altitude Response
+</h3>
+
+<p>
+
+The altitude response exhibited a gradual low-frequency excursion rather than
+a rapid or unstable departure from the initial 5000 ft condition.
+
+</p>
+
+<p>
+
+This behaviour was consistent with a lightly damped phugoid response, where
+kinetic and potential energy exchange slowly while the aircraft remains
+dynamically stable.
+
+</p>
+
+<div class="key-result">
+
+<strong>Verification outcome:</strong>
+limited low-frequency altitude variation without rapid divergence.
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- ELEVATOR -->
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Elevator response.jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Elevator response.jpeg"
+alt="Cessna 182 elevator response during gust simulation">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Control Authority
+</span>
+
+<h3>
+Elevator Response
+</h3>
+
+<p>
+
+Elevator deflection remained within a narrow range of approximately ±0.3
+degrees throughout the disturbance simulation, substantially below the
+available operational range of ±20 degrees.
+
+</p>
+
+<p>
+
+The bounded response showed that aircraft pitch behaviour was maintained
+without excessive control-surface movement and indicated sufficient natural
+aerodynamic damping.
+
+</p>
+
+<div class="key-result">
+
+<strong>Verification outcome:</strong>
+stable elevator motion with significant remaining control authority.
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- THROTTLE -->
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Throttle response.jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Throttle response.jpeg"
+alt="Cessna 182 throttle response during cruise gust simulation">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Propulsion Behaviour
+</span>
+
+<h3>
+Throttle Response
+</h3>
+
+<p>
+
+The simulated engine output remained close to the selected cruise trim setting
+during both the velocity-sweep and elevator-sweep disturbance cases.
+
+</p>
+
+<p>
+
+Only small fluctuations were observed during the 100-second simulations,
+demonstrating that the propulsion model maintained approximately constant power
+while the aircraft responded aerodynamically to atmospheric disturbances.
+
+</p>
+
+<div class="key-result">
+
+<strong>Verification outcome:</strong>
+stable cruise power with limited variation under stochastic gust excitation.
+
+</div>
+
+</div>
+
+</article>
+
+
+</div>
+
+</section>
+
+
+<!-- POSTER -->
+
+<section class="section">
+
+<h2>Engineering Capstone Poster</h2>
+
+<div class="poster-layout">
+
+
+<div class="poster-image">
+
+<a
+href="assets/PosterFinal.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/PosterFinal.png"
+alt="Flight Control System Design Optimisation capstone poster">
+
+</a>
+
+</div>
+
+
+<div class="poster-content">
+
+<span class="result-label">
+Final Project Presentation
+</span>
+
+<h3>
+Project Methodology and Outcomes
+</h3>
+
+<p>
+
+The final capstone poster summarises the project objective, flight-dynamics
+architecture, optimisation methodology, systems-engineering workflow and key
+verification results.
+
+</p>
+
+<p>
+
+It provides a concise visual overview of the complete multidisciplinary project,
+while the portfolio page identifies my individual contribution to the
+flight-dynamics and simulation work.
+
+</p>
+
+<a
+class="button"
+href="assets/PosterFinal.pdf"
+target="_blank"
+rel="noopener">
+
+Open Full Poster PDF
+
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ENGINEERING DECISIONS -->
+
+<section class="section">
+
+<h2>Engineering Decisions</h2>
+
+<div class="decision-grid">
+
+
+<div class="decision-card">
+
+<h3>Why a 3-DoF Longitudinal Model?</h3>
+
+<p>
+
+The project focused on pitch dynamics and longitudinal flight-control
+performance. A three-degree-of-freedom model provided sufficient fidelity for
+this objective while remaining computationally practical for repeated
+parameter evaluation.
+
+</p>
+
+</div>
+
+
+<div class="decision-card">
+
+<h3>Why MATLAB and Simulink?</h3>
+
+<p>
+
+MATLAB supported mathematical implementation, trim calculations and data
+analysis, while Simulink enabled the aircraft model and control inputs to be
+integrated within a repeatable dynamic simulation.
+
+</p>
+
+</div>
+
+
+<div class="decision-card">
+
+<h3>Why a Manual Genetic Algorithm?</h3>
+
+<p>
+
+The manually implemented workflow retained visibility over individual candidate
+solutions and enabled intermediate parameter combinations to be reviewed during
+development and verification.
+
+</p>
+
+</div>
+
+
+<div class="decision-card">
+
+<h3>Why Dryden Gust Modelling?</h3>
+
+<p>
+
+Dryden disturbances introduced statistically representative turbulence and
+allowed aircraft response to be tested under repeatable non-ideal atmospheric
+conditions.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REFLECTION -->
+
+<section class="section">
+
+<h2>Engineering Reflection</h2>
+
+<p>
+
+Developing the flight-dynamics and simulation environment reinforced the
+importance of accurate mathematical modelling as the foundation of
+flight-control system development.
+
+Integrating trim analysis, optimisation and atmospheric disturbance modelling
+also demonstrated how subsystem verification and iterative simulation contribute
+to reliable aerospace engineering outcomes.
+
+Working within a multidisciplinary team further strengthened my understanding
+of interface management, technical communication and the need to clearly
+distinguish individual subsystem responsibility from the wider project effort.
+
 </p>
 
 </section>
 
 
-<section class="section">
+<!-- SUPPORTING FILES -->
 
-<h2>Project Files</h2>
+<section class="section" id="files">
 
-<a class="button" href="#">
-Final Report
+<h2>Supporting Project Files</h2>
+
+<p class="files-description">
+
+The portfolio page above presents the principal engineering methods, personal
+contributions and technical interpretation of the project results.
+
+The original documents below are provided as supporting evidence for readers
+who would like to examine the complete team project, detailed analysis or
+MATLAB outputs.
+
+</p>
+
+<div class="file-buttons">
+
+
+<a
+class="button"
+href="assets/Capstone Final report.pdf"
+target="_blank"
+rel="noopener">
+
+View Full Technical Report
+
 </a>
 
-<a class="button" href="#">
-Project Poster
+
+<a
+class="button"
+href="assets/PosterFinal.pdf"
+target="_blank"
+rel="noopener">
+
+View Project Poster
+
 </a>
 
-<a class="button" href="#">
-MATLAB Files
+
+<a
+class="button"
+href="assets/MatlabOutput.pdf"
+target="_blank"
+rel="noopener">
+
+View MATLAB Outputs
+
 </a>
 
-<a class="button" href="index.html">
+
+<a
+class="button secondary"
+href="index.html">
+
 Return to Portfolio
+
 </a>
+
+
+</div>
 
 </section>
 
 
-</div>
+</main>
 
 
 <footer>
@@ -553,6 +1850,7 @@ Return to Portfolio
 © 2026 Ninad Bhave | Aerospace Engineering Portfolio
 
 </footer>
+
 
 </body>
 
