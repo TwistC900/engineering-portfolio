@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +26,7 @@ header{
     background:#0f172a;
     color:white;
     text-align:center;
-    padding:70px 20px;
+    padding:75px 20px;
 }
 
 header h1{
@@ -44,44 +45,99 @@ header p{
 
 .container{
     width:90%;
-    max-width:1100px;
+    max-width:1150px;
     margin:auto;
-    padding:40px 0;
+    padding:45px 0;
 }
 
-.card{
+.section{
     background:white;
-    margin-bottom:30px;
-    padding:30px;
-    border-radius:12px;
+    margin-bottom:35px;
+    padding:32px;
+    border-radius:14px;
     box-shadow:0 6px 20px rgba(0,0,0,0.08);
 }
 
-.card h2{
+.section h2{
     color:#0f172a;
-    margin-bottom:20px;
+    margin-bottom:22px;
 }
 
-ul{
-    margin-left:20px;
+.projects-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:24px;
 }
 
-li{
-    margin-bottom:10px;
+.project-card{
+    background:#f8fafc;
+    border:1px solid #dbe2ea;
+    border-radius:14px;
+    padding:26px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    min-height:300px;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 10px 25px rgba(0,0,0,0.12);
+}
+
+.project-card h3{
+    color:#0f172a;
+    margin-bottom:8px;
+    font-size:22px;
+}
+
+.project-role{
+    color:#475569;
+    font-size:15px;
+    margin-bottom:14px;
+    font-weight:bold;
+}
+
+.project-card p{
+    margin-bottom:18px;
+}
+
+.tags{
+    margin:10px 0 18px 0;
+}
+
+.tag{
+    display:inline-block;
+    background:#e2e8f0;
+    color:#0f172a;
+    padding:6px 10px;
+    margin:4px 5px 4px 0;
+    border-radius:20px;
+    font-size:13px;
 }
 
 .button{
     display:inline-block;
     background:#0f172a;
     color:white;
-    padding:12px 25px;
+    padding:11px 20px;
     text-decoration:none;
     border-radius:8px;
-    margin-top:20px;
+    margin-top:auto;
+    width:fit-content;
 }
 
 .button:hover{
     background:#1e293b;
+}
+
+.skills{
+    line-height:2;
+}
+
+.contact a{
+    color:#1d4ed8;
 }
 
 footer{
@@ -90,6 +146,18 @@ footer{
     text-align:center;
     padding:25px;
     margin-top:50px;
+}
+
+@media(max-width:800px){
+
+    header h1{
+        font-size:40px;
+    }
+
+    .projects-grid{
+        grid-template-columns:1fr;
+    }
+
 }
 
 </style>
@@ -104,63 +172,283 @@ footer{
 
 <h2>Aerospace Engineering (Honours) Graduate</h2>
 
-<p>Flight Dynamics | Autonomous Systems | Systems Engineering | Aircraft Structures</p>
+<p>
+Flight Dynamics | Autonomous Systems | Systems Engineering | Aircraft Structures
+</p>
 
 </header>
 
 <div class="container">
 
-<div class="card">
+<section class="section">
 
 <h2>About Me</h2>
 
 <p>
-
-Welcome to my professional engineering portfolio.
-
-This website showcases selected aerospace engineering projects completed throughout my Bachelor of Engineering (Honours) at RMIT University, Australia.
-
-My interests include flight dynamics, autonomous systems, aircraft structures, aerospace research and development, avionics, simulation-driven engineering and multidisciplinary systems engineering.
-
+Welcome to my professional aerospace engineering portfolio.
 </p>
 
-</div>
+<br>
 
-<div class="card">
+<p>
+This website presents selected engineering projects completed throughout my
+Bachelor of Engineering (Honours) at RMIT University, Australia.
+My interests include flight dynamics, autonomous systems, aerospace research
+and development, avionics, aircraft structures, simulation-driven engineering
+and multidisciplinary systems engineering.
+</p>
+
+</section>
+
+
+<section class="section">
 
 <h2>Featured Engineering Projects</h2>
 
-<ul>
+<div class="projects-grid">
 
-<li><strong>Flight Control System Design Optimisation (Capstone)</strong> – High Distinction project investigating aircraft flight dynamics, control system optimisation and Genetic Algorithms using MATLAB/Simulink.</li>
 
-<li><strong>Autonomous UAV Development</strong> – Integration of Autonomous Systems Engineering and Foundations of Artificial Intelligence to develop and validate a conceptual autonomous UAV for intelligent mission planning.</li>
+<!-- CAPSTONE PROJECT -->
 
-<li><strong>Pilatus PC-9 Composite Wing Redesign</strong> – Composite wing redesign incorporating finite element analysis, structural optimisation and aircraft maintenance principles.</li>
+<div class="project-card">
 
-<li><strong>MiG-21 Aerospace Systems Design</strong> – Systems engineering evaluation and modernisation study of the MiG-21 aircraft.</li>
+<div>
 
-<li><strong>Aerospace Bracket Design (DFMA)</strong> – Design and optimisation of a lightweight aerospace bracket capable of sustaining approximately three times the required design load.</li>
+<h3>Flight Control System Optimisation</h3>
 
-<li><strong>Aircraft CAD Portfolio</strong> – Professional aircraft modelling and component design using CATIA V6 and SolidWorks.</li>
+<div class="project-role">
+Role: Flight Dynamics & Simulation Engineer
+</div>
 
-</ul>
+<p>
+Developed a nonlinear three-degree-of-freedom longitudinal flight dynamics
+model for a Cessna 182 using MATLAB and Simulink. Integrated a manually
+implemented Genetic Algorithm workflow for iterative parameter evaluation and
+tested aircraft response under Dryden atmospheric disturbances.
+</p>
+
+<div class="tags">
+
+<span class="tag">MATLAB</span>
+<span class="tag">Simulink</span>
+<span class="tag">Flight Dynamics</span>
+<span class="tag">Genetic Algorithm</span>
+<span class="tag">Dryden Gust</span>
 
 </div>
 
-<div class="card">
+</div>
+
+<a class="button" href="capstone.html">
+View Project →
+</a>
+
+</div>
+
+
+<!-- AUTONOMOUS UAV PROJECT -->
+
+<div class="project-card">
+
+<div>
+
+<h3>Autonomous UAV Development</h3>
+
+<div class="project-role">
+Role: Autonomous Systems & AI Developer
+</div>
+
+<p>
+Conceptual autonomous UAV integrating navigation, terrain interpretation,
+mission planning and artificial intelligence principles using MATLAB and
+Simulink.
+</p>
+
+<div class="tags">
+
+<span class="tag">Autonomous Systems</span>
+<span class="tag">Artificial Intelligence</span>
+<span class="tag">MATLAB</span>
+<span class="tag">Simulink</span>
+
+</div>
+
+</div>
+
+<a class="button" href="uav.html">
+View Project →
+</a>
+
+</div>
+
+
+<!-- PC-9 PROJECT -->
+
+<div class="project-card">
+
+<div>
+
+<h3>Pilatus PC-9 Composite Wing Redesign</h3>
+
+<div class="project-role">
+Role: Structural Analysis Engineer
+</div>
+
+<p>
+Redesigned a Pilatus PC-9 wing structure using composite materials, structural
+load analysis and finite element modelling to investigate weight reduction,
+stress distribution and structural performance.
+</p>
+
+<div class="tags">
+
+<span class="tag">ABAQUS</span>
+<span class="tag">FEA</span>
+<span class="tag">Aircraft Structures</span>
+<span class="tag">Composite Materials</span>
+
+</div>
+
+</div>
+
+<a class="button" href="pc9.html">
+View Project →
+</a>
+
+</div>
+
+
+<!-- MIG-21 PROJECT -->
+
+<div class="project-card">
+
+<div>
+
+<h3>MiG-21 Aerospace Systems Design</h3>
+
+<div class="project-role">
+Role: Aerospace Systems Engineer
+</div>
+
+<p>
+Conducted a systems engineering modernisation study of the MiG-21 Bison,
+examining avionics, radar, weapons integration, operational requirements and
+aircraft capability development.
+</p>
+
+<div class="tags">
+
+<span class="tag">Systems Engineering</span>
+<span class="tag">Avionics</span>
+<span class="tag">Radar Systems</span>
+<span class="tag">Requirements Analysis</span>
+
+</div>
+
+</div>
+
+<a class="button" href="mig21.html">
+View Project →
+</a>
+
+</div>
+
+
+<!-- BRACKET PROJECT -->
+
+<div class="project-card">
+
+<div>
+
+<h3>Aerospace Bracket Design</h3>
+
+<div class="project-role">
+Role: Design & Manufacturing Engineer
+</div>
+
+<p>
+Designed and manufactured a lightweight aerospace support bracket using
+Design for Manufacturing and Assembly principles. The final component sustained
+approximately three times the required design load during testing.
+</p>
+
+<div class="tags">
+
+<span class="tag">CATIA</span>
+<span class="tag">SolidWorks</span>
+<span class="tag">DFMA</span>
+<span class="tag">Additive Manufacturing</span>
+
+</div>
+
+</div>
+
+<a class="button" href="bracket.html">
+View Project →
+</a>
+
+</div>
+
+
+<!-- AIRCRAFT CAD PROJECT -->
+
+<div class="project-card">
+
+<div>
+
+<h3>Aircraft CAD Portfolio</h3>
+
+<div class="project-role">
+Role: CAD Design Engineer
+</div>
+
+<p>
+Developed aircraft components and full aircraft geometry from engineering
+drawings using CATIA V6 and SolidWorks, with emphasis on accurate modelling,
+surface development and manufacturable geometry.
+</p>
+
+<div class="tags">
+
+<span class="tag">CATIA V6</span>
+<span class="tag">SolidWorks</span>
+<span class="tag">Aircraft Modelling</span>
+<span class="tag">Mechanical Design</span>
+
+</div>
+
+</div>
+
+<a class="button" href="cad.html">
+View Project →
+</a>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<section class="section">
 
 <h2>Technical Skills</h2>
 
-<p>
+<p class="skills">
 
-MATLAB • Simulink • CATIA V6 • SolidWorks • ABAQUS • Flight Dynamics • Systems Engineering • Aircraft Structures • Finite Element Analysis • Design for Manufacturing & Assembly • Autonomous Systems • Artificial Intelligence Applications
+MATLAB • Simulink • CATIA V6 • SolidWorks • ABAQUS • ANSYS •
+Flight Dynamics • Aircraft Stability and Control • Systems Engineering •
+Aircraft Structures • Finite Element Analysis • Composite Materials •
+Design for Manufacturing and Assembly • Autonomous Systems •
+Artificial Intelligence Applications
 
 </p>
 
-</div>
+</section>
 
-<div class="card">
+
+<section class="section contact">
 
 <h2>Contact</h2>
 
@@ -181,9 +469,10 @@ linkedin.com/in/ninad-bhave-8b7b53338
 
 </p>
 
-</div>
+</section>
 
 </div>
+
 
 <footer>
 
