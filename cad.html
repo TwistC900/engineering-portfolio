@@ -1,0 +1,2122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="description"
+content="Aircraft CAD design and engineering drafting portfolio by Ninad Bhave, demonstrating CATIA V5 part modelling, assembly design, engineering drawing interpretation, aircraft structural modelling and CAD documentation.">
+
+<title>
+Aircraft CAD Design & Engineering Drafting | Ninad Bhave
+</title>
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#eef2f6;
+    color:#1f2937;
+    line-height:1.7;
+}
+
+a{
+    text-decoration:none;
+}
+
+
+/* NAVIGATION */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(15,23,42,0.97);
+    border-bottom:1px solid rgba(255,255,255,0.12);
+}
+
+.nav-container{
+    width:90%;
+    max-width:1150px;
+    margin:auto;
+    min-height:66px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:24px;
+}
+
+.nav-name{
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.nav-links a{
+    color:#cbd5e1;
+    font-size:14px;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+
+/* HERO */
+
+.hero{
+    background:
+    linear-gradient(
+        135deg,
+        rgba(8,20,39,0.99),
+        rgba(15,67,86,0.97)
+    );
+
+    color:white;
+    padding:88px 20px;
+}
+
+.hero-content{
+    width:90%;
+    max-width:1150px;
+    margin:auto;
+}
+
+.hero-label{
+    display:inline-block;
+    background:rgba(255,255,255,0.10);
+    border:1px solid rgba(255,255,255,0.22);
+    color:#cffafe;
+    padding:7px 13px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    max-width:970px;
+    font-size:50px;
+    line-height:1.15;
+    margin-bottom:18px;
+}
+
+.hero-role{
+    color:#a5f3fc;
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:22px;
+}
+
+.hero-description{
+    max-width:970px;
+    color:#e2e8f0;
+    font-size:17px;
+}
+
+.hero-tags{
+    margin-top:28px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.hero-tag{
+    background:rgba(255,255,255,0.10);
+    border:1px solid rgba(255,255,255,0.18);
+    color:white;
+    padding:8px 12px;
+    border-radius:22px;
+    font-size:13px;
+}
+
+
+/* GENERAL PAGE */
+
+.container{
+    width:90%;
+    max-width:1150px;
+    margin:auto;
+    padding:45px 0;
+}
+
+.section{
+    background:white;
+    margin-bottom:30px;
+    padding:34px;
+    border-radius:16px;
+    box-shadow:0 8px 26px rgba(15,23,42,0.08);
+}
+
+.section h2{
+    color:#0f172a;
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.section-intro{
+    color:#475569;
+    max-width:920px;
+    margin-bottom:26px;
+}
+
+
+/* INFORMATION CARDS */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.info-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:12px;
+    padding:20px;
+}
+
+.info-card span{
+    display:block;
+    color:#64748b;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-bottom:8px;
+}
+
+.info-card strong{
+    color:#0f172a;
+    font-size:16px;
+}
+
+
+/* PROBLEM AND SOLUTION */
+
+.problem-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.problem-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:14px;
+    padding:25px;
+}
+
+.problem-card h3{
+    color:#0f172a;
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+.problem-card p{
+    color:#475569;
+}
+
+.problem-card.solution{
+    border-left:5px solid #0f766e;
+}
+
+
+/* OBJECTIVES */
+
+.objectives-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.objective-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:12px;
+    padding:20px;
+}
+
+.objective-card h3{
+    color:#0f172a;
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.objective-card p{
+    color:#475569;
+}
+
+
+/* WORKFLOW */
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:14px;
+}
+
+.workflow-step{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    border-radius:10px;
+    padding:20px 14px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+
+/* RESULTS AND IMAGE GALLERY */
+
+.results-list{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+.result-item{
+    display:grid;
+    grid-template-columns:minmax(0,1.1fr) minmax(300px,0.9fr);
+    gap:28px;
+    align-items:center;
+    border:1px solid #dbe3ec;
+    background:#f8fafc;
+    border-radius:15px;
+    padding:24px;
+}
+
+.result-item:nth-child(even) .result-image{
+    order:2;
+}
+
+.result-item:nth-child(even) .result-content{
+    order:1;
+}
+
+.result-image{
+    background:white;
+    border:1px solid #dbe3ec;
+    border-radius:12px;
+    padding:12px;
+}
+
+.result-image img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:8px;
+}
+
+.result-label{
+    display:inline-block;
+    background:#dce9ea;
+    color:#164e63;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-bottom:12px;
+}
+
+.result-content h3{
+    color:#0f172a;
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.result-content p{
+    color:#475569;
+    margin-bottom:12px;
+}
+
+.key-result{
+    background:#e7eff1;
+    border-left:4px solid #0f766e;
+    padding:13px 15px;
+    border-radius:0 9px 9px 0;
+    color:#334155;
+    font-size:14px;
+}
+
+
+/* SKILLS */
+
+.skills-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.skill-card{
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:24px;
+    background:#f8fafc;
+}
+
+.skill-card h3{
+    color:#0f172a;
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.skill-card p{
+    color:#475569;
+}
+
+.skill-evidence{
+    margin-top:14px;
+    padding:12px 14px;
+    background:#e8eef4;
+    border-radius:9px;
+    color:#334155;
+    font-size:14px;
+}
+
+.skill-evidence strong{
+    color:#0f172a;
+}
+
+
+/* CAD CAPABILITY */
+
+.capability-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.capability-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:23px;
+}
+
+.capability-card h3{
+    color:#0f172a;
+    font-size:19px;
+    margin-bottom:9px;
+}
+
+.capability-card p{
+    color:#475569;
+}
+
+
+/* DRAWING INTERPRETATION */
+
+.drawing-box{
+    background:#f8fafc;
+    border-left:5px solid #0f766e;
+    padding:24px;
+    border-radius:0 13px 13px 0;
+}
+
+.drawing-box p{
+    color:#475569;
+    margin-bottom:14px;
+}
+
+.drawing-list{
+    margin-left:20px;
+    color:#334155;
+}
+
+.drawing-list li{
+    margin-bottom:9px;
+}
+
+
+/* VALUE */
+
+.value-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.value-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:23px;
+}
+
+.value-card h3{
+    color:#0f172a;
+    margin-bottom:10px;
+    font-size:20px;
+}
+
+.value-card p{
+    color:#475569;
+}
+
+
+/* SUPPORTING FILES */
+
+.files-description{
+    max-width:920px;
+    color:#475569;
+    margin-bottom:22px;
+}
+
+.file-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:#0f172a;
+    color:white;
+    padding:12px 21px;
+    border-radius:9px;
+    font-size:14px;
+    font-weight:bold;
+    transition:0.2s;
+}
+
+.button:hover{
+    background:#155e75;
+    transform:translateY(-2px);
+}
+
+.button.secondary{
+    background:#e2e8f0;
+    color:#0f172a;
+}
+
+.button.secondary:hover{
+    background:#cbd5e1;
+}
+
+.additional-files{
+    margin-top:22px;
+    background:#e7eff1;
+    border-left:4px solid #0f766e;
+    padding:16px 18px;
+    border-radius:0 10px 10px 0;
+    color:#334155;
+}
+
+
+/* FOOTER */
+
+footer{
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:28px 20px;
+    margin-top:45px;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .info-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .workflow{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .capability-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .result-item{
+        grid-template-columns:1fr;
+    }
+
+    .result-item:nth-child(even) .result-image,
+    .result-item:nth-child(even) .result-content{
+        order:initial;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .hero{
+        padding:60px 20px;
+    }
+
+    .hero h1{
+        font-size:36px;
+    }
+
+    .nav-container{
+        padding:14px 0;
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .nav-links{
+        gap:12px;
+    }
+
+    .info-grid,
+    .problem-grid,
+    .objectives-grid,
+    .workflow,
+    .skills-grid,
+    .capability-grid,
+    .value-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section{
+        padding:24px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVIGATION -->
+
+<nav>
+
+<div class="nav-container">
+
+<a class="nav-name" href="index.html">
+Ninad Bhave
+</a>
+
+<div class="nav-links">
+
+<a href="#overview">Overview</a>
+
+<a href="#drawings">Drawings</a>
+
+<a href="#components">Components</a>
+
+<a href="#development">Development</a>
+
+<a href="#skills">CAD Skills</a>
+
+<a href="#files">Files</a>
+
+</div>
+
+</div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<header class="hero">
+
+<div class="hero-content">
+
+<div class="hero-label">
+High Distinction Aircraft CAD Project
+</div>
+
+<h1>
+Aircraft CAD Design &amp; Engineering Drafting
+</h1>
+
+<div class="hero-role">
+Role: CAD Drafter &amp; Aircraft Assembly Designer
+</div>
+
+<p class="hero-description">
+
+This project involved reconstructing the complete T240 aircraft in CATIA V5
+from supplied engineering drawings and assembly documentation.
+
+Individual structural components were interpreted from dimensioned drawings,
+modelled as parametric CAD parts and progressively integrated into the final
+aircraft assembly.
+
+The work demonstrates practical capability in aerospace drafting, engineering
+drawing interpretation, sheet-metal component modelling, constraint-based
+assembly and aircraft structural design.
+
+</p>
+
+<div class="hero-tags">
+
+<span class="hero-tag">CATIA V5</span>
+
+<span class="hero-tag">Engineering Drafting</span>
+
+<span class="hero-tag">Aircraft Modelling</span>
+
+<span class="hero-tag">Assembly Design</span>
+
+<span class="hero-tag">Parametric CAD</span>
+
+<span class="hero-tag">Sheet-Metal Components</span>
+
+<span class="hero-tag">Mechanical Design</span>
+
+<span class="hero-tag">High Distinction</span>
+
+</div>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- PROJECT INFORMATION -->
+
+<section class="section" id="overview">
+
+<h2>Project Information</h2>
+
+<p class="section-intro">
+
+A complete digital aircraft reconstruction developed by interpreting
+professional engineering drawings and converting them into individual CATIA
+parts, structural subassemblies and a complete constrained aircraft assembly.
+
+</p>
+
+<div class="info-grid">
+
+<div class="info-card">
+
+<span>Project</span>
+
+<strong>
+T240 Aircraft CAD Assembly
+</strong>
+
+</div>
+
+
+<div class="info-card">
+
+<span>Software</span>
+
+<strong>
+CATIA V5
+</strong>
+
+</div>
+
+
+<div class="info-card">
+
+<span>Role</span>
+
+<strong>
+CAD Drafter &amp; Assembly Designer
+</strong>
+
+</div>
+
+
+<div class="info-card">
+
+<span>Result</span>
+
+<strong>
+High Distinction
+</strong>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ENGINEERING CHALLENGE -->
+
+<section class="section">
+
+<h2>Engineering Challenge</h2>
+
+<div class="problem-grid">
+
+
+<div class="problem-card">
+
+<h3>The Drafting Challenge</h3>
+
+<p>
+
+The aircraft was not supplied as a completed digital model. The design had to
+be reconstructed from an engineering drawing package containing aircraft
+assembly drawings, exploded wing layouts, component dimensions, airfoil
+coordinates, sheet-metal bend information, tolerances and structural
+interfaces.
+
+This required the design intent contained within two-dimensional drawings to be
+correctly interpreted before accurate three-dimensional components could be
+created.
+
+</p>
+
+</div>
+
+
+<div class="problem-card solution">
+
+<h3>The Completed Outcome</h3>
+
+<p>
+
+More than twenty individual CAD components were created and integrated into the
+complete aircraft.
+
+Representative parts included wing ribs, spars, channels, skins, control
+surfaces and structural mounting components. These were developed into wing,
+tail and complete-aircraft assemblies while maintaining alignment, symmetry and
+component compatibility.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- OBJECTIVES -->
+
+<section class="section">
+
+<h2>Project Objectives</h2>
+
+<div class="objectives-grid">
+
+
+<div class="objective-card">
+
+<h3>Interpret Engineering Drawings</h3>
+
+<p>
+Extract dimensions, tolerances, profiles, quantities, interfaces and assembly
+relationships from the supplied technical documentation.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Create Parametric Parts</h3>
+
+<p>
+Translate two-dimensional manufacturing information into editable and
+dimensionally controlled CATIA components.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Develop Structural Subassemblies</h3>
+
+<p>
+Combine ribs, spars, channels, skins and control surfaces into an organised
+aircraft wing structure.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Complete the Aircraft Assembly</h3>
+
+<p>
+Integrate the wings, fuselage, empennage and mounting structures into one
+complete digital aircraft model.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Maintain Assembly Accuracy</h3>
+
+<p>
+Use constraints, reference geometry and visual verification to preserve
+symmetry, alignment and correct component interfaces.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Develop Design Refinements</h3>
+
+<p>
+Introduce additional structural support and aerodynamic transition features
+while maintaining compatibility with the baseline aircraft geometry.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ENGINEERING DRAWING INTERPRETATION -->
+
+<section class="section" id="drawings">
+
+<h2>Engineering Drawing Interpretation</h2>
+
+<p class="section-intro">
+
+The supplied drawing package formed the primary design input for the entire
+aircraft model. It included the complete T240 assembly, exploded wing
+structure, individual component drawings and detailed manufacturing
+information.
+
+</p>
+
+<div class="drawing-box">
+
+<p>
+
+Developing the aircraft from this documentation required more than copying
+visible geometry. The drawings had to be interpreted as a connected
+engineering system in which each dimension, reference, bend and interface
+affected the final assembly.
+
+</p>
+
+<ul class="drawing-list">
+
+<li>
+Read third-angle projection drawings and detailed component views.
+</li>
+
+<li>
+Interpreted linear and angular dimensions under ISO 2768-mK tolerances.
+</li>
+
+<li>
+Used coordinate tables to recreate the specified airfoil profile.
+</li>
+
+<li>
+Modelled sheet-metal thicknesses, flange geometry, bend radii and relief
+features.
+</li>
+
+<li>
+Interpreted exploded assembly drawings and bills of materials.
+</li>
+
+<li>
+Determined rib spacing, spar locations and component quantities.
+</li>
+
+<li>
+Maintained the relationship between part drawings, wing assembly drawings and
+the complete aircraft assembly.
+</li>
+
+<li>
+Converted drawing intent into editable three-dimensional parametric geometry.
+</li>
+
+</ul>
+
+</div>
+
+</section>
+
+
+<!-- WORKFLOW -->
+
+<section class="section">
+
+<h2>CAD Development Workflow</h2>
+
+<div class="workflow">
+
+<div class="workflow-step">
+Engineering Drawing Package
+</div>
+
+<div class="workflow-step">
+Individual Parametric Parts
+</div>
+
+<div class="workflow-step">
+Structural Subassemblies
+</div>
+
+<div class="workflow-step">
+Complete Aircraft Assembly
+</div>
+
+<div class="workflow-step">
+Interface &amp; Alignment Verification
+</div>
+
+</div>
+
+</section>
+
+
+<!-- COMPONENT GALLERY -->
+
+<section class="section" id="components">
+
+<h2>Aircraft Component &amp; Assembly Gallery</h2>
+
+<p class="section-intro">
+
+The following representative images show the progression from individual
+structural parts to the completed wing and aircraft assemblies.
+
+</p>
+
+<div class="results-list">
+
+
+<!-- ISOMETRIC WING -->
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/IsoWing.jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/IsoWing.jpeg"
+alt="CATIA isometric view of the completed T240 aircraft wing">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Completed Wing
+</span>
+
+<h3>Complete Wing Assembly</h3>
+
+<p>
+
+The completed wing integrates the internal structural system with external
+skins and control surfaces.
+
+The assembly demonstrates the ability to move from separate structural
+components to a complete aerodynamic wing while maintaining the designed
+airfoil geometry and component interfaces.
+
+</p>
+
+<div class="key-result">
+
+<strong>CAD capability:</strong>
+multi-part assembly development, external surface continuity and integration of
+structural and aerodynamic components.
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- INTERNAL WING -->
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Wing.jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Wing.jpeg"
+alt="CATIA internal wing structure showing ribs spars and control surfaces">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Internal Structure
+</span>
+
+<h3>Wing Rib and Spar Assembly</h3>
+
+<p>
+
+The internal wing assembly contains repeated nose ribs, middle ribs, rear ribs,
+the main spar, rear wing channel and the supporting structure for the control
+surfaces.
+
+The model required accurate repetition, spacing and constraint of multiple
+structural members across the wing span.
+
+</p>
+
+<div class="key-result">
+
+<strong>CAD capability:</strong>
+large assembly organisation, repeated structural features, rib positioning,
+spar integration and internal aircraft-structure modelling.
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- WING ASSEMBLY -->
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Wing_assemb.jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Wing_assemb.jpeg"
+alt="Completed CATIA wing assembly with skins and control surfaces">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Structural Integration
+</span>
+
+<h3>Wing Skins and Control Surfaces</h3>
+
+<p>
+
+The top and bottom skins were integrated with the internal wing structure,
+together with the flap and aileron components.
+
+This stage required the aerodynamic surface geometry to remain consistent with
+the internal rib and spar arrangement while preserving clear component
+boundaries.
+
+</p>
+
+<div class="key-result">
+
+<strong>CAD capability:</strong>
+skin modelling, control-surface integration, component alignment and
+aircraft-level assembly management.
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- NOSE RIB -->
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Nose.jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Nose.jpeg"
+alt="CATIA nose rib sheet-metal aircraft component">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Part Modelling
+</span>
+
+<h3>Nose Rib Component</h3>
+
+<p>
+
+The nose rib was reconstructed from its individual manufacturing drawing,
+including its airfoil profile, lightening holes, mounting holes, flange
+geometry and bend details.
+
+Fourteen instances were required within the complete wing assembly.
+
+</p>
+
+<div class="key-result">
+
+<strong>CAD capability:</strong>
+drawing-to-model conversion, sheet-metal geometry, bend interpretation,
+dimension control and repeatable aerospace part creation.
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- MID RIB -->
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Mid.jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Mid.jpeg"
+alt="CATIA middle rib aircraft structural component">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Structural Component
+</span>
+
+<h3>Middle Rib Component</h3>
+
+<p>
+
+The middle rib was developed from detailed dimensional information defining
+the airfoil offset, flange positions, bend radius, fastener holes and
+weight-reduction openings.
+
+The completed component was then positioned repeatedly along the spar according
+to the wing assembly drawing.
+
+</p>
+
+<div class="key-result">
+
+<strong>CAD capability:</strong>
+manufacture-aware part modelling, geometric interpretation and accurate
+placement within a larger structural assembly.
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- TAIL -->
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Tail_assemb 2.heic"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Tail_assemb 2.heic"
+alt="CATIA tail and empennage assembly for the T240 aircraft">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Empennage Assembly
+</span>
+
+<h3>Tail Structure Integration</h3>
+
+<p>
+
+The tail assembly combines the fuselage structure with the horizontal and
+vertical stabiliser components.
+
+The assembly required alignment of the empennage relative to the aircraft
+centreline and verification of the interfaces between the structural members
+and rear fuselage.
+
+</p>
+
+<div class="key-result">
+
+<strong>CAD capability:</strong>
+empennage modelling, symmetry control, assembly positioning and structural
+interface verification.
+
+</div>
+
+</div>
+
+</article>
+
+
+</div>
+
+</section>
+
+
+<!-- STRUCTURAL DESIGN DEVELOPMENT -->
+
+<section class="section" id="development">
+
+<h2>Structural Design Development</h2>
+
+<p class="section-intro">
+
+After completing the baseline aircraft assembly from the supplied drawings,
+additional structural and aerodynamic refinements were developed directly
+within CATIA V5.
+
+These modifications focused on improving mounting rigidity, structural
+continuity, load-transfer paths and aerodynamic integration around the
+wing-fuselage interface.
+
+</p>
+
+<div class="results-list">
+
+
+<!-- STRUT ASSEMBLY -->
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Strut_assemb.jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Strut_assemb.jpeg"
+alt="CATIA diagonal structural strut assembly">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Structural Reinforcement
+</span>
+
+<h3>Diagonal Strut Support Assembly</h3>
+
+<p>
+
+Diagonal support members were integrated between the lower fuselage mounting
+region and the upper wing-support structure.
+
+The triangulated arrangement introduced additional load paths and reduced the
+unsupported span of the structural members.
+
+</p>
+
+<div class="key-result">
+
+<strong>Engineering purpose:</strong>
+improved bending resistance, torsional rigidity, structural continuity and
+load transfer between the upper and lower support regions.
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- FINAL HEAD BRACKET -->
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Final_headbracket_design.jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Final_headbracket_design.jpeg"
+alt="Final reinforced aerodynamic head bracket design in CATIA">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Wing Mount Design
+</span>
+
+<h3>Final Reinforced Head Bracket</h3>
+
+<p>
+
+The head bracket was developed as a reinforced interface between the aircraft
+wing and fuselage support structure.
+
+Rather than using a simple flat plate, the component incorporated an
+aerodynamic profile and internal reinforcement to support wing mounting while
+improving geometric continuity around the upper fuselage.
+
+</p>
+
+<div class="key-result">
+
+<strong>Engineering purpose:</strong>
+increased mounting rigidity, improved wing-load distribution and smoother
+aerodynamic transition around the wing root.
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- HEAD BRACKET CONFIGURATION -->
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/HeadBracket_config.jpeg"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/HeadBracket_config.jpeg"
+alt="CATIA head bracket integration and wing mount configuration">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Assembly Integration
+</span>
+
+<h3>Wing Mount Configuration</h3>
+
+<p>
+
+The reinforced bracket was integrated into the complete aircraft using
+coincidence, contact, offset and centre-plane constraints.
+
+Its position was checked relative to the upper fuselage, wing support mounts,
+internal reinforcement and surrounding structural members.
+
+</p>
+
+<div class="key-result">
+
+<strong>CAD capability:</strong>
+designing new components within an existing assembly, managing interfaces and
+maintaining geometric compatibility during structural development.
+
+</div>
+
+</div>
+
+</article>
+
+
+</div>
+
+</section>
+
+
+<!-- CAD CAPABILITY -->
+
+<section class="section" id="skills">
+
+<h2>CAD &amp; Engineering Drafting Capability</h2>
+
+<p class="section-intro">
+
+This project demonstrates my ability to produce engineering-ready CAD from
+technical documentation rather than simply creating visual models.
+
+</p>
+
+<div class="capability-grid">
+
+
+<div class="capability-card">
+
+<h3>Drawing-to-CAD Translation</h3>
+
+<p>
+
+Interpret dimensioned engineering drawings and convert them into accurate,
+editable three-dimensional components while preserving the original design
+intent.
+
+</p>
+
+</div>
+
+
+<div class="capability-card">
+
+<h3>Parametric Part Modelling</h3>
+
+<p>
+
+Develop controlled part geometry using dimensions, profiles, reference planes,
+features, holes, bends and reusable design relationships.
+
+</p>
+
+</div>
+
+
+<div class="capability-card">
+
+<h3>Sheet-Metal Interpretation</h3>
+
+<p>
+
+Model aerospace components from specified thicknesses, bend radii, flange
+positions, relief features and manufacturing details.
+
+</p>
+
+</div>
+
+
+<div class="capability-card">
+
+<h3>Assembly Design</h3>
+
+<p>
+
+Build multi-part aircraft assemblies using constraints, centre-plane alignment,
+contact relationships and component interface verification.
+
+</p>
+
+</div>
+
+
+<div class="capability-card">
+
+<h3>Aircraft Structural Modelling</h3>
+
+<p>
+
+Develop ribs, spars, channels, skins, control surfaces, brackets, struts and
+empennage structures as connected elements of a complete aircraft.
+
+</p>
+
+</div>
+
+
+<div class="capability-card">
+
+<h3>Large Assembly Organisation</h3>
+
+<p>
+
+Maintain a clear product structure across numerous individual components and
+subassemblies while preserving part relationships and assembly readability.
+
+</p>
+
+</div>
+
+
+<div class="capability-card">
+
+<h3>Mechanical Design Judgement</h3>
+
+<p>
+
+Create additional structural support concepts that consider rigidity, load
+transfer, interface compatibility, manufacturability and aerodynamic
+continuity.
+
+</p>
+
+</div>
+
+
+<div class="capability-card">
+
+<h3>CAD Verification</h3>
+
+<p>
+
+Use front, side, top and isometric views to verify alignment, symmetry,
+component positioning and overall geometric continuity.
+
+</p>
+
+</div>
+
+
+<div class="capability-card">
+
+<h3>Engineering Documentation</h3>
+
+<p>
+
+Communicate the design through structured reports, assembly views, annotated
+images and downloadable digital engineering files.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SKILLS DEMONSTRATED -->
+
+<section class="section">
+
+<h2>Engineering Skills Demonstrated</h2>
+
+<div class="skills-grid">
+
+
+<div class="skill-card">
+
+<h3>CATIA V5 Part Design</h3>
+
+<p>
+
+Created individual aircraft components from dimensioned drawings using
+controlled sketches, pads, pockets, holes, reference geometry and feature-based
+modelling.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+nose ribs, middle ribs, rear ribs, spar components, channels, brackets and
+support members.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>CATIA Assembly Design</h3>
+
+<p>
+
+Integrated individual aircraft components and structural subassemblies into the
+complete T240 aircraft configuration.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+complete wing structure, tail assembly, wing-fuselage interfaces and final
+aircraft assembly.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Engineering Drawing Interpretation</h3>
+
+<p>
+
+Read component drawings, assembly views, coordinate tables, bills of materials,
+tolerances, bend information and detailed sections.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+the aircraft was reconstructed from the supplied drawing package rather than
+from an existing native CAD model.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Aerospace Structural Drafting</h3>
+
+<p>
+
+Modelled aircraft structural members using realistic rib, spar, skin, channel
+and control-surface arrangements.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+complete internal wing framework and associated external aerodynamic assembly.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Constraint-Based Modelling</h3>
+
+<p>
+
+Used assembly constraints and reference geometry to position components and
+maintain correct structural relationships.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+symmetrical wing placement, repeated rib locations, empennage alignment and
+head-bracket integration.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Design Development</h3>
+
+<p>
+
+Extended the baseline assembly through new structural supports and aerodynamic
+mounting features while preserving compatibility with the existing aircraft.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+diagonal struts, reinforced head bracket, internal support ribs and wing-root
+transition features.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Design for Manufacture Awareness</h3>
+
+<p>
+
+Considered material thickness, bends, hole placement, flange geometry,
+component repetition and practical assembly relationships.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+sheet-metal rib and spar models derived directly from manufacturing drawings.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Engineering Communication</h3>
+
+<p>
+
+Documented the model, modifications, design reasoning and future validation
+requirements within a structured engineering report.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+supporting free-design report and complete engineering drawing package.
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- WHAT I BRING -->
+
+<section class="section">
+
+<h2>What I Bring as a CAD Drafter</h2>
+
+<div class="value-grid">
+
+
+<div class="value-card">
+
+<h3>Accurate Drawing Interpretation</h3>
+
+<p>
+
+I can extract design intent from technical drawings and translate it into
+accurate digital geometry rather than relying on approximate visual
+reconstruction.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Aircraft-Level Understanding</h3>
+
+<p>
+
+I understand how individual ribs, spars, skins, channels, brackets and control
+surfaces contribute to the larger aircraft assembly.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Part-to-Assembly Thinking</h3>
+
+<p>
+
+I model components with their final interfaces and assembly relationships in
+mind, reducing conflicts during integration.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Manufacture-Aware CAD</h3>
+
+<p>
+
+I account for material thickness, flange geometry, bends, holes and component
+repetition when developing engineering models.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Structured CAD Management</h3>
+
+<p>
+
+I can organise multi-component CAD work into clear part and assembly
+hierarchies suitable for review and continued development.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Design Communication</h3>
+
+<p>
+
+I can present CAD work through appropriate views, concise technical
+descriptions, digital assembly files and supporting engineering documentation.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SUPPORTING DOCUMENTATION -->
+
+<section class="section">
+
+<h2>Supporting Engineering Documentation</h2>
+
+<p class="section-intro">
+
+Two documents support the CAD work presented on this page.
+
+The original drawing package provided the technical information used to
+reconstruct the aircraft, while the free-design report documents the structural
+and aerodynamic refinements developed after completion of the baseline
+assembly.
+
+</p>
+
+<div class="problem-grid">
+
+
+<div class="problem-card">
+
+<h3>Original Drawing Package</h3>
+
+<p>
+
+The drawing package includes the complete T240 aircraft assembly, exploded wing
+structure, component quantities, airfoil coordinates, nose and middle rib
+drawings, rear rib, wing spar and rear wing channel.
+
+It served as the primary engineering reference from which the CAD parts and
+assemblies were created.
+
+</p>
+
+</div>
+
+
+<div class="problem-card solution">
+
+<h3>Free Design Report</h3>
+
+<p>
+
+The free-design report documents the reinforced head bracket, diagonal struts,
+Y-bar support concept, internal reinforcement, wing-root fairing and final
+complete aircraft assembly.
+
+It also records the engineering rationale and identifies future FEA, fatigue
+and CFD validation work.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REFLECTION -->
+
+<section class="section">
+
+<h2>Engineering Reflection</h2>
+
+<p>
+
+This project strengthened my ability to work from engineering documentation
+and translate two-dimensional design information into a complete digital
+aircraft.
+
+The most important skill developed was understanding that accurate CAD drafting
+requires more than reproducing visible geometry. Every component must be
+created with its dimensions, manufacturing details, interfaces and final
+assembly position in mind.
+
+Developing more than twenty parts and integrating them into wing, tail and
+complete-aircraft assemblies also strengthened my ability to manage complex CAD
+structures and verify component relationships.
+
+The additional structural modifications allowed me to progress from drawing
+interpretation into design development, where new components had to improve the
+assembly while remaining compatible with the existing aircraft geometry.
+
+</p>
+
+</section>
+
+
+<!-- SUPPORTING FILES -->
+
+<section class="section" id="files">
+
+<h2>Supporting Project Files</h2>
+
+<p class="files-description">
+
+The files below allow the aircraft drawings, design report and principal CATIA
+assemblies to be reviewed in greater technical detail.
+
+</p>
+
+<div class="file-buttons">
+
+<a
+class="button"
+href="assets/Wsa.pdf"
+target="_blank"
+rel="noopener">
+Open Original Drawing Package
+</a>
+
+<a
+class="button"
+href="assets/FD.pdf"
+target="_blank"
+rel="noopener">
+Open Free Design Report
+</a>
+
+<a
+class="button"
+href="assets/CA_final_s3875369.3dxml"
+download>
+Download Complete Aircraft Assembly
+</a>
+
+<a
+class="button"
+href="assets/WSA_s3875369.3dxml"
+download>
+Download Wing Structure Assembly
+</a>
+
+<a
+class="button secondary"
+href="index.html">
+Return to Portfolio
+</a>
+
+</div>
+
+
+<div class="additional-files">
+
+<strong>Additional project files:</strong>
+
+The complete project contains more than twenty individual CATIA components
+created from the supplied engineering drawings before being integrated into the
+final aircraft assembly.
+
+Representative parts, primary assemblies and engineering documentation are
+provided here to keep the portfolio concise. The complete project archive,
+including the remaining native CAD parts and associated files, can be provided
+upon request for technical review.
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+Ninad Bhave — Aerospace Engineering Portfolio
+
+</footer>
+
+
+</body>
+
+</html>
