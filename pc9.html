@@ -3,23 +3,673 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="description"
-        content="Structural analysis of a Pilatus PC-9 wing, demonstrating static analysis, fatigue assessment, fracture mechanics, material selection and composite modernisation skills.">
+<meta
+name="description"
+content="Pilatus PC-9 wing structural analysis project by Ninad Bhave, demonstrating static analysis, fatigue, fracture mechanics, material selection and composite modernisation.">
 
-    <title>
-        Structural Analysis of a Pilatus PC-9 Wing | Ninad Bhave
-    </title>
+<title>
+Structural Analysis of a Pilatus PC-9 Wing | Ninad Bhave
+</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#eef2f6;
+    color:#1f2937;
+    line-height:1.7;
+}
+
+a{
+    text-decoration:none;
+}
+
+
+/* NAVIGATION */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(15,23,42,0.97);
+    border-bottom:1px solid rgba(255,255,255,0.12);
+}
+
+.nav-container{
+    width:90%;
+    max-width:1150px;
+    margin:auto;
+    min-height:66px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:24px;
+}
+
+.nav-name{
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.nav-links a{
+    color:#cbd5e1;
+    font-size:14px;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+
+/* HERO */
+
+.hero{
+    background:
+    linear-gradient(
+        135deg,
+        rgba(8,20,39,0.99),
+        rgba(15,67,86,0.97)
+    );
+
+    color:white;
+    padding:88px 20px;
+}
+
+.hero-content{
+    width:90%;
+    max-width:1150px;
+    margin:auto;
+}
+
+.hero-label{
+    display:inline-block;
+    background:rgba(255,255,255,0.10);
+    border:1px solid rgba(255,255,255,0.22);
+    color:#cffafe;
+    padding:7px 13px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    max-width:970px;
+    font-size:50px;
+    line-height:1.15;
+    margin-bottom:18px;
+}
+
+.hero-role{
+    color:#a5f3fc;
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:22px;
+}
+
+.hero-description{
+    max-width:970px;
+    color:#e2e8f0;
+    font-size:17px;
+}
+
+.hero-tags{
+    margin-top:28px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.hero-tag{
+    background:rgba(255,255,255,0.10);
+    border:1px solid rgba(255,255,255,0.18);
+    color:white;
+    padding:8px 12px;
+    border-radius:22px;
+    font-size:13px;
+}
+
+
+/* GENERAL PAGE */
+
+.container{
+    width:90%;
+    max-width:1150px;
+    margin:auto;
+    padding:45px 0;
+}
+
+.section{
+    background:white;
+    margin-bottom:30px;
+    padding:34px;
+    border-radius:16px;
+    box-shadow:0 8px 26px rgba(15,23,42,0.08);
+}
+
+.section h2{
+    color:#0f172a;
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.section-intro{
+    color:#475569;
+    max-width:920px;
+    margin-bottom:26px;
+}
+
+
+/* INFORMATION CARDS */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.info-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:12px;
+    padding:20px;
+}
+
+.info-card span{
+    display:block;
+    color:#64748b;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-bottom:8px;
+}
+
+.info-card strong{
+    color:#0f172a;
+    font-size:16px;
+}
+
+
+/* PROBLEM AND SOLUTION */
+
+.problem-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.problem-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:14px;
+    padding:25px;
+}
+
+.problem-card h3{
+    color:#0f172a;
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+.problem-card p{
+    color:#475569;
+}
+
+.problem-card.solution{
+    border-left:5px solid #0f766e;
+}
+
+
+/* OBJECTIVES */
+
+.objectives-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.objective-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:12px;
+    padding:20px;
+}
+
+.objective-card h3{
+    color:#0f172a;
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.objective-card p{
+    color:#475569;
+}
+
+
+/* ARCHITECTURE IMAGE */
+
+.architecture-image{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:14px;
+    padding:14px;
+    margin-bottom:24px;
+}
+
+.architecture-image img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:9px;
+}
+
+
+/* ARCHITECTURE MODULES */
+
+.module-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.module-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:23px;
+}
+
+.module-card h3{
+    color:#0f172a;
+    font-size:19px;
+    margin-bottom:9px;
+}
+
+.module-card p{
+    color:#475569;
+}
+
+
+/* WORKFLOW */
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.workflow-step{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    border-radius:10px;
+    padding:20px 14px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+
+/* ENGINEERING SKILLS */
+
+.skills-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.skill-card{
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:24px;
+    background:#f8fafc;
+}
+
+.skill-card h3{
+    color:#0f172a;
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.skill-card p{
+    color:#475569;
+}
+
+.skill-evidence{
+    margin-top:14px;
+    padding:12px 14px;
+    background:#e8eef4;
+    border-radius:9px;
+    color:#334155;
+    font-size:14px;
+}
+
+.skill-evidence strong{
+    color:#0f172a;
+}
+
+
+/* RESULTS */
+
+.results-list{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+.result-item{
+    display:grid;
+    grid-template-columns:minmax(0,1.1fr) minmax(300px,0.9fr);
+    gap:28px;
+    align-items:center;
+    border:1px solid #dbe3ec;
+    background:#f8fafc;
+    border-radius:15px;
+    padding:24px;
+}
+
+.result-item:nth-child(even) .result-image{
+    order:2;
+}
+
+.result-item:nth-child(even) .result-content{
+    order:1;
+}
+
+.result-image{
+    background:white;
+    border:1px solid #dbe3ec;
+    border-radius:12px;
+    padding:12px;
+}
+
+.result-image img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:8px;
+}
+
+.result-label{
+    display:inline-block;
+    background:#dce9ea;
+    color:#164e63;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-bottom:12px;
+}
+
+.result-content h3{
+    color:#0f172a;
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.result-content p{
+    color:#475569;
+    margin-bottom:12px;
+}
+
+.key-result{
+    background:#e7eff1;
+    border-left:4px solid #0f766e;
+    padding:13px 15px;
+    border-radius:0 9px 9px 0;
+    color:#334155;
+    font-size:14px;
+}
+
+
+/* ENGINEERING QUESTIONS */
+
+.question-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.question-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:23px;
+}
+
+.question-card h3{
+    color:#0f172a;
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.question-card p{
+    color:#475569;
+}
+
+
+/* APPLICATIONS */
+
+.application-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.application-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:24px;
+}
+
+.application-card h3{
+    color:#0f172a;
+    font-size:21px;
+    margin-bottom:10px;
+}
+
+.application-card p{
+    color:#475569;
+}
+
+
+/* ETHICS */
+
+.ethics-box{
+    background:#f8fafc;
+    border-left:5px solid #0f766e;
+    padding:24px;
+    border-radius:0 13px 13px 0;
+}
+
+.ethics-box p{
+    color:#475569;
+    margin-bottom:14px;
+}
+
+.ethics-list{
+    margin-left:20px;
+    color:#334155;
+}
+
+.ethics-list li{
+    margin-bottom:9px;
+}
+
+
+/* EMPLOYER VALUE */
+
+.value-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.value-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:23px;
+}
+
+.value-card h3{
+    color:#0f172a;
+    margin-bottom:10px;
+    font-size:20px;
+}
+
+.value-card p{
+    color:#475569;
+}
+
+
+/* SUPPORTING FILES */
+
+.files-description{
+    max-width:920px;
+    color:#475569;
+    margin-bottom:22px;
+}
+
+.file-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:#0f172a;
+    color:white;
+    padding:12px 21px;
+    border-radius:9px;
+    font-size:14px;
+    font-weight:bold;
+    transition:0.2s;
+}
+
+.button:hover{
+    background:#155e75;
+    transform:translateY(-2px);
+}
+
+.button.secondary{
+    background:#e2e8f0;
+    color:#0f172a;
+}
+
+.button.secondary:hover{
+    background:#cbd5e1;
+}
+
+
+/* FOOTER */
+
+footer{
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:28px 20px;
+    margin-top:45px;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .info-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .module-grid,
+    .application-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .workflow{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .result-item{
+        grid-template-columns:1fr;
+    }
+
+    .result-item:nth-child(even) .result-image,
+    .result-item:nth-child(even) .result-content{
+        order:initial;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .hero{
+        padding:60px 20px;
+    }
+
+    .hero h1{
+        font-size:36px;
+    }
+
+    .nav-container{
+        padding:14px 0;
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .nav-links{
+        gap:12px;
+    }
+
+    .info-grid,
+    .problem-grid,
+    .objectives-grid,
+    .module-grid,
+    .workflow,
+    .skills-grid,
+    .question-grid,
+    .application-grid,
+    .value-grid{
+        grid-template-columns:1fr;
+    }
+
+    .section{
+        padding:24px;
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -27,620 +677,1333 @@
 <body>
 
 
-<!-- ====================================================== -->
+<!-- NAVIGATION -->
+
+<nav>
+
+<div class="nav-container">
+
+<a class="nav-name" href="index.html">
+Ninad Bhave
+</a>
+
+<div class="nav-links">
+
+<a href="#problem">Problem</a>
+
+<a href="#methodology">Methodology</a>
+
+<a href="#skills">Skills</a>
+
+<a href="#static">Static Analysis</a>
+
+<a href="#dynamic">Dynamic Analysis</a>
+
+<a href="#materials">Materials</a>
+
+<a href="#files">Files</a>
+
+</div>
+
+</div>
+
+</nav>
+
+
 <!-- HERO -->
-<!-- ====================================================== -->
 
 <header class="hero">
 
-    <div class="hero-content">
+<div class="hero-content">
 
-        <p class="hero-label">
-            Aerospace Structures Studio
-        </p>
+<div class="hero-label">
+Aerospace Structures Studio
+</div>
 
-        <h1>
-            Structural Analysis of a Pilatus PC-9 Wing
-        </h1>
+<h1>
+Structural Analysis of a Pilatus PC-9 Wing
+</h1>
 
-        <p class="hero-subtitle">
-            Applying static analysis, fatigue assessment, fracture mechanics,
-            material selection and composite redesign to evaluate the structural
-            integrity of an aerospace wing.
-        </p>
+<div class="hero-role">
+Role: Structural Analysis and Composite-Design Contributor
+</div>
 
-    </div>
+<p class="hero-description">
+
+This project used the Pilatus PC-9 wing as a case study for developing
+transferable structural-analysis skills.
+
+The work progressed from aerodynamic load identification to forces and
+moments, stress analysis, static failure assessment, fatigue, fracture
+mechanics, material selection and composite modernisation.
+
+The central outcome was a repeatable engineering methodology that can be
+applied to aerospace structures, mechanical assemblies, trusses and other
+load-bearing systems.
+
+</p>
+
+<div class="hero-tags">
+
+<span class="hero-tag">Static Analysis</span>
+
+<span class="hero-tag">Dynamic Analysis</span>
+
+<span class="hero-tag">Fracture Mechanics</span>
+
+<span class="hero-tag">Fatigue</span>
+
+<span class="hero-tag">Material Selection</span>
+
+<span class="hero-tag">Composite Design</span>
+
+<span class="hero-tag">Structural Optimisation</span>
+
+</div>
+
+</div>
 
 </header>
 
 
-
-<main>
-
-
-<!-- ====================================================== -->
-<!-- PROJECT OVERVIEW -->
-<!-- ====================================================== -->
-
-<section class="section" id="overview">
-
-    <h2>
-        Project Overview
-    </h2>
-
-    <p>
-        This project used the Pilatus PC-9 wing as a case study for developing
-        a structured approach to aerospace structural analysis. The work began
-        by converting aerodynamic loading into forces and moments acting on the
-        wing structure before analysing the resulting bending, shear and
-        torsional stresses.
-    </p>
-
-    <p>
-        Static failure, stress concentrations, fracture behaviour and cyclic
-        fatigue were then assessed to determine the structural safety and
-        durability of the existing aluminium wing. The analysis was extended
-        through material selection and mathematical redesign using composite
-        materials.
-    </p>
-
-    <p>
-        The central outcome was not limited to analysing one aircraft wing.
-        It developed a repeatable structural engineering methodology that can
-        be applied to aerospace components, mechanical assemblies, trusses,
-        bridges and other load-bearing structures.
-    </p>
-
-</section>
+<main class="container">
 
 
+<!-- PROJECT INFORMATION -->
 
-<!-- ====================================================== -->
-<!-- SKILLS -->
-<!-- ====================================================== -->
+<section class="section">
 
-<section class="section" id="skills">
+<h2>Project Information</h2>
 
-    <h2>
-        Engineering Skills Demonstrated
-    </h2>
+<p class="section-intro">
 
-    <div class="project-grid">
+A structural engineering case study focused on analytical methodology,
+failure assessment and material modernisation rather than software-led
+analysis alone.
 
-        <article class="skill-card">
+</p>
 
-            <h3>
-                Load Identification
-            </h3>
+<div class="info-grid">
 
-            <p>
-                Converting operational loading into distributed and concentrated
-                forces acting on structural components.
-            </p>
+<div class="info-card">
 
-        </article>
+<span>Project Type</span>
 
+<strong>
+University Aerospace Structures Project
+</strong>
 
-        <article class="skill-card">
-
-            <h3>
-                Forces and Moments
-            </h3>
-
-            <p>
-                Resolving shear forces, bending moments and torsional moments
-                through structural load paths.
-            </p>
-
-        </article>
+</div>
 
 
-        <article class="skill-card">
+<div class="info-card">
 
-            <h3>
-                Stress Analysis
-            </h3>
+<span>Case Study</span>
 
-            <p>
-                Evaluating bending, shear, principal and equivalent stresses
-                across critical structural locations.
-            </p>
+<strong>
+Pilatus PC-9 Wing
+</strong>
 
-        </article>
+</div>
 
 
-        <article class="skill-card">
+<div class="info-card">
 
-            <h3>
-                Static Failure
-            </h3>
+<span>Primary Focus</span>
 
-            <p>
-                Comparing calculated stresses with material allowables and
-                determining structural margins of safety.
-            </p>
+<strong>
+Analytical Structural Assessment
+</strong>
 
-        </article>
+</div>
 
 
-        <article class="skill-card">
+<div class="info-card">
 
-            <h3>
-                Fatigue and Fracture
-            </h3>
+<span>Design Extension</span>
 
-            <p>
-                Assessing cyclic loading, crack growth, safe-life and
-                damage-tolerance requirements.
-            </p>
+<strong>
+Composite Modernisation
+</strong>
 
-        </article>
+</div>
 
-
-        <article class="skill-card">
-
-            <h3>
-                Material Selection
-            </h3>
-
-            <p>
-                Balancing strength, stiffness, weight, durability,
-                manufacturability and operational requirements.
-            </p>
-
-        </article>
-
-
-        <article class="skill-card">
-
-            <h3>
-                Composite Design
-            </h3>
-
-            <p>
-                Mathematically redesigning an existing metallic structure using
-                modern composite materials.
-            </p>
-
-        </article>
-
-
-        <article class="skill-card">
-
-            <h3>
-                Structural Optimisation
-            </h3>
-
-            <p>
-                Improving structural efficiency while retaining appropriate
-                strength, stiffness and safety performance.
-            </p>
-
-        </article>
-
-    </div>
+</div>
 
 </section>
 
 
+<!-- PROBLEM AND SOLUTION -->
 
-<!-- ====================================================== -->
-<!-- LOAD DISTRIBUTION -->
-<!-- ====================================================== -->
+<section class="section" id="problem">
 
-<section class="section" id="loading">
+<h2>Engineering Problem and Analytical Approach</h2>
 
-    <h2>
-        From Aerodynamic Loading to Structural Forces
-    </h2>
-
-    <p>
-        Structural analysis begins by defining the loads acting on the system.
-        For the PC-9 wing, an elliptical spanwise lift distribution was used to
-        estimate how aerodynamic loading varied from the wing root to the tip.
-    </p>
-
-    <p>
-        The distributed loading was converted into an equivalent concentrated
-        force and its effective position. This allowed the resulting shear
-        forces, bending moments and torsional moments to be calculated at the
-        selected wing section.
-    </p>
-
-    <figure class="project-figure">
-
-        <a
-            href="assets/Force%20distribution%20.png"
-            target="_blank"
-            rel="noopener">
-
-            <img
-                src="assets/Force%20distribution%20.png"
-                alt="Elliptical spanwise lift distribution across the Pilatus PC-9 wing">
-
-        </a>
-
-        <figcaption>
-            Spanwise lift distribution used to convert aerodynamic loading into
-            structural forces and moments.
-        </figcaption>
-
-    </figure>
-
-</section>
+<div class="problem-grid">
 
 
+<div class="problem-card">
 
-<!-- ====================================================== -->
-<!-- STATIC ANALYSIS -->
-<!-- ====================================================== -->
+<h3>The Structural Problem</h3>
 
-<section class="section" id="static-analysis">
+<p>
 
-    <h2>
-        Static Structural Analysis
-    </h2>
+Aircraft wings are exposed to distributed aerodynamic forces that produce
+shear, bending and torsion throughout the internal structure.
 
-    <p>
-        The static analysis examined how the wing spar responded to bending,
-        shear and torsional loading. The calculated internal forces were used
-        to determine stresses at critical locations across the spar section.
-    </p>
+A safe design must withstand individual operational loads while also remaining
+resistant to fatigue, crack growth and repeated loading over its service life.
 
-    <p>
-        This developed the ability to move systematically from an external load
-        case to an internal stress state, identify highly loaded regions and
-        assess whether the structure remained within acceptable safety limits.
-    </p>
+The engineering challenge was therefore to convert aerodynamic loading into a
+defined structural stress state and assess the likely modes of failure.
+
+</p>
+
+</div>
 
 
-    <div class="project-grid">
+<div class="problem-card solution">
 
+<h3>My Analytical Approach</h3>
 
-        <article class="project-card">
+<p>
 
-            <h3>
-                Bending Stress Distribution
-            </h3>
+The wing loading was converted into forces and moments acting at a selected
+spar section.
 
-            <a
-                href="assets/Bending_stress_distribution.png"
-                target="_blank"
-                rel="noopener">
+The resulting stresses were analysed before evaluating margins of safety,
+notched behaviour, fracture cases and fatigue performance.
 
-                <img
-                    src="assets/Bending_stress_distribution.png"
-                    alt="Idealised linear bending stress distribution through a structural cross-section">
+Material selection and composite redesign were then used to investigate how an
+existing metallic aerospace structure could be modernised through analytical
+engineering methods.
 
-            </a>
+</p>
 
-            <p>
-                The linear variation demonstrates how bending creates opposing
-                tensile and compressive stresses across a structural
-                cross-section, with zero normal stress at the neutral axis.
-            </p>
+</div>
 
-        </article>
-
-
-        <article class="project-card">
-
-            <h3>
-                Static Margin of Safety
-            </h3>
-
-            <a
-                href="assets/Static_safety.png"
-                target="_blank"
-                rel="noopener">
-
-                <img
-                    src="assets/Static_safety.png"
-                    alt="Margins of safety calculated at critical PC-9 wing spar locations">
-
-            </a>
-
-            <p>
-                Calculated margins of safety were used to compare structural
-                demand against material capacity and identify the most critical
-                analysed location.
-            </p>
-
-        </article>
-
-
-    </div>
+</div>
 
 </section>
 
 
+<!-- OBJECTIVES -->
 
-<!-- ====================================================== -->
-<!-- DYNAMIC FAILURE -->
-<!-- ====================================================== -->
+<section class="section">
 
-<section class="section" id="dynamic-analysis">
+<h2>Engineering Objectives</h2>
 
-    <h2>
-        Dynamic Failure and Structural Life
-    </h2>
-
-    <p>
-        A structure may remain safe under a single static load while still
-        becoming vulnerable under repeated operational loading. The dynamic
-        analysis therefore considered fatigue, safe-life and damage-tolerance
-        principles.
-    </p>
-
-    <p>
-        Safe-life analysis estimates how long a component may operate before
-        fatigue becomes critical. Damage-tolerance analysis instead assumes
-        that a defect may already exist and evaluates whether the structure can
-        continue carrying load until the damage is detected and repaired.
-    </p>
-
-    <p>
-        Fracture mechanics was applied to compare cracks located near flange
-        holes, within the spar web and along a flange edge. This demonstrated
-        how geometry, stress concentration and crack location influence the
-        critical failure condition.
-    </p>
+<div class="objectives-grid">
 
 
-    <figure class="project-figure">
+<div class="objective-card">
 
-        <a
-            href="assets/Fracture_Assessment.png"
-            target="_blank"
-            rel="noopener">
+<h3>Define Aerodynamic Loading</h3>
 
-            <img
-                src="assets/Fracture_Assessment.png"
-                alt="Comparison of fracture margins of safety for flange-hole, web-centre and edge-flange cracks">
+<p>
+Estimate the spanwise lift distribution acting across the aircraft wing.
+</p>
 
-        </a>
-
-        <figcaption>
-            Comparison of fracture margins of safety for three analysed crack
-            configurations.
-        </figcaption>
-
-    </figure>
-
-</section>
+</div>
 
 
+<div class="objective-card">
 
-<!-- ====================================================== -->
-<!-- MATERIALS AND COMPOSITES -->
-<!-- ====================================================== -->
+<h3>Resolve Forces and Moments</h3>
 
-<section class="section" id="materials">
+<p>
+Convert distributed loading into equivalent forces, bending moments and
+torsional moments.
+</p>
 
-    <h2>
-        Material Selection and Composite Modernisation
-    </h2>
-
-    <p>
-        Material selection was treated as an engineering decision rather than
-        a direct substitution exercise. Strength, stiffness, weight, fatigue
-        resistance, corrosion behaviour, manufacturing requirements and
-        environmental performance all influence whether a material is
-        appropriate for an aerospace structure.
-    </p>
-
-    <p>
-        The existing aluminium wing structure was mathematically redesigned
-        using composite material properties. The objective was to achieve an
-        efficient modernisation of the existing aircraft structure while
-        maintaining the required load-bearing performance.
-    </p>
-
-    <p>
-        Composite structures introduce directional material behaviour, meaning
-        that fibre orientation and laminate design must correspond to the
-        expected loading directions. The redesign therefore considered
-        multidirectional stress resistance, stiffness and structural weight
-        rather than simply replacing aluminium with carbon fibre.
-    </p>
+</div>
 
 
-    <figure class="project-figure">
+<div class="objective-card">
 
-        <a
-            href="assets/Material_comparison.png"
-            target="_blank"
-            rel="noopener">
+<h3>Analyse Structural Stresses</h3>
 
-            <img
-                src="assets/Material_comparison.png"
-                alt="Conceptual comparison of aluminium and composite structural weight and efficiency">
+<p>
+Determine bending, shear, principal and equivalent stresses at critical spar
+locations.
+</p>
 
-        </a>
+</div>
 
-        <figcaption>
-            Conceptual comparison illustrating the weight and structural
-            efficiency objectives of composite modernisation.
-        </figcaption>
 
-    </figure>
+<div class="objective-card">
+
+<h3>Assess Static Failure</h3>
+
+<p>
+Compare calculated stresses with material limits and determine margins of
+safety.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Assess Dynamic Failure</h3>
+
+<p>
+Evaluate fatigue, safe-life, damage tolerance and fracture behaviour.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Investigate Composite Modernisation</h3>
+
+<p>
+Examine how composite materials could reduce structural weight while preserving
+required performance.
+</p>
+
+</div>
+
+</div>
 
 </section>
 
 
-
-<!-- ====================================================== -->
-<!-- TRANSFERABILITY -->
-<!-- ====================================================== -->
+<!-- METHODOLOGY -->
 
 <section class="section" id="methodology">
 
-    <h2>
-        Transferable Structural Engineering Methodology
-    </h2>
+<h2>Transferable Structural Engineering Methodology</h2>
 
-    <p>
-        Although the PC-9 wing provided the case study, the fundamental
-        methodology is transferable to almost any load-bearing structure.
-        The scale and complexity of the structure may change, but the analytical
-        sequence remains consistent.
-    </p>
+<p class="section-intro">
 
+The most important outcome was understanding a repeatable method for solving
+structural engineering problems. The size and complexity of the structure may
+change, but the analytical sequence remains fundamentally consistent.
 
-    <figure class="project-figure">
+</p>
 
-        <a
-            href="assets/Structural_methodology.png"
-            target="_blank"
-            rel="noopener">
+<div class="architecture-image">
 
-            <img
-                src="assets/Structural_methodology.png"
-                alt="Structural engineering methodology from loading through optimisation">
+<a
+href="assets/Structural_methodology.png"
+target="_blank"
+rel="noopener">
 
-        </a>
+<img
+src="assets/Structural_methodology.png"
+alt="Structural engineering methodology from loads through optimisation">
 
-        <figcaption>
-            A repeatable engineering workflow linking loads, forces, stresses,
-            failure assessment, material selection and optimisation.
-        </figcaption>
+</a>
 
-    </figure>
+</div>
 
 
-    <div class="project-grid">
-
-        <article class="skill-card">
-
-            <h3>
-                Simple Structures
-            </h3>
-
-            <p>
-                The same method can define the loading and stress distribution
-                of a cantilevered ledge, shelf, bracket or park-bench component.
-            </p>
-
-        </article>
+<div class="module-grid">
 
 
-        <article class="skill-card">
+<div class="module-card">
 
-            <h3>
-                Mechanical Assemblies
-            </h3>
+<h3>Identify Loads</h3>
 
-            <p>
-                Connections, mounts and manufactured components can be analysed
-                by identifying their load paths, moments, stress concentrations
-                and likely failure modes.
-            </p>
+<p>
 
-        </article>
+Define the external loading, operating conditions, constraints and boundary
+conditions acting on the structure.
+
+</p>
+
+</div>
 
 
-        <article class="skill-card">
+<div class="module-card">
 
-            <h3>
-                Complex Structures
-            </h3>
+<h3>Determine Forces and Moments</h3>
 
-            <p>
-                Aircraft wings, space structures, bridges and trusses apply the
-                same principles across larger systems containing multiple
-                interacting structural members.
-            </p>
+<p>
 
-        </article>
+Resolve distributed and concentrated loads into shear forces, bending moments
+and torsional moments.
 
-    </div>
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Analyse Stress</h3>
+
+<p>
+
+Calculate the resulting direct, bending, shear, principal and equivalent
+stresses at critical locations.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Assess Failure</h3>
+
+<p>
+
+Compare structural demand with material capacity while considering static,
+fatigue and fracture failure mechanisms.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Select Materials</h3>
+
+<p>
+
+Evaluate strength, stiffness, mass, durability, manufacturability and
+environmental performance.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Optimise the Structure</h3>
+
+<p>
+
+Improve structural efficiency while maintaining required safety, stiffness and
+operational performance.
+
+</p>
+
+</div>
+
+</div>
 
 </section>
 
 
+<!-- WORKFLOW -->
 
-<!-- ====================================================== -->
-<!-- RELATED ENGINEERING EXPERIENCE -->
-<!-- ====================================================== -->
+<section class="section">
 
-<section class="section" id="related-work">
+<h2>Engineering Workflow</h2>
 
-    <h2>
-        Broader Application of the Skills
-    </h2>
+<div class="workflow">
 
-    <p>
-        The composite redesign reflects experience in using mathematical
-        analysis to modernise an existing aerospace structure rather than
-        designing without reference to an established system.
-    </p>
+<div class="workflow-step">
+Define Load Case
+</div>
 
-    <p>
-        This approach is also reflected in my aerospace bracket project, where
-        structural performance was balanced with Design for Manufacture and
-        Assembly requirements. My MiG-21 modernisation study similarly examined
-        how contemporary technologies could be integrated into an existing
-        aircraft platform.
-    </p>
+<div class="workflow-step">
+Identify Boundary Conditions
+</div>
+
+<div class="workflow-step">
+Calculate Forces and Moments
+</div>
+
+<div class="workflow-step">
+Determine Internal Stresses
+</div>
+
+<div class="workflow-step">
+Assess Static Failure
+</div>
+
+<div class="workflow-step">
+Assess Fatigue and Fracture
+</div>
+
+<div class="workflow-step">
+Select Appropriate Material
+</div>
+
+<div class="workflow-step">
+Optimise and Validate Design
+</div>
+
+</div>
 
 </section>
 
 
+<!-- SKILLS -->
 
-<!-- ====================================================== -->
+<section class="section" id="skills">
+
+<h2>Engineering Skills Demonstrated</h2>
+
+<p class="section-intro">
+
+The project reflects analytical structural skills that are transferable beyond
+the PC-9 wing and applicable to a wide range of aerospace, mechanical and civil
+structures.
+
+</p>
+
+<div class="skills-grid">
+
+
+<div class="skill-card">
+
+<h3>Load Identification</h3>
+
+<p>
+
+Developed the ability to interpret operational conditions and translate them
+into distributed and concentrated structural loads.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Transferable application:</strong>
+aircraft wings, brackets, beams, shelves, bridge members, trusses and other
+load-bearing structures.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Forces and Moments</h3>
+
+<p>
+
+Resolved external loading into shear forces, bending moments and torsional
+moments acting through a defined structural section.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Transferable application:</strong>
+identifying load paths and internal reactions in simple components and complex
+structural assemblies.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Stress Analysis</h3>
+
+<p>
+
+Applied section properties and structural mechanics to determine bending,
+shear, principal and equivalent stresses.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Transferable application:</strong>
+defining expected stress distributions and locating highly loaded regions
+before detailed numerical analysis.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Static Failure Assessment</h3>
+
+<p>
+
+Compared calculated stresses against material allowables and evaluated
+structural margins of safety.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Transferable application:</strong>
+determining whether a component can safely withstand its design loading without
+yielding or structural collapse.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Fatigue and Damage Tolerance</h3>
+
+<p>
+
+Examined the effect of cyclic loading through safe-life, damage-tolerance and
+fracture-mechanics principles.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Transferable application:</strong>
+assessing structures where repeated loading and existing defects may govern
+service life.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Material Selection</h3>
+
+<p>
+
+Considered strength, stiffness, weight, fatigue resistance, corrosion,
+manufacturing and operational constraints.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Transferable application:</strong>
+selecting materials based on the complete engineering requirement rather than
+strength alone.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Composite Modernisation</h3>
+
+<p>
+
+Applied mathematical analysis to investigate the redesign of an existing
+metallic aircraft structure using directional composite properties.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Transferable application:</strong>
+modernising legacy aerospace structures through contemporary materials and
+structural-efficiency improvements.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Engineering Judgement</h3>
+
+<p>
+
+Used assumptions, safety factors, material data and analytical results to form
+defensible structural conclusions.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Transferable application:</strong>
+selecting an appropriate level of analysis and recognising when assumptions,
+testing or further validation are required.
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- STATIC ANALYSIS -->
+
+<section class="section" id="static">
+
+<h2>Static Structural Analysis</h2>
+
+<p class="section-intro">
+
+Static analysis established how aerodynamic loads were transferred into the
+wing spar and how the resulting internal forces generated structural stresses.
+
+</p>
+
+<div class="results-list">
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Force%20distribution%20.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Force%20distribution%20.png"
+alt="Elliptical spanwise lift distribution across the Pilatus PC-9 wing">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Load Definition
+</span>
+
+<h3>Spanwise Aerodynamic Force Distribution</h3>
+
+<p>
+
+The aerodynamic loading was represented using an elliptical spanwise lift
+distribution.
+
+This established how the applied force reduced from the wing root toward the
+tip and provided the basis for calculating an equivalent concentrated load and
+its effective location.
+
+</p>
+
+<div class="key-result">
+
+<strong>Engineering outcome:</strong>
+aerodynamic loading was translated into a defined structural load case suitable
+for force, moment and stress analysis.
+
+</div>
+
+</div>
+
+</article>
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Bending_stress_distribution.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Bending_stress_distribution.png"
+alt="Idealised bending stress distribution through a structural cross-section">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Stress Interpretation
+</span>
+
+<h3>Idealised Bending Stress Distribution</h3>
+
+<p>
+
+Bending produces opposing tensile and compressive normal stresses across a
+structural section.
+
+The stress varies approximately linearly through the section height and passes
+through zero at the neutral axis.
+
+This principle applies to aircraft spars, beams, brackets, shelves, bridge
+members and many other load-bearing structures.
+
+</p>
+
+<div class="key-result">
+
+<strong>Engineering outcome:</strong>
+the analysis demonstrated how an applied bending moment can be converted into a
+predictable stress distribution across a structural section.
+
+</div>
+
+</div>
+
+</article>
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Static_safety.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Static_safety.png"
+alt="Static structural margins of safety for analysed PC-9 wing spar locations">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Static Failure
+</span>
+
+<h3>Structural Margin-of-Safety Assessment</h3>
+
+<p>
+
+Calculated stresses were compared against the allowable material strength at
+critical spar locations.
+
+The margin-of-safety comparison helped identify which location was governing
+the structural assessment while confirming that the analysed locations retained
+positive static safety margins.
+
+</p>
+
+<div class="key-result">
+
+<strong>Engineering outcome:</strong>
+Point B represented the lowest of the displayed static margins, while the web
+retained the greatest calculated reserve against the assessed failure
+condition.
+
+</div>
+
+</div>
+
+</article>
+
+
+</div>
+
+</section>
+
+
+<!-- DYNAMIC ANALYSIS -->
+
+<section class="section" id="dynamic">
+
+<h2>Dynamic Failure and Structural Life</h2>
+
+<p class="section-intro">
+
+A structure may withstand a single static load while remaining vulnerable to
+fatigue and crack growth under repeated service loading. Dynamic assessment
+therefore considered safe-life, damage tolerance and fracture mechanics.
+
+</p>
+
+<div class="results-list">
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Fracture_Assessment.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Fracture_Assessment.png"
+alt="Fracture margin-of-safety comparison for three crack configurations">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Fracture Mechanics
+</span>
+
+<h3>Comparison of Critical Crack Configurations</h3>
+
+<p>
+
+Three crack configurations were assessed: a crack emanating from a flange
+hole, a centre crack within the web and an edge crack along the flange.
+
+The analysis demonstrated that crack location and nearby geometry strongly
+influence local stress concentration, stress intensity and the resulting
+margin of safety.
+
+</p>
+
+<div class="key-result">
+
+<strong>Engineering outcome:</strong>
+the flange-hole case produced the lowest fracture margin of safety and was
+therefore the most critical of the three assessed configurations.
+
+</div>
+
+</div>
+
+</article>
+
+
+</div>
+
+<div class="module-grid">
+
+
+<div class="module-card">
+
+<h3>Safe-Life Assessment</h3>
+
+<p>
+
+Estimates the service period or number of load cycles that a structural
+component can withstand before fatigue becomes critical.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Damage Tolerance</h3>
+
+<p>
+
+Assumes that a defect may already exist and evaluates whether the structure can
+continue operating safely until inspection and repair.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Fracture Mechanics</h3>
+
+<p>
+
+Relates crack size, applied stress, geometry and fracture toughness to the
+likelihood of stable or unstable crack growth.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- MATERIALS -->
+
+<section class="section" id="materials">
+
+<h2>Material Selection and Composite Modernisation</h2>
+
+<p class="section-intro">
+
+The material investigation examined how modern composite materials could be
+used to improve an existing aerospace structure while maintaining its required
+strength and stiffness.
+
+</p>
+
+<div class="results-list">
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Material_comparison.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Material_comparison.png"
+alt="Conceptual comparison of aluminium and composite structural weight and efficiency">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Material Engineering
+</span>
+
+<h3>Weight and Structural-Efficiency Comparison</h3>
+
+<p>
+
+The composite redesign was not treated as a simple material substitution.
+
+Directional composite properties, ply orientation, structural stiffness and
+load-bearing requirements had to be considered before an efficient
+configuration could be proposed.
+
+</p>
+
+<div class="key-result">
+
+<strong>Engineering outcome:</strong>
+the project developed experience in mathematically incorporating advanced
+materials as a modernisation method for an existing aerospace structure.
+
+</div>
+
+</div>
+
+</article>
+
+
+</div>
+
+<div class="question-grid">
+
+
+<div class="question-card">
+
+<h3>Why use composites?</h3>
+
+<p>
+
+Composite materials can provide high specific strength and stiffness while
+reducing structural weight.
+
+They can also improve corrosion resistance, but their performance depends on
+fibre orientation, laminate design, manufacturing quality and inspection
+requirements.
+
+</p>
+
+</div>
+
+
+<div class="question-card">
+
+<h3>Why is this a modernisation exercise?</h3>
+
+<p>
+
+The starting point was an existing aluminium aircraft structure with established
+loads and structural requirements.
+
+The composite design therefore had to reproduce or improve the required
+performance rather than being designed without reference to the original
+system.
+
+</p>
+
+</div>
+
+
+<div class="question-card">
+
+<h3>How does this connect to DFMA?</h3>
+
+<p>
+
+The same design approach was reflected in my aerospace bracket project, where
+structural performance was considered alongside manufacturing method, assembly,
+mass and practical component geometry.
+
+</p>
+
+</div>
+
+
+<div class="question-card">
+
+<h3>How does this connect to the MiG-21 study?</h3>
+
+<p>
+
+My MiG-21 systems-design study similarly explored how an existing aircraft could
+be improved through the integration of contemporary engineering technologies.
+
+Both projects reflect an interest in modernising established aerospace systems
+through analytical design decisions.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- APPLICATIONS -->
+
+<section class="section" id="applications">
+
+<h2>Transferability to Other Structures</h2>
+
+<p class="section-intro">
+
+The PC-9 provided the case study, but the underlying skills apply to structures
+well beyond a single aircraft wing.
+
+</p>
+
+<div class="application-grid">
+
+
+<div class="application-card">
+
+<h3>Simple Load-Bearing Components</h3>
+
+<p>
+
+A shelf, ledge, park-bench member or cantilevered bracket can be assessed by
+identifying the applied load, support conditions, bending moment and resulting
+stress distribution.
+
+</p>
+
+</div>
+
+
+<div class="application-card">
+
+<h3>Mechanical and Aerospace Assemblies</h3>
+
+<p>
+
+Mounts, wing spars, fuselage frames, landing-gear components and spacecraft
+structures require analysis of load paths, stress concentrations, fatigue and
+material suitability.
+
+</p>
+
+</div>
+
+
+<div class="application-card">
+
+<h3>Trusses and Civil Structures</h3>
+
+<p>
+
+Bridges, roof structures and trusses use the same fundamental process of
+defining external loads, resolving internal forces and assessing the capacity
+of structural members.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- EMPLOYER VALUE -->
+
+<section class="section">
+
+<h2>What I Bring to an Engineering Team</h2>
+
+<div class="value-grid">
+
+
+<div class="value-card">
+
+<h3>Analytical Structural Thinking</h3>
+
+<p>
+
+I can progress from an external load case to internal forces, moments, stresses
+and likely failure mechanisms using a structured engineering process.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Failure-Mode Awareness</h3>
+
+<p>
+
+I understand that structural safety requires consideration of yielding,
+stress concentration, fatigue, crack growth and fracture rather than static
+strength alone.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Material-Selection Judgement</h3>
+
+<p>
+
+I evaluate materials using strength, stiffness, mass, durability,
+manufacturability and operational requirements instead of choosing solely by
+maximum strength.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Modernisation Mindset</h3>
+
+<p>
+
+I can use analytical methods to investigate how an established aerospace
+structure or system may be improved using contemporary materials and
+technologies.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Transferable Methodology</h3>
+
+<p>
+
+The same process can be applied to aircraft, mechanical assemblies, launch
+vehicles, brackets, beams, bridges and other load-bearing structures.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Engineering Communication</h3>
+
+<p>
+
+I can interpret structural results, identify the governing condition and
+explain what the analysis demonstrates without relying only on equations or
+software output.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REFLECTION -->
+
+<section class="section">
+
+<h2>Engineering Reflection</h2>
+
+<p>
+
+The most valuable outcome of this project was understanding how a structural
+problem can be solved systematically.
+
+The process begins by defining the loads and boundary conditions, followed by
+determining internal forces and moments, calculating stresses, identifying
+possible failure mechanisms and comparing the structural demand against the
+capacity of the selected material.
+
+Static analysis explains whether a component can withstand an applied load,
+while fatigue and fracture analysis explain whether it can remain safe under
+repeated operation and potential damage.
+
+The composite redesign extended this methodology into the modernisation of an
+existing aerospace structure, connecting structural analysis with material
+selection, manufacturing considerations and broader aircraft-system
+improvement.
+
+</p>
+
+</section>
+
+
 <!-- SUPPORTING FILES -->
-<!-- ====================================================== -->
 
 <section class="section" id="files">
 
-    <h2>
-        Supporting Project Files
-    </h2>
+<h2>Supporting Project Files</h2>
 
-    <p class="files-description">
-        This portfolio page summarises the structural engineering skills
-        developed through the project. The complete technical report is
-        available for readers interested in the detailed assumptions,
-        calculations, fatigue analysis, fracture assessment, composite design
-        and supporting research.
-    </p>
+<p class="files-description">
 
+This page summarises the structural-analysis skills and transferable
+engineering methodology demonstrated through the Pilatus PC-9 wing case study.
 
-    <div class="file-buttons">
+The complete report is available below for readers who would like to review the
+detailed calculations, assumptions, fatigue assessment, fracture analysis and
+composite redesign.
 
-        <a
-            class="button"
-            href="assets/PC9_report.pdf"
-            target="_blank"
-            rel="noopener">
+</p>
 
-            View Full PC-9 Technical Report
+<div class="file-buttons">
 
-        </a>
+<a
+class="button"
+href="assets/PC9_report.pdf"
+target="_blank"
+rel="noopener">
+View Full PC-9 Technical Report
+</a>
 
+<a
+class="button secondary"
+href="index.html">
+Return to Portfolio
+</a>
 
-        <a
-            class="button secondary"
-            href="index.html">
-
-            Return to Portfolio
-
-        </a>
-
-    </div>
+</div>
 
 </section>
-
 
 </main>
 
 
-
 <footer>
 
-    <p>
-        © Ninad Bhave — Aerospace Engineering Portfolio
-    </p>
+<p>
+© 2026 Ninad Bhave — Aerospace Engineering Portfolio
+</p>
 
 </footer>
 
