@@ -1,1265 +1,2060 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="MiG-21 Bison modernisation engineering portfolio project by Ninad Bhave, covering systems architecture, radar and missile integration, propulsion trade studies, structural modernisation and final concept selection.">
-  <title>MiG-21 Bison Modernisation | Ninad Bhave</title>
 
-  <style>
-    :root {
-      --bg: #07111f;
-      --bg-soft: #0b1728;
-      --panel: rgba(15, 29, 48, 0.88);
-      --panel-strong: #101f33;
-      --panel-light: #14263d;
-      --text: #e8eef6;
-      --muted: #aebdce;
-      --subtle: #75889f;
-      --accent: #4db8d8;
-      --accent-soft: rgba(77, 184, 216, 0.13);
-      --line: rgba(144, 176, 205, 0.20);
-      --shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
-      --radius-lg: 24px;
-      --radius-md: 16px;
-      --radius-sm: 11px;
-      --max-width: 1180px;
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="description"
+content="MiG-21 Bison modernisation study developed by Ninad Bhave using aircraft systems engineering, radar and missile trade studies, propulsion analysis, Breguet range modelling, structural modernisation and requirement-based concept selection.">
+
+<title>
+MiG-21 Bison Modernisation | Ninad Bhave
+</title>
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#eef2f6;
+    color:#1f2937;
+    line-height:1.7;
+}
+
+a{
+    text-decoration:none;
+}
+
+
+/* NAVIGATION */
+
+nav{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:rgba(15,23,42,0.97);
+    border-bottom:1px solid rgba(255,255,255,0.12);
+}
+
+.nav-container{
+    width:90%;
+    max-width:1150px;
+    margin:auto;
+    min-height:66px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:24px;
+}
+
+.nav-name{
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.nav-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.nav-links a{
+    color:#cbd5e1;
+    font-size:14px;
+}
+
+.nav-links a:hover{
+    color:white;
+}
+
+
+/* HERO */
+
+.hero{
+    background:
+    linear-gradient(
+        135deg,
+        rgba(8,20,39,0.99),
+        rgba(15,67,86,0.97)
+    );
+
+    color:white;
+    padding:88px 20px;
+}
+
+.hero-content{
+    width:90%;
+    max-width:1150px;
+    margin:auto;
+}
+
+.hero-label{
+    display:inline-block;
+    background:rgba(255,255,255,0.10);
+    border:1px solid rgba(255,255,255,0.22);
+    color:#cffafe;
+    padding:7px 13px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:bold;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    max-width:970px;
+    font-size:50px;
+    line-height:1.15;
+    margin-bottom:18px;
+}
+
+.hero-role{
+    color:#a5f3fc;
+    font-size:21px;
+    font-weight:bold;
+    margin-bottom:22px;
+}
+
+.hero-description{
+    max-width:970px;
+    color:#e2e8f0;
+    font-size:17px;
+}
+
+.hero-tags{
+    margin-top:28px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.hero-tag{
+    background:rgba(255,255,255,0.10);
+    border:1px solid rgba(255,255,255,0.18);
+    color:white;
+    padding:8px 12px;
+    border-radius:22px;
+    font-size:13px;
+}
+
+
+/* GENERAL PAGE */
+
+.container{
+    width:90%;
+    max-width:1150px;
+    margin:auto;
+    padding:45px 0;
+}
+
+.section{
+    background:white;
+    margin-bottom:30px;
+    padding:34px;
+    border-radius:16px;
+    box-shadow:0 8px 26px rgba(15,23,42,0.08);
+}
+
+.section h2{
+    color:#0f172a;
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.section-intro{
+    color:#475569;
+    max-width:920px;
+    margin-bottom:26px;
+}
+
+
+/* INFORMATION CARDS */
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.info-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:12px;
+    padding:20px;
+}
+
+.info-card span{
+    display:block;
+    color:#64748b;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-bottom:8px;
+}
+
+.info-card strong{
+    color:#0f172a;
+    font-size:16px;
+}
+
+
+/* PROBLEM AND SOLUTION */
+
+.problem-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.problem-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:14px;
+    padding:25px;
+}
+
+.problem-card h3{
+    color:#0f172a;
+    font-size:22px;
+    margin-bottom:12px;
+}
+
+.problem-card p{
+    color:#475569;
+}
+
+.problem-card.solution{
+    border-left:5px solid #0f766e;
+}
+
+
+/* OBJECTIVES */
+
+.objectives-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:16px;
+}
+
+.objective-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:12px;
+    padding:20px;
+}
+
+.objective-card h3{
+    color:#0f172a;
+    font-size:18px;
+    margin-bottom:8px;
+}
+
+.objective-card p{
+    color:#475569;
+}
+
+
+/* ARCHITECTURE IMAGE */
+
+.architecture-image{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:14px;
+    padding:14px;
+    margin-bottom:24px;
+}
+
+.architecture-image img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:9px;
+}
+
+
+/* ARCHITECTURE MODULES */
+
+.module-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.module-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:23px;
+}
+
+.module-card h3{
+    color:#0f172a;
+    font-size:19px;
+    margin-bottom:9px;
+}
+
+.module-card p{
+    color:#475569;
+}
+
+
+/* WORKFLOW */
+
+.workflow{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.workflow-step{
+    background:#0f172a;
+    color:white;
+    text-align:center;
+    border-radius:10px;
+    padding:20px 14px;
+    font-size:14px;
+    font-weight:bold;
+}
+
+
+/* ENGINEERING SKILLS */
+
+.skills-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.skill-card{
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:24px;
+    background:#f8fafc;
+}
+
+.skill-card h3{
+    color:#0f172a;
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.skill-card p{
+    color:#475569;
+}
+
+.skill-evidence{
+    margin-top:14px;
+    padding:12px 14px;
+    background:#e8eef4;
+    border-radius:9px;
+    color:#334155;
+    font-size:14px;
+}
+
+.skill-evidence strong{
+    color:#0f172a;
+}
+
+
+/* RESULTS */
+
+.results-list{
+    display:flex;
+    flex-direction:column;
+    gap:28px;
+}
+
+.result-item{
+    display:grid;
+    grid-template-columns:minmax(0,1.1fr) minmax(300px,0.9fr);
+    gap:28px;
+    align-items:center;
+    border:1px solid #dbe3ec;
+    background:#f8fafc;
+    border-radius:15px;
+    padding:24px;
+}
+
+.result-item:nth-child(even) .result-image{
+    order:2;
+}
+
+.result-item:nth-child(even) .result-content{
+    order:1;
+}
+
+.result-image{
+    background:white;
+    border:1px solid #dbe3ec;
+    border-radius:12px;
+    padding:12px;
+}
+
+.result-image img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:8px;
+}
+
+.result-label{
+    display:inline-block;
+    background:#dce9ea;
+    color:#164e63;
+    padding:6px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-bottom:12px;
+}
+
+.result-content h3{
+    color:#0f172a;
+    font-size:24px;
+    margin-bottom:12px;
+}
+
+.result-content p{
+    color:#475569;
+    margin-bottom:12px;
+}
+
+.key-result{
+    background:#e7eff1;
+    border-left:4px solid #0f766e;
+    padding:13px 15px;
+    border-radius:0 9px 9px 0;
+    color:#334155;
+    font-size:14px;
+}
+
+
+/* ENGINEERING QUESTIONS */
+
+.question-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.question-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:23px;
+}
+
+.question-card h3{
+    color:#0f172a;
+    font-size:20px;
+    margin-bottom:10px;
+}
+
+.question-card p{
+    color:#475569;
+}
+
+
+/* APPLICATIONS */
+
+.application-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.application-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:24px;
+}
+
+.application-card h3{
+    color:#0f172a;
+    font-size:21px;
+    margin-bottom:10px;
+}
+
+.application-card p{
+    color:#475569;
+}
+
+
+/* EMPLOYER VALUE */
+
+.value-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.value-card{
+    background:#f8fafc;
+    border:1px solid #dbe3ec;
+    border-radius:13px;
+    padding:23px;
+}
+
+.value-card h3{
+    color:#0f172a;
+    margin-bottom:10px;
+    font-size:20px;
+}
+
+.value-card p{
+    color:#475569;
+}
+
+
+/* SUPPORTING FILES */
+
+.files-description{
+    max-width:920px;
+    color:#475569;
+    margin-bottom:22px;
+}
+
+.file-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+}
+
+.button{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    background:#0f172a;
+    color:white;
+    padding:12px 21px;
+    border-radius:9px;
+    font-size:14px;
+    font-weight:bold;
+    transition:0.2s;
+}
+
+.button:hover{
+    background:#155e75;
+    transform:translateY(-2px);
+}
+
+.button.secondary{
+    background:#e2e8f0;
+    color:#0f172a;
+}
+
+.button.secondary:hover{
+    background:#cbd5e1;
+}
+
+
+/* FOOTER */
+
+footer{
+    background:#0f172a;
+    color:#cbd5e1;
+    text-align:center;
+    padding:28px 20px;
+    margin-top:45px;
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .info-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    * {
-      box-sizing: border-box;
+    .module-grid,
+    .application-grid{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 92px;
+    .workflow{
+        grid-template-columns:repeat(2,1fr);
     }
 
-    body {
-      margin: 0;
-      background:
-        radial-gradient(circle at 82% 2%, rgba(77, 184, 216, 0.10), transparent 28%),
-        radial-gradient(circle at 8% 24%, rgba(52, 102, 157, 0.12), transparent 32%),
-        var(--bg);
-      color: var(--text);
-      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.72;
-      -webkit-font-smoothing: antialiased;
-      text-rendering: optimizeLegibility;
+    .result-item{
+        grid-template-columns:1fr;
     }
 
-    img {
-      display: block;
-      max-width: 100%;
+    .result-item:nth-child(even) .result-image,
+    .result-item:nth-child(even) .result-content{
+        order:initial;
     }
 
-    a {
-      color: inherit;
+}
+
+@media(max-width:650px){
+
+    .hero{
+        padding:60px 20px;
     }
 
-    .site-nav {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      border-bottom: 1px solid var(--line);
-      background: rgba(7, 17, 31, 0.86);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+    .hero h1{
+        font-size:36px;
     }
 
-    .nav-inner {
-      width: min(calc(100% - 40px), var(--max-width));
-      min-height: 72px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
+    .nav-container{
+        padding:14px 0;
+        flex-direction:column;
+        align-items:flex-start;
     }
 
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 11px;
-      text-decoration: none;
-      font-size: 0.86rem;
-      font-weight: 800;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      white-space: nowrap;
+    .nav-links{
+        gap:12px;
     }
 
-    .brand-mark {
-      width: 34px;
-      height: 34px;
-      display: grid;
-      place-items: center;
-      border: 1px solid rgba(77, 184, 216, 0.46);
-      border-radius: 10px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      letter-spacing: 0;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 22px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      font-size: 0.88rem;
-      font-weight: 700;
-      text-decoration: none;
-      transition: color 180ms ease;
-    }
-
-    .nav-links a:hover,
-    .nav-links a:focus-visible {
-      color: var(--text);
-    }
-
-    .page-shell {
-      width: min(calc(100% - 40px), var(--max-width));
-      margin: 0 auto;
-    }
-
-    .hero {
-      min-height: calc(100vh - 72px);
-      display: grid;
-      align-items: center;
-      padding: 92px 0 76px;
-    }
-
-    .hero-card {
-      position: relative;
-      overflow: hidden;
-      padding: clamp(34px, 7vw, 82px);
-      border: 1px solid var(--line);
-      border-radius: 30px;
-      background:
-        linear-gradient(135deg, rgba(16, 31, 51, 0.97), rgba(8, 20, 35, 0.94)),
-        var(--panel-strong);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto auto;
-      width: 48%;
-      height: 100%;
-      background:
-        linear-gradient(135deg, transparent 28%, rgba(77, 184, 216, 0.11) 28.2%, transparent 28.7%),
-        linear-gradient(135deg, transparent 43%, rgba(77, 184, 216, 0.08) 43.2%, transparent 43.7%),
-        linear-gradient(135deg, transparent 58%, rgba(77, 184, 216, 0.06) 58.2%, transparent 58.7%);
-      pointer-events: none;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-      max-width: 900px;
-    }
-
-    .eyebrow {
-      margin: 0 0 18px;
-      color: var(--accent);
-      font-size: 0.76rem;
-      font-weight: 800;
-      letter-spacing: 0.19em;
-      text-transform: uppercase;
-    }
-
-    h1,
-    h2,
-    h3 {
-      margin-top: 0;
-      line-height: 1.14;
-      text-wrap: balance;
-    }
-
-    h1 {
-      max-width: 920px;
-      margin-bottom: 24px;
-      font-size: clamp(2.7rem, 7vw, 6.6rem);
-      font-weight: 780;
-      letter-spacing: -0.055em;
-    }
-
-    .hero-lead {
-      max-width: 780px;
-      margin: 0;
-      color: var(--muted);
-      font-size: clamp(1.05rem, 2vw, 1.28rem);
-    }
-
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 32px;
-    }
-
-    .tag {
-      padding: 8px 13px;
-      border: 1px solid rgba(77, 184, 216, 0.25);
-      border-radius: 999px;
-      background: var(--accent-soft);
-      color: #c9edf6;
-      font-size: 0.78rem;
-      font-weight: 750;
-      letter-spacing: 0.035em;
-    }
-
-    main {
-      padding-bottom: 88px;
-    }
-
-    .section {
-      padding: 70px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .section:first-child {
-      border-top: 0;
-    }
-
-    .section-heading {
-      display: grid;
-      grid-template-columns: minmax(190px, 0.38fr) minmax(0, 1fr);
-      gap: clamp(28px, 7vw, 88px);
-      margin-bottom: 34px;
-      align-items: start;
-    }
-
-    .section-number {
-      display: inline-block;
-      margin-bottom: 13px;
-      color: var(--accent);
-      font-size: 0.74rem;
-      font-weight: 800;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-
-    h2 {
-      margin-bottom: 0;
-      font-size: clamp(1.85rem, 3.3vw, 3.1rem);
-      letter-spacing: -0.035em;
-    }
-
-    .section-intro {
-      margin: 4px 0 0;
-      color: var(--muted);
-      font-size: 1.04rem;
-    }
-
-    .content-narrow {
-      max-width: 850px;
-      margin-left: auto;
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
-    }
-
-    .card {
-      padding: 23px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      background: var(--panel);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-    }
-
-    .card-label {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--subtle);
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .card-value {
-      margin: 0;
-      color: var(--text);
-      font-size: 1rem;
-      font-weight: 720;
-      line-height: 1.45;
-    }
-
-    .prose {
-      color: var(--muted);
-    }
-
-    .prose p {
-      margin: 0 0 1.15em;
-    }
-
-    .prose p:last-child {
-      margin-bottom: 0;
-    }
-
-    .objective-grid,
+    .info-grid,
+    .problem-grid,
+    .objectives-grid,
+    .module-grid,
+    .workflow,
     .skills-grid,
-    .impact-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 16px;
+    .question-grid,
+    .application-grid,
+    .value-grid{
+        grid-template-columns:1fr;
     }
 
-    .objective,
-    .skill-card,
-    .impact-card {
-      position: relative;
-      padding: 24px 24px 24px 25px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      background: var(--panel);
+    .section{
+        padding:24px;
     }
 
-    .objective::before,
-    .skill-card::before,
-    .impact-card::before {
-      content: "";
-      position: absolute;
-      top: 25px;
-      left: 0;
-      width: 3px;
-      height: 32px;
-      border-radius: 0 4px 4px 0;
-      background: var(--accent);
-    }
+}
 
-    .objective h3,
-    .skill-card h3,
-    .impact-card h3 {
-      margin-bottom: 10px;
-      font-size: 1.03rem;
-      letter-spacing: -0.01em;
-    }
+</style>
 
-    .objective p,
-    .skill-card p,
-    .impact-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
-
-    .figure-card {
-      overflow: hidden;
-      margin-top: 34px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      background: var(--panel-strong);
-      box-shadow: var(--shadow);
-    }
-
-    .figure-frame {
-      padding: clamp(14px, 2vw, 24px);
-      background: #f6f8fa;
-    }
-
-    .figure-frame img {
-      width: 100%;
-      height: auto;
-      border-radius: 9px;
-      object-fit: contain;
-    }
-
-    .figure-caption {
-      display: grid;
-      grid-template-columns: auto 1fr;
-      gap: 16px;
-      padding: 19px 22px 21px;
-      color: var(--muted);
-      font-size: 0.88rem;
-    }
-
-    .figure-index {
-      color: var(--accent);
-      font-weight: 800;
-    }
-
-    .analysis-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 24px;
-    }
-
-    .analysis-card {
-      padding: 22px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      background: var(--panel);
-    }
-
-    .analysis-card strong {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--text);
-      font-size: 1.02rem;
-    }
-
-    .analysis-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.91rem;
-    }
-
-    .result-banner {
-      margin-top: 26px;
-      padding: 24px;
-      border: 1px solid rgba(77, 184, 216, 0.30);
-      border-radius: var(--radius-md);
-      background: linear-gradient(135deg, rgba(77, 184, 216, 0.12), rgba(77, 184, 216, 0.035));
-    }
-
-    .result-banner strong {
-      color: #d4f3fa;
-    }
-
-    .result-banner p {
-      margin: 0;
-      color: var(--muted);
-    }
-
-    .mod-list {
-      display: grid;
-      gap: 13px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      counter-reset: mods;
-    }
-
-    .mod-list li {
-      counter-increment: mods;
-      display: grid;
-      grid-template-columns: 48px minmax(0, 1fr);
-      gap: 17px;
-      padding: 21px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      background: var(--panel);
-    }
-
-    .mod-list li::before {
-      content: counter(mods, decimal-leading-zero);
-      width: 42px;
-      height: 42px;
-      display: grid;
-      place-items: center;
-      border-radius: 12px;
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 0.78rem;
-      font-weight: 850;
-    }
-
-    .mod-list h3 {
-      margin-bottom: 7px;
-      font-size: 1rem;
-    }
-
-    .mod-list p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.93rem;
-    }
-
-    .selection-summary {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-      margin-top: 24px;
-    }
-
-    .selection-item {
-      padding: 22px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      background: var(--panel);
-    }
-
-    .selection-item span {
-      display: block;
-      margin-bottom: 7px;
-      color: var(--accent);
-      font-size: 0.72rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .selection-item strong {
-      font-size: 1rem;
-    }
-
-    .reflection {
-      padding: clamp(28px, 5vw, 50px);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-lg);
-      background:
-        linear-gradient(145deg, rgba(77, 184, 216, 0.09), transparent 42%),
-        var(--panel-strong);
-    }
-
-    .reflection p {
-      margin: 0;
-      color: var(--muted);
-      font-size: clamp(1rem, 1.8vw, 1.15rem);
-    }
-
-    .files-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 28px;
-      padding: 27px;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-md);
-      background: var(--panel);
-    }
-
-    .files-card h3 {
-      margin-bottom: 6px;
-      font-size: 1.04rem;
-    }
-
-    .files-card p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.92rem;
-    }
-
-    .file-button {
-      flex: 0 0 auto;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 46px;
-      padding: 0 18px;
-      border: 1px solid rgba(77, 184, 216, 0.36);
-      border-radius: 12px;
-      background: var(--accent-soft);
-      color: #d5f5fb;
-      font-size: 0.86rem;
-      font-weight: 800;
-      text-decoration: none;
-      transition: transform 180ms ease, background 180ms ease;
-    }
-
-    .file-button:hover,
-    .file-button:focus-visible {
-      transform: translateY(-2px);
-      background: rgba(77, 184, 216, 0.20);
-    }
-
-    footer {
-      padding: 30px 0 44px;
-      border-top: 1px solid var(--line);
-      color: var(--subtle);
-      font-size: 0.84rem;
-    }
-
-    .footer-inner {
-      width: min(calc(100% - 40px), var(--max-width));
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    @media (max-width: 980px) {
-      .card-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .analysis-grid,
-      .selection-summary {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 760px) {
-      .nav-inner {
-        min-height: 64px;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        min-height: auto;
-        padding: 54px 0 64px;
-      }
-
-      .hero-card {
-        border-radius: 22px;
-      }
-
-      .section {
-        padding: 54px 0;
-      }
-
-      .section-heading {
-        grid-template-columns: 1fr;
-        gap: 18px;
-      }
-
-      .content-narrow {
-        max-width: none;
-      }
-
-      .objective-grid,
-      .skills-grid,
-      .impact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .figure-caption {
-        grid-template-columns: 1fr;
-        gap: 6px;
-      }
-
-      .files-card {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-        gap: 7px;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .page-shell,
-      .nav-inner,
-      .footer-inner {
-        width: min(calc(100% - 24px), var(--max-width));
-      }
-
-      h1 {
-        font-size: clamp(2.35rem, 13vw, 3.35rem);
-      }
-
-      .hero-card {
-        padding: 28px 22px;
-      }
-
-      .card-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .card,
-      .objective,
-      .skill-card,
-      .impact-card,
-      .analysis-card,
-      .selection-item,
-      .files-card {
-        padding: 20px;
-      }
-
-      .mod-list li {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      *,
-      *::before,
-      *::after {
-        transition-duration: 0.01ms !important;
-      }
-    }
-  </style>
 </head>
 
+
 <body>
-  <nav class="site-nav" aria-label="Primary navigation">
-    <div class="nav-inner">
-      <a class="brand" href="index.html" aria-label="Return to portfolio home">
-        <span class="brand-mark">NB</span>
-        <span>Engineering Portfolio</span>
-      </a>
 
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#trade-studies">Trade Studies</a></li>
-        <li><a href="#final-design">Final Design</a></li>
-        <li><a href="#supporting-files">Files</a></li>
-      </ul>
-    </div>
-  </nav>
 
-  <div class="page-shell">
-    <header class="hero">
-      <div class="hero-card">
-        <div class="hero-content">
-          <p class="eyebrow">Aerospace Systems Design</p>
-          <h1>Modernisation and System Upgrade of the MiG-21 Bison</h1>
-          <p class="hero-lead">
-            A preliminary design study developing an integrated avionics, propulsion and structural
-            modernisation pathway for a legacy fighter platform, supported by requirements,
-            performance trade studies and system-level concept selection.
-          </p>
+<!-- NAVIGATION -->
 
-          <div class="hero-tags" aria-label="Project themes">
-            <span class="tag">Systems Architecture</span>
-            <span class="tag">Breguet Range Analysis</span>
-            <span class="tag">Trade Studies</span>
-            <span class="tag">Requirements Engineering</span>
-            <span class="tag">Aircraft Modernisation</span>
-          </div>
-        </div>
-      </div>
-    </header>
+<nav>
 
-    <main>
-      <section class="section" id="project-information">
-        <div class="section-heading">
-          <div>
-            <span class="section-number">01</span>
-            <h2>Project Information</h2>
-          </div>
-          <p class="section-intro">
-            The project examined the MiG-21 Bison as an integrated aircraft system rather than treating
-            radar, propulsion and structure as isolated upgrades.
-          </p>
-        </div>
+<div class="nav-container">
 
-        <div class="card-grid">
-          <article class="card">
-            <span class="card-label">Project</span>
-            <p class="card-value">MiG-21 Bison Modernisation</p>
-          </article>
-          <article class="card">
-            <span class="card-label">Course</span>
-            <p class="card-value">AERO 2362</p>
-          </article>
-          <article class="card">
-            <span class="card-label">Project Type</span>
-            <p class="card-value">Preliminary Design Report</p>
-          </article>
-          <article class="card">
-            <span class="card-label">Primary Method</span>
-            <p class="card-value">Requirement-led concept evaluation</p>
-          </article>
-        </div>
-      </section>
+<a class="nav-name" href="index.html">
+Ninad Bhave
+</a>
 
-      <section class="section" id="overview">
-        <div class="section-heading">
-          <div>
-            <span class="section-number">02</span>
-            <h2>Project Overview</h2>
-          </div>
-          <div class="prose">
-            <p>
-              The study defined a cost-effective modernisation pathway intended to extend the operational
-              relevance of the MiG-21 Bison into the 2030s. It evaluated upgrades across three connected
-              areas: radar and missile integration, propulsion, and airframe structure.
-            </p>
-            <p>
-              Performance trade studies, Breguet range analysis and requirement-based evaluation were
-              used to identify a balanced integrated concept. The selected solution combined the Uttam
-              AESA radar and Astra Mk-1 missile, a small afterburning turbofan, and targeted structural
-              reinforcement with lightweight material substitution and fatigue-life extension measures.
-            </p>
-          </div>
-        </div>
-      </section>
+<div class="nav-links">
 
-      <section class="section" id="objectives">
-        <div class="section-heading">
-          <div>
-            <span class="section-number">03</span>
-            <h2>Engineering Objectives</h2>
-          </div>
-          <p class="section-intro">
-            The revised requirements translated the modernisation problem into measurable capability,
-            integration, performance and service-life objectives.
-          </p>
-        </div>
+<a href="#problem">Problem</a>
 
-        <div class="objective-grid">
-          <article class="objective">
-            <h3>Beyond-Visual-Range Capability</h3>
-            <p>
-              Integrate a radar capable of at least 150 km detection range with an 80–100 km BVR
-              missile engagement envelope.
-            </p>
-          </article>
-          <article class="objective">
-            <h3>Propulsion Efficiency</h3>
-            <p>
-              Reduce specific fuel consumption by at least 10% while retaining supersonic dash
-              performance and improving thrust-to-weight ratio.
-            </p>
-          </article>
-          <article class="objective">
-            <h3>Structural Compatibility</h3>
-            <p>
-              Accommodate the radar and engine retrofit through forward-fuselage, rear-fuselage and
-              engine-mount adaptations while managing mass distribution.
-            </p>
-          </article>
-          <article class="objective">
-            <h3>Life Extension and Survivability</h3>
-            <p>
-              Extend airframe life by approximately 2,000 flight hours and introduce practical
-              radar-cross-section reduction and corrosion-control measures.
-            </p>
-          </article>
-        </div>
-      </section>
+<a href="#architecture">Architecture</a>
 
-      <section class="section" id="architecture">
-        <div class="section-heading">
-          <div>
-            <span class="section-number">04</span>
-            <h2>System Architecture</h2>
-          </div>
-          <div class="prose">
-            <p>
-              The architecture organised the aircraft into three primary subsystems: avionics and
-              weapons, propulsion, and airframe and structure. Power, cooling and flight-control links
-              were treated as the integration layer connecting these upgrades.
-            </p>
-            <p>
-              The Uttam AESA radar and Astra Mk-1 missile formed the combat-system core. A small
-              afterburning turbofan was selected to improve fuel efficiency while preserving the
-              interceptor role. Lightweight structural elements, reinforced mounts and fatigue-life
-              measures supported the added systems and maintained aircraft compatibility.
-            </p>
-          </div>
-        </div>
+<a href="#radar">Radar &amp; Missile</a>
 
-        <figure class="figure-card">
-          <div class="figure-frame">
-            <img src="Architecture_plan.png" alt="MiG-21 Bison upgraded system architecture linking avionics and weapons, propulsion, and structure and survivability subsystems." loading="lazy">
-          </div>
-          <figcaption class="figure-caption">
-            <span class="figure-index">Figure 01</span>
-            <span>System architecture plan for the integrated MiG-21 Bison upgrade concept.</span>
-          </figcaption>
-        </figure>
-      </section>
+<a href="#propulsion">Propulsion</a>
 
-      <section class="section" id="trade-studies">
-        <div class="section-heading">
-          <div>
-            <span class="section-number">05</span>
-            <h2>Radar &amp; Missile Trade Study</h2>
-          </div>
-          <div class="prose">
-            <p>
-              Radar–missile combinations were assessed using radar mass, missile mass, total installed
-              mass, indicative detection range, cruise range and a composite score. The aim was to
-              increase BVR effectiveness without creating unacceptable packaging, cooling or flight
-              performance penalties.
-            </p>
-            <p>
-              The Uttam AESA and Astra Mk-1 combination achieved the highest composite score of
-              0.892. Its estimated 150 km radar detection range, 428 kg combined system mass and
-              approximately 1,691 km cruise range provided the strongest balance of capability,
-              integration feasibility and indigenous sustainment.
-            </p>
-          </div>
-        </div>
+<a href="#structure">Structure</a>
 
-        <figure class="figure-card">
-          <div class="figure-frame">
-            <img src="Radar_missile_config.png" alt="Radar and missile configuration trade study for MiG-21 Bison modernisation." loading="lazy">
-          </div>
-          <figcaption class="figure-caption">
-            <span class="figure-index">Trade Study</span>
-            <span>Comparison of radar and missile pairings by mass, range, capability and composite score.</span>
-          </figcaption>
-        </figure>
+<a href="#skills">Skills</a>
 
-        <figure class="figure-card">
-          <div class="figure-frame">
-            <img src="Figure2.png" alt="MiG-21 radar and missile performance plots showing cruise range, radar detection range versus antenna aperture and sensitivity analysis." loading="lazy">
-          </div>
-          <figcaption class="figure-caption">
-            <span class="figure-index">Figure 02</span>
-            <span>Cruise range, aperture scaling and sensitivity analysis for the radar–missile evaluation.</span>
-          </figcaption>
-        </figure>
+<a href="#files">Files</a>
 
-        <div class="analysis-grid">
-          <article class="analysis-card">
-            <strong>External stores governed endurance</strong>
-            <p>
-              Clean cruise range was approximately 1,876 km, reducing to about 1,691 km with two
-              Astra Mk-1 missiles. The principal penalty came from store drag and weight.
-            </p>
-          </article>
-          <article class="analysis-card">
-            <strong>Radar mass had limited range effect</strong>
-            <p>
-              Radar mass variation from 120 to 200 kg changed cruise range by only a few kilometres,
-              leaving aerodynamic penalties as the stronger influence.
-            </p>
-          </article>
-          <article class="analysis-card">
-            <strong>Aperture was constrained by integration</strong>
-            <p>
-              Larger radar apertures offered greater detection range, but the MiG-21 nose volume and
-              cooling limits made the compact Uttam AESA the more feasible choice.
-            </p>
-          </article>
-        </div>
+</div>
 
-        <div class="result-banner">
-          <p>
-            <strong>Selected configuration:</strong> Uttam AESA with Astra Mk-1. The pairing provided
-            credible BVR capability with minimal relative range penalty while avoiding the packaging,
-            cooling and supply-chain disadvantages identified in the alternatives.
-          </p>
-        </div>
-      </section>
+</div>
 
-      <section class="section" id="propulsion">
-        <div class="section-heading">
-          <div>
-            <span class="section-number">06</span>
-            <h2>Propulsion Trade Study</h2>
-          </div>
-          <div class="prose">
-            <p>
-              Four propulsion pathways were compared: sustaining and optimising the R-25-300,
-              uprating the existing turbojet, installing a small afterburning turbofan, and adopting a
-              higher-bypass non-afterburning turbofan.
-            </p>
-            <p>
-              The weighted study considered SFC improvement, mission-radius gain, thrust change,
-              integration risk and mass increase. The small afterburning turbofan achieved the highest
-              composite score of 0.78 and represented the best long-term balance between efficiency,
-              thrust and compatibility with the MiG-21’s supersonic interceptor role.
-            </p>
-          </div>
-        </div>
+</nav>
 
-        <figure class="figure-card">
-          <div class="figure-frame">
-            <img src="Propulsion_Trade_Study.png" alt="MiG-21 Bison propulsion system trade study comparing R-25 optimisation, uprating and turbofan concepts." loading="lazy">
-          </div>
-          <figcaption class="figure-caption">
-            <span class="figure-index">Trade Study</span>
-            <span>Propulsion concepts assessed by SFC improvement, radius gain, thrust change, risk, mass and composite score.</span>
-          </figcaption>
-        </figure>
 
-        <figure class="figure-card">
-          <div class="figure-frame">
-            <img src="Figure 3.png" alt="MiG-21 propulsion performance plots showing range, system mass effects and SFC sensitivity." loading="lazy">
-          </div>
-          <figcaption class="figure-caption">
-            <span class="figure-index">Figure 03</span>
-            <span>Range comparison, range gain versus added system weight, and sensitivity to SFC and added mass.</span>
-          </figcaption>
-        </figure>
+<!-- HERO -->
 
-        <div class="analysis-grid">
-          <article class="analysis-card">
-            <strong>Efficiency dominated mass penalty</strong>
-            <p>
-              Moderate avionics and missile mass increases up to 200 kg had limited endurance effect,
-              whereas improved propulsion efficiency produced substantial range gains.
-            </p>
-          </article>
-          <article class="analysis-card">
-            <strong>Small turbofan delivered the balance</strong>
-            <p>
-              The small afterburning turbofan reduced SFC by approximately 12%, improved mission
-              radius by roughly 13–15%, and increased thrust by approximately 15%.
-            </p>
-          </article>
-          <article class="analysis-card">
-            <strong>Maximum endurance was not the only criterion</strong>
-            <p>
-              The higher-bypass concept exceeded 3,000 km in the analysis, but its packaging,
-              cooling and speed compromises conflicted with the aircraft’s interceptor role.
-            </p>
-          </article>
-        </div>
+<header class="hero">
 
-        <div class="result-banner">
-          <p>
-            <strong>Selected propulsion concept:</strong> a small afterburning turbofan. Breguet-range
-            analysis showed an improvement of roughly 350 km over the reference configuration while
-            retaining the supersonic capability required by the design objectives.
-          </p>
-        </div>
-      </section>
+<div class="hero-content">
 
-      <section class="section" id="structure">
-        <div class="section-heading">
-          <div>
-            <span class="section-number">07</span>
-            <h2>Structural Modernisation</h2>
-          </div>
-          <p class="section-intro">
-            Structural changes were limited to targeted adaptations supporting system integration,
-            mass control, durability and survivability without replacing the aircraft’s core layout.
-          </p>
-        </div>
+<div class="hero-label">
+Aerospace Systems Design Project
+</div>
 
-        <ol class="mod-list">
-          <li>
-            <div>
-              <h3>Lightweight Material Substitution</h3>
-              <p>
-                Composite or aluminium-lithium materials were proposed for selected non-primary
-                structures, including access panels and avionics-bay housings, to offset added system mass.
-              </p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <h3>Forward Fuselage and Radar Bay</h3>
-              <p>
-                The radar bay was re-profiled and stiffened to accommodate the AESA installation and
-                thermal loads while managing the associated forward centre-of-gravity shift.
-              </p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <h3>Engine Mount and Rear Fuselage Strengthening</h3>
-              <p>
-                Reinforced mounts and bulkheads were required to support the different thrust, mass and
-                vibration characteristics of the turbofan retrofit.
-              </p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <h3>Fatigue Life and Corrosion Control</h3>
-              <p>
-                Cold expansion of fastener holes, composite patch repairs and corrosion-resistant coatings
-                were proposed to extend fatigue life by approximately 1,500–2,000 hours.
-              </p>
-            </div>
-          </li>
-          <li>
-            <div>
-              <h3>Radar-Cross-Section Reduction</h3>
-              <p>
-                Limited contour reshaping and radar-absorbing coatings were included as practical
-                survivability measures with negligible relative weight penalty.
-              </p>
-            </div>
-          </li>
-        </ol>
-      </section>
+<h1>
+Modernisation and System Upgrade of the MiG-21 Bison
+</h1>
 
-      <section class="section" id="final-design">
-        <div class="section-heading">
-          <div>
-            <span class="section-number">08</span>
-            <h2>Final Design Selection</h2>
-          </div>
-          <div class="prose">
-            <p>
-              Final concept selection combined the strongest subsystem outcomes into one integrated
-              aircraft configuration. The selection was not based on the maximum performance of any
-              single component; it was based on the best total balance of capability, efficiency,
-              structural compatibility, survivability and requirement compliance.
-            </p>
-          </div>
-        </div>
+<div class="hero-role">
+Role: Aircraft Systems Design and Trade-Study Developer
+</div>
 
-        <figure class="figure-card">
-          <div class="figure-frame">
-            <img src="final_concept.png" alt="Final selected MiG-21 Bison modernisation concept." loading="lazy">
-          </div>
-          <figcaption class="figure-caption">
-            <span class="figure-index">Final Concept</span>
-            <span>Integrated design selection combining avionics, propulsion and structural upgrades.</span>
-          </figcaption>
-        </figure>
+<p class="hero-description">
 
-        <div class="selection-summary">
-          <article class="selection-item">
-            <span>Avionics &amp; Weapons</span>
-            <strong>Uttam AESA radar with Astra Mk-1 missiles</strong>
-          </article>
-          <article class="selection-item">
-            <span>Propulsion</span>
-            <strong>Small afterburning turbofan with digital control</strong>
-          </article>
-          <article class="selection-item">
-            <span>Structure</span>
-            <strong>Lightweight substitution, reinforcement and life extension</strong>
-          </article>
-        </div>
-      </section>
+This project investigated a cost-effective modernisation pathway for the
+MiG-21 Bison through integrated radar, missile, propulsion and structural
+upgrades.
 
-      <section class="section" id="impact">
-        <div class="section-heading">
-          <div>
-            <span class="section-number">09</span>
-            <h2>Engineering Impact</h2>
-          </div>
-          <p class="section-intro">
-            The project demonstrates how a legacy platform can be evaluated through coordinated
-            subsystem improvements while retaining focus on the operational role and integration limits
-            of the original aircraft.
-          </p>
-        </div>
+The study used system architecture development, Breguet range analysis,
+quantitative trade studies, sensitivity analysis and requirement-based concept
+selection to identify a balanced final configuration that improved capability
+while respecting the limitations of the existing airframe.
 
-        <div class="impact-grid">
-          <article class="impact-card">
-            <h3>Capability with Controlled Penalties</h3>
-            <p>
-              The radar and missile selection improved BVR capability while the trade study kept
-              aerodynamic, mass, cooling and packaging penalties visible in the decision.
-            </p>
-          </article>
-          <article class="impact-card">
-            <h3>Performance Driven by the Governing Variable</h3>
-            <p>
-              Sensitivity analysis showed that propulsion efficiency had a greater influence on
-              endurance than moderate equipment mass growth, directing effort toward the more valuable
-              design change.
-            </p>
-          </article>
-          <article class="impact-card">
-            <h3>Integrated Rather Than Isolated Upgrades</h3>
-            <p>
-              Radar, engine, cooling, power, mass distribution, structural reinforcement and flight
-              control augmentation were treated as interacting parts of one aircraft-level solution.
-            </p>
-          </article>
-          <article class="impact-card">
-            <h3>Requirement Traceability</h3>
-            <p>
-              The final concept was selected against explicit BVR, SFC, thrust-to-weight, fatigue-life,
-              survivability and compatibility objectives rather than through qualitative preference alone.
-            </p>
-          </article>
-        </div>
-      </section>
+</p>
 
-      <section class="section" id="skills">
-        <div class="section-heading">
-          <div>
-            <span class="section-number">10</span>
-            <h2>Engineering Skills Demonstrated</h2>
-          </div>
-          <p class="section-intro">
-            The work connected quantitative performance assessment with the broader decisions required
-            when modifying an existing aerospace platform.
-          </p>
-        </div>
+<div class="hero-tags">
 
-        <div class="skills-grid">
-          <article class="skill-card">
-            <h3>Systems Architecture</h3>
-            <p>
-              Decomposed the aircraft into avionics, weapons, propulsion and structural subsystems and
-              identified the power, cooling, control and mass-distribution interfaces between them.
-            </p>
-          </article>
-          <article class="skill-card">
-            <h3>Quantitative Trade Studies</h3>
-            <p>
-              Compared competing radar, missile and propulsion concepts using performance, mass,
-              integration risk and weighted composite criteria.
-            </p>
-          </article>
-          <article class="skill-card">
-            <h3>Performance and Sensitivity Analysis</h3>
-            <p>
-              Used Breguet-range modelling and sensitivity studies to separate the effects of SFC,
-              lift-to-drag ratio, external stores and added system mass.
-            </p>
-          </article>
-          <article class="skill-card">
-            <h3>Requirement-Led Decision Making</h3>
-            <p>
-              Converted broad modernisation aims into measurable subsystem requirements and used those
-              requirements to justify the integrated final concept.
-            </p>
-          </article>
-        </div>
-      </section>
+<span class="hero-tag">Systems Engineering</span>
 
-      <section class="section" id="reflection">
-        <div class="section-heading">
-          <div>
-            <span class="section-number">11</span>
-            <h2>Reflection</h2>
-          </div>
-          <div class="reflection">
-            <p>
-              This project reinforced that aircraft modernisation is not a search for the individually
-              highest-performing radar, engine or material. Each improvement changes the demands placed
-              on other parts of the aircraft. A larger radar affects packaging, cooling and centre of
-              gravity; a more efficient engine changes mounts, rear-fuselage loads and control integration;
-              and structural reinforcement can preserve safety while eroding the mass benefit it was meant
-              to protect. The final concept therefore emerged from balancing interfaces and sensitivities,
-              not from maximising a single metric. That systems-level view was the most important outcome
-              of the study.
-            </p>
-          </div>
-        </div>
-      </section>
+<span class="hero-tag">Aircraft Modernisation</span>
 
-      <section class="section" id="supporting-files">
-        <div class="section-heading">
-          <div>
-            <span class="section-number">12</span>
-            <h2>Supporting Files</h2>
-          </div>
-          <p class="section-intro">
-            The complete preliminary design report contains the full requirements, calculations,
-            trade-study tables, compliance assessment and references supporting this portfolio summary.
-          </p>
-        </div>
+<span class="hero-tag">Trade Studies</span>
 
-        <article class="files-card">
-          <div>
-            <h3>MiG-21 Bison Modernisation — Final Report</h3>
-            <p>Complete project report in PDF format.</p>
-          </div>
-          <a class="file-button" href="Mig21 final report.pdf" target="_blank" rel="noopener">
-            Open PDF
-          </a>
-        </article>
-      </section>
-    </main>
-  </div>
+<span class="hero-tag">Breguet Range Analysis</span>
 
-  <footer>
-    <div class="footer-inner">
-      <span>Ninad Bhave — Aerospace Engineering Portfolio</span>
-      <span>MiG-21 Bison Modernisation</span>
-    </div>
-  </footer>
+<span class="hero-tag">Avionics Integration</span>
+
+<span class="hero-tag">Propulsion Analysis</span>
+
+<span class="hero-tag">Requirements Engineering</span>
+
+</div>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- PROJECT INFORMATION -->
+
+<section class="section">
+
+<h2>Project Information</h2>
+
+<p class="section-intro">
+
+A preliminary aircraft-design study examining how modern avionics, weapons,
+propulsion and structural improvements could be integrated into a legacy
+fighter platform as one coherent system.
+
+</p>
+
+<div class="info-grid">
+
+<div class="info-card">
+
+<span>Project Type</span>
+
+<strong>
+Aerospace Systems Design Study
+</strong>
+
+</div>
+
+
+<div class="info-card">
+
+<span>Course</span>
+
+<strong>
+AERO 2362
+</strong>
+
+</div>
+
+
+<div class="info-card">
+
+<span>Primary Method</span>
+
+<strong>
+Requirement-Based Trade Studies
+</strong>
+
+</div>
+
+
+<div class="info-card">
+
+<span>Final Selection</span>
+
+<strong>
+Integrated Modernisation Package
+</strong>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- PROBLEM AND SOLUTION -->
+
+<section class="section" id="problem">
+
+<h2>Engineering Problem and Proposed Solution</h2>
+
+<div class="problem-grid">
+
+
+<div class="problem-card">
+
+<h3>The Engineering Problem</h3>
+
+<p>
+
+The MiG-21 Bison remained constrained by an ageing radar, limited situational
+awareness, propulsion inefficiency and structural fatigue. Improving only one
+subsystem would not resolve the aircraft-level problem because each proposed
+upgrade affected mass distribution, cooling, electrical power, aerodynamic
+drag, structural loads and overall mission performance.
+
+The engineering challenge was therefore to identify a modernisation package
+that improved combat capability without creating integration penalties that
+outweighed the benefit.
+
+</p>
+
+</div>
+
+
+<div class="problem-card solution">
+
+<h3>My Proposed Solution</h3>
+
+<p>
+
+I developed an integrated concept combining the Uttam AESA radar and Astra
+Mk-1 missile, a small afterburning turbofan, lightweight material substitution,
+targeted structural reinforcement and fatigue-life extension measures.
+
+The concept was selected using quantitative comparison rather than preference
+alone. Radar and missile combinations were assessed against mass, range,
+capability and integration constraints, while propulsion concepts were assessed
+against fuel efficiency, mission radius, thrust, mass and implementation risk.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- OBJECTIVES -->
+
+<section class="section">
+
+<h2>Engineering Objectives</h2>
+
+<div class="objectives-grid">
+
+
+<div class="objective-card">
+
+<h3>Beyond-Visual-Range Capability</h3>
+
+<p>
+Integrate a radar with at least 150 km detection range and support an 80–100 km
+BVR missile engagement envelope.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Propulsion Efficiency</h3>
+
+<p>
+Reduce specific fuel consumption by at least 10% while maintaining the
+supersonic dash capability required by the interceptor role.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Improved Thrust-to-Weight Ratio</h3>
+
+<p>
+Achieve a minimum 12% improvement in thrust-to-weight ratio to support climb
+performance and manoeuvrability.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Mass Reduction</h3>
+
+<p>
+Use lightweight materials in selected secondary structures to reduce empty
+mass by approximately 150–200 kg.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Structural Life Extension</h3>
+
+<p>
+Introduce reinforcement, fatigue-management and corrosion-control measures to
+extend airframe life by approximately 2,000 flight hours.
+</p>
+
+</div>
+
+
+<div class="objective-card">
+
+<h3>Integrated Survivability</h3>
+
+<p>
+Improve defensive capability through modern sensors, electronic systems and
+practical radar-cross-section reduction measures.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ARCHITECTURE -->
+
+<section class="section" id="architecture">
+
+<h2>Integrated System Architecture</h2>
+
+<p class="section-intro">
+
+The final architecture linked the aircraft's sensing, weapons, propulsion,
+structure, survivability, flight-control, power and cooling functions. This
+approach ensured that each subsystem upgrade was assessed as part of the whole
+aircraft rather than as an isolated replacement.
+
+</p>
+
+<div class="architecture-image">
+
+<a href="assets/Architecture_plan.png" target="_blank" rel="noopener">
+
+<img
+src="assets/Architecture_plan.png"
+alt="Integrated system architecture for the MiG-21 Bison modernisation concept">
+
+</a>
+
+</div>
+
+
+<div class="module-grid">
+
+
+<div class="module-card">
+
+<h3>Uttam AESA Radar</h3>
+
+<p>
+
+Provides the primary sensor upgrade with an estimated 150 km detection range
+while remaining more compatible with the MiG-21 nose volume and cooling limits
+than the larger alternatives considered.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Astra Mk-1 Missile</h3>
+
+<p>
+
+Provides the selected indigenous BVR weapon capability with an engagement
+envelope of approximately 80–100 km and supports the self-reliance objective of
+the design.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Afterburning Turbofan</h3>
+
+<p>
+
+Replaces the R-25-300 turbojet conceptually with a more fuel-efficient
+propulsion system while retaining the afterburning capability required for
+supersonic interception.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Structural Adaptation</h3>
+
+<p>
+
+Includes radar-bay stiffening, engine-mount and rear-fuselage reinforcement,
+lightweight secondary structures and fatigue-life extension measures.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Power and Cooling</h3>
+
+<p>
+
+Supports the increased electrical and thermal demands created by the AESA
+radar, upgraded avionics and propulsion-system integration.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Flight-Control Augmentation</h3>
+
+<p>
+
+Compensates for changes in aircraft mass distribution created by the forward
+radar installation and the rear propulsion-system modification.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- WORKFLOW -->
+
+<section class="section">
+
+<h2>Engineering Workflow</h2>
+
+<div class="workflow">
+
+<div class="workflow-step">
+Define Platform Limitations
+</div>
+
+<div class="workflow-step">
+Translate Needs into Requirements
+</div>
+
+<div class="workflow-step">
+Develop System Architecture
+</div>
+
+<div class="workflow-step">
+Generate Upgrade Concepts
+</div>
+
+<div class="workflow-step">
+Perform Range Analysis
+</div>
+
+<div class="workflow-step">
+Conduct Trade Studies
+</div>
+
+<div class="workflow-step">
+Evaluate Integration Risks
+</div>
+
+<div class="workflow-step">
+Select Final Concept
+</div>
+
+</div>
+
+</section>
+
+
+<!-- RADAR AND MISSILE -->
+
+<section class="section" id="radar">
+
+<h2>Radar and Missile Trade Study</h2>
+
+<p class="section-intro">
+
+The radar and missile evaluation combined performance calculations with mass,
+aerodynamic, packaging and sensor-capability considerations. The objective was
+to improve BVR effectiveness while keeping aircraft-performance penalties
+within acceptable limits.
+
+</p>
+
+<div class="results-list">
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Radar_missile_config.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Radar_missile_config.png"
+alt="Radar and missile configuration trade study for the MiG-21 Bison">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Concept Comparison
+</span>
+
+<h3>Radar and Missile Configuration Evaluation</h3>
+
+<p>
+
+Candidate combinations were compared using radar mass, missile mass, total
+installed mass, indicative detection range, estimated cruise range and a
+weighted composite score.
+
+The Uttam AESA and Astra Mk-1 combination achieved the strongest overall
+balance between capability, mass, integration feasibility and indigenous
+support.
+
+</p>
+
+<div class="key-result">
+
+<strong>Selection outcome:</strong>
+the Uttam AESA and Astra Mk-1 combination achieved the highest composite score
+of 0.892, with an estimated 150 km radar range and approximately 1,691 km cruise
+range in the selected weapon configuration.
+
+</div>
+
+</div>
+
+</article>
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Figure2.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Figure2.png"
+alt="MiG-21 radar missile cruise range aperture scaling and sensitivity analysis">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Performance Analysis
+</span>
+
+<h3>Range, Aperture and Sensitivity Results</h3>
+
+<p>
+
+The clean-aircraft cruise range was approximately 1,876 km, reducing to about
+1,691 km with two Astra Mk-1 missiles. This indicated that external-store drag
+and weight had a greater effect on endurance than moderate radar-mass
+variation.
+
+Aperture scaling showed that larger radars could provide greater detection
+range, but the MiG-21's limited nose volume and cooling capacity reduced their
+integration feasibility.
+
+</p>
+
+<div class="key-result">
+
+<strong>Engineering conclusion:</strong>
+radar mass changes between approximately 120 and 200 kg altered range by only a
+few kilometres, while aerodynamic penalties from external stores governed the
+larger endurance loss.
+
+</div>
+
+</div>
+
+</article>
+
+
+</div>
+
+</section>
+
+
+<!-- PROPULSION -->
+
+<section class="section" id="propulsion">
+
+<h2>Propulsion Trade Study</h2>
+
+<p class="section-intro">
+
+Four propulsion pathways were compared: optimisation of the existing R-25-300,
+an uprated turbojet, a small afterburning turbofan and a higher-bypass
+non-afterburning turbofan.
+
+</p>
+
+<div class="results-list">
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Propulsion_Trade_Study.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Propulsion_Trade_Study.png"
+alt="Propulsion system trade study for the MiG-21 Bison modernisation">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Propulsion Selection
+</span>
+
+<h3>Weighted Engine-Concept Evaluation</h3>
+
+<p>
+
+Each propulsion option was assessed using specific-fuel-consumption
+improvement, mission-radius gain, thrust change, integration risk, mass increase
+and a weighted composite score.
+
+The small afterburning turbofan did not provide the maximum range of every
+concept, but it delivered the strongest balance between efficiency, thrust and
+compatibility with the aircraft's supersonic interceptor role.
+
+</p>
+
+<div class="key-result">
+
+<strong>Selection outcome:</strong>
+the small afterburning turbofan achieved the highest composite score of 0.78,
+with approximately 12% lower SFC, 13–15% mission-radius improvement and about
+15% greater thrust.
+
+</div>
+
+</div>
+
+</article>
+
+
+<article class="result-item">
+
+<div class="result-image">
+
+<a
+href="assets/Figure 3.png"
+target="_blank"
+rel="noopener">
+
+<img
+src="assets/Figure 3.png"
+alt="MiG-21 propulsion range system-mass and sensitivity analysis">
+
+</a>
+
+</div>
+
+<div class="result-content">
+
+<span class="result-label">
+Range and Sensitivity
+</span>
+
+<h3>Effect of Propulsion Efficiency and Added Mass</h3>
+
+<p>
+
+The Breguet-based analysis showed that propulsion efficiency had a stronger
+influence on mission range than moderate avionics and weapon mass increases.
+
+Although a higher-bypass concept produced the greatest theoretical endurance,
+its packaging, cooling and speed compromises were inconsistent with the
+interceptor mission. The selected afterburning turbofan instead provided a
+practical long-term improvement while retaining supersonic capability.
+
+</p>
+
+<div class="key-result">
+
+<strong>Engineering conclusion:</strong>
+the selected propulsion concept improved estimated range by approximately
+350 km over the reference configuration, demonstrating that SFC reduction was
+the governing performance benefit.
+
+</div>
+
+</div>
+
+</article>
+
+
+</div>
+
+</section>
+
+
+<!-- STRUCTURAL MODERNISATION -->
+
+<section class="section" id="structure">
+
+<h2>Structural Modernisation</h2>
+
+<p class="section-intro">
+
+The structural proposal focused on targeted changes required to carry the new
+systems, control mass growth, preserve durability and extend service life
+without replacing the aircraft's fundamental configuration.
+
+</p>
+
+<div class="module-grid">
+
+
+<div class="module-card">
+
+<h3>Lightweight Material Substitution</h3>
+
+<p>
+
+Composites or aluminium-lithium alloys were proposed for selected non-primary
+structures, including access panels and avionics-bay housings, to offset added
+system mass.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Forward Fuselage Reinforcement</h3>
+
+<p>
+
+The radar bay required re-profiling and local stiffening to support the AESA
+installation, thermal loading and the resulting forward centre-of-gravity
+change.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Engine-Mount Strengthening</h3>
+
+<p>
+
+Reinforced engine mounts, bulkheads and rear-fuselage structure were required
+to support the different mass, thrust and vibration characteristics of the
+turbofan retrofit.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Fatigue-Life Extension</h3>
+
+<p>
+
+Cold expansion of fastener holes, composite patch repair and other targeted
+life-extension measures were proposed to increase fatigue life by approximately
+2,000 flight hours.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Corrosion Control</h3>
+
+<p>
+
+Corrosion-resistant coatings and focused maintenance measures were included to
+support the continued operation of the ageing airframe.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Radar-Cross-Section Reduction</h3>
+
+<p>
+
+Minor contour reshaping and radar-absorbing coatings were proposed as practical
+survivability improvements with limited additional mass.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- FINAL DESIGN -->
+
+<section class="section" id="final">
+
+<h2>Final Design Selection</h2>
+
+<p class="section-intro">
+
+The final concept combined the strongest subsystem outcomes into one aircraft
+configuration. Selection was based on the best total balance of capability,
+efficiency, structural compatibility, survivability and requirement
+compliance rather than the maximum value of any single metric.
+
+</p>
+
+<div class="architecture-image">
+
+<a href="assets/final_concept.png" target="_blank" rel="noopener">
+
+<img
+src="assets/final_concept.png"
+alt="Final selected MiG-21 Bison modernisation concept">
+
+</a>
+
+</div>
+
+
+<div class="module-grid">
+
+
+<div class="module-card">
+
+<h3>Avionics and Weapons</h3>
+
+<p>
+
+Uttam AESA radar, Astra Mk-1 missiles, helmet-mounted sighting and secure
+datalink capability formed the selected combat-system package.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Propulsion</h3>
+
+<p>
+
+A small afterburning turbofan was selected to improve fuel efficiency,
+mission radius and thrust while retaining supersonic dash capability.
+
+</p>
+
+</div>
+
+
+<div class="module-card">
+
+<h3>Structure and Survivability</h3>
+
+<p>
+
+Lightweight substitution, reinforcement, fatigue-life extension,
+corrosion control and practical RCS-reduction measures supported the complete
+integration.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ENGINEERING IMPACT -->
+
+<section class="section">
+
+<h2>Engineering Impact</h2>
+
+<p class="section-intro">
+
+The project demonstrates how an ageing aircraft platform can be assessed
+through coordinated subsystem improvements while retaining focus on its
+original operational role and physical integration limits.
+
+</p>
+
+<div class="application-grid">
+
+
+<div class="application-card">
+
+<h3>Capability with Controlled Penalties</h3>
+
+<p>
+
+The selected radar and missile combination improved BVR capability while
+keeping mass, drag, cooling, packaging and range penalties visible throughout
+the decision process.
+
+</p>
+
+</div>
+
+
+<div class="application-card">
+
+<h3>Focus on the Governing Variables</h3>
+
+<p>
+
+Sensitivity analysis identified propulsion efficiency and external-store drag
+as stronger influences on endurance than moderate radar or avionics mass
+growth.
+
+</p>
+
+</div>
+
+
+<div class="application-card">
+
+<h3>Aircraft-Level Integration</h3>
+
+<p>
+
+The study linked radar, weapons, propulsion, structure, cooling, electrical
+power, centre-of-gravity change and flight-control augmentation within one
+system architecture.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- SKILLS -->
+
+<section class="section" id="skills">
+
+<h2>Engineering Skills Demonstrated</h2>
+
+<p class="section-intro">
+
+The project demonstrates engineering ability through system decomposition,
+quantitative comparison, performance interpretation and requirement-led
+decision making.
+
+</p>
+
+<div class="skills-grid">
+
+
+<div class="skill-card">
+
+<h3>Aircraft Systems Engineering</h3>
+
+<p>
+
+Decomposed the modernisation problem into avionics, weapons, propulsion,
+structure, survivability, power, cooling and flight-control functions.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+an integrated architecture showing the physical and functional interfaces
+between all major upgrade areas.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Quantitative Trade Studies</h3>
+
+<p>
+
+Compared competing radar, missile and propulsion concepts using capability,
+mass, range, thrust, fuel efficiency, implementation risk and weighted scores.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+selection of Uttam AESA with Astra Mk-1 and the small afterburning turbofan from
+the evaluated alternatives.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Aircraft Performance Analysis</h3>
+
+<p>
+
+Applied Breguet range analysis to investigate the effect of propulsion
+efficiency, lift-to-drag ratio, external stores and added system mass.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+clean and loaded cruise-range comparison, propulsion range improvement and
+sensitivity plots.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Requirements Engineering</h3>
+
+<p>
+
+Converted the broad modernisation objective into measurable radar, missile,
+propulsion, structural-life, mass-reduction and survivability requirements.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+the final concept was assessed against explicit performance and integration
+targets rather than descriptive preference.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Integration-Risk Assessment</h3>
+
+<p>
+
+Considered the effects of radar aperture, nose volume, cooling, engine mass,
+rear-fuselage loading, centre-of-gravity movement and flight-control
+compensation.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+larger or higher-performing alternatives were rejected where their packaging
+and mission-role penalties outweighed the theoretical benefit.
+
+</div>
+
+</div>
+
+
+<div class="skill-card">
+
+<h3>Engineering Decision Making</h3>
+
+<p>
+
+Selected the final design by balancing operational capability, efficiency,
+durability, risk and compatibility across the entire aircraft.
+
+</p>
+
+<div class="skill-evidence">
+
+<strong>Evidence:</strong>
+the final concept combines the best overall subsystem balance rather than the
+maximum value in any one performance category.
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ENGINEERING QUESTIONS -->
+
+<section class="section">
+
+<h2>Engineering Design Questions</h2>
+
+<p class="section-intro">
+
+The following decisions explain why the final configuration was selected and
+how the trade studies informed the overall aircraft design.
+
+</p>
+
+<div class="question-grid">
+
+
+<div class="question-card">
+
+<h3>Why was Uttam AESA selected?</h3>
+
+<p>
+
+Larger radar options offered greater theoretical detection range, but their
+mass, aperture, cooling and nose-volume requirements reduced their feasibility.
+Uttam provided the required 150 km class detection capability with a better
+integration balance.
+
+</p>
+
+</div>
+
+
+<div class="question-card">
+
+<h3>Why pair it with Astra Mk-1?</h3>
+
+<p>
+
+The Astra Mk-1 provided the required BVR engagement capability while supporting
+the project's self-reliance objective. Its range penalty remained comparable
+with the other missile options evaluated.
+
+</p>
+
+</div>
+
+
+<div class="question-card">
+
+<h3>Why choose a small afterburning turbofan?</h3>
+
+<p>
+
+The small turbofan improved SFC, mission radius and thrust while preserving the
+afterburning and supersonic performance needed for the interceptor role. It
+therefore offered a stronger operational balance than the maximum-endurance
+alternative.
+
+</p>
+
+</div>
+
+
+<div class="question-card">
+
+<h3>Why not maximise range alone?</h3>
+
+<p>
+
+The highest-range propulsion concept introduced packaging, cooling and speed
+compromises that conflicted with the aircraft's intended role. System selection
+therefore required mission compatibility rather than single-variable
+optimisation.
+
+</p>
+
+</div>
+
+
+<div class="question-card">
+
+<h3>Why include structural changes in a systems study?</h3>
+
+<p>
+
+New radar and propulsion systems change mass distribution, local loading,
+thermal demand and vibration. Structural adaptation was therefore essential to
+make the avionics and propulsion selections physically credible.
+
+</p>
+
+</div>
+
+
+<div class="question-card">
+
+<h3>What governed the final concept?</h3>
+
+<p>
+
+The governing principle was balanced requirement compliance. Capability,
+efficiency, mass, structural durability, survivability and integration risk
+were considered together before the final configuration was selected.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- EMPLOYER VALUE -->
+
+<section class="section">
+
+<h2>What I Bring to an Engineering Team</h2>
+
+<div class="value-grid">
+
+
+<div class="value-card">
+
+<h3>System-Level Problem Solving</h3>
+
+<p>
+
+I can take a broad aircraft capability problem and decompose it into
+requirements, subsystem functions, interfaces and measurable design decisions.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Evidence-Based Concept Selection</h3>
+
+<p>
+
+I use calculations, sensitivity analysis and weighted trade criteria to justify
+why one concept provides a better overall engineering solution than another.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Multidisciplinary Integration</h3>
+
+<p>
+
+I can connect avionics, weapons, propulsion, aerodynamics, structures,
+flight-control and support-system constraints within one design assessment.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Performance Interpretation</h3>
+
+<p>
+
+I can identify which variables meaningfully govern aircraft performance and
+distinguish them from changes that create only minor system-level effects.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Requirements Traceability</h3>
+
+<p>
+
+I can move from operational need to measurable requirements and use those
+requirements to assess concept compliance and final design suitability.
+
+</p>
+
+</div>
+
+
+<div class="value-card">
+
+<h3>Engineering Communication</h3>
+
+<p>
+
+I can present complex trade studies as clear design reasoning, including the
+benefits, limitations and integration consequences of each decision.
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REFLECTION -->
+
+<section class="section">
+
+<h2>Engineering Reflection</h2>
+
+<p>
+
+This project strengthened my understanding that aircraft modernisation is not a
+search for the individually highest-performing radar, engine or material.
+
+Each proposed improvement changes the demands placed on other parts of the
+aircraft. A larger radar affects packaging, cooling and centre of gravity. A
+different engine changes structural loads, rear-fuselage integration and
+flight-control requirements. Structural reinforcement may preserve safety but
+can also reduce the mass benefit achieved elsewhere.
+
+The most important outcome was therefore learning to evaluate the aircraft as
+one connected system. The final concept emerged from balancing interfaces,
+performance sensitivities and mission requirements rather than maximising a
+single number.
+
+</p>
+
+</section>
+
+
+<!-- SUPPORTING FILES -->
+
+<section class="section" id="files">
+
+<h2>Supporting Project Files</h2>
+
+<p class="files-description">
+
+The portfolio page above summarises the engineering problem, system
+architecture, trade studies, selected concept and design reasoning.
+
+The complete preliminary design report is available below for readers who
+would like to examine the requirements, calculations, compliance assessment and
+references in greater technical detail.
+
+</p>
+
+<div class="file-buttons">
+
+<a
+class="button"
+href="assets/Mig21 final report.pdf"
+target="_blank"
+rel="noopener">
+Open MiG-21 Final Report
+</a>
+
+<a
+class="button secondary"
+href="index.html">
+Return to Portfolio
+</a>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+Ninad Bhave — Aerospace Engineering Portfolio
+
+</footer>
+
+
 </body>
+
 </html>
