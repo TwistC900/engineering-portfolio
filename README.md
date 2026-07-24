@@ -22,9 +22,6 @@ Composite wing redesign incorporating finite element analysis, structural optimi
 ### MiG-21 Aerospace Systems Design
 Systems engineering evaluation and modernisation study of the MiG-21 aircraft.
 
-### Aerospace Bracket Design (DFMA)
-Design and optimisation of a lightweight aerospace bracket capable of sustaining approximately three times the required design load.
-
 ### Aircraft CAD Portfolio
 Professional aircraft modelling and component design using CATIA V6 and SolidWorks.
 
