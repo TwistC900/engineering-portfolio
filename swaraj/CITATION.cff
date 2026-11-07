@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+message: "Please cite the project report and identify the PDR version when referring to these results."
+title: "SWARAJ: Autonomous Guidance and Behavioural Flight-Control Framework"
+authors:
+  - family-names: Bhave
+    given-names: Ninad Samrat
+version: "PDR-2026-11"
+date-released: 2026-11-07
+url: "https://twistc900.github.io/engineering-portfolio/swaraj.html"
