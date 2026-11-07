@@ -1,25 +1,367 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="SWARAJ by Ninad Bhave: nonlinear C182 autonomous guidance and behavioural flight control, with PDR results and gust-recovery comparisons."><meta name="theme-color" content="#101d29"><title>SWARAJ | Autonomous Flight-Control Research | Ninad Bhave</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:#f4f3ef;color:#182534;font:16px/1.7 system-ui,-apple-system,Segoe UI,sans-serif}a{color:inherit}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #c77e24;outline-offset:5px}nav{background:#101d29;color:#eef3f5;border-bottom:1px solid #34424f;position:sticky;top:0;z-index:5}.nav-inner{max-width:1200px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:17px 28px}.brand{font-weight:800;letter-spacing:.12em;text-decoration:none}.nav-links{display:flex;gap:20px;flex-wrap:wrap;font-size:13px}.nav-links a{text-decoration:none;color:#ccd4da}.hero{background:#101d29;color:#f4f3ef;padding:74px 28px 42px}.wrap{max-width:1144px;margin:auto}.eyebrow{text-transform:uppercase;letter-spacing:.16em;font-size:11px;font-weight:700;color:#ad7232}.hero .eyebrow{color:#e7b572}.hero h1{font-size:clamp(60px,10vw,118px);letter-spacing:-.065em;line-height:1;margin:20px 0 26px;font-weight:800}.hero .lead{font-size:clamp(22px,3vw,34px);line-height:1.3;max-width:820px;color:#f1f3f4;font-weight:500}.hero p{max-width:740px;color:#bac8d2}.buttons{display:flex;gap:12px;flex-wrap:wrap;margin:28px 0}.button{display:inline-flex;align-items:center;gap:10px;padding:11px 19px;background:#e9b678;color:#101d29;font-weight:700;font-size:14px;text-decoration:none;border:1px solid #e9b678;border-radius:3px}.button.secondary{background:transparent;color:#ecf1f4;border-color:#5b6b78}.hero-bottom{margin-top:40px;border-top:1px solid #34424f;padding-top:20px;display:flex;gap:35px;flex-wrap:wrap;font-size:13px;color:#aebec9}.hero-bottom strong{display:block;color:#eef3f5;font-size:18px}.section{padding:65px 28px;border-bottom:1px solid #d8dbd8}.section h2{font-size:clamp(28px,4vw,42px);letter-spacing:-.035em;line-height:1.18;margin:12px 0 23px}.section-intro{max-width:770px;color:#52606b}.section-head{display:grid;grid-template-columns:70px 1fr;gap:20px}.number{font-size:13px;letter-spacing:.1em;color:#8d969c;padding-top:17px}.metrics{display:grid;grid-template-columns:repeat(4,1fr);margin:34px 0;border:1px solid #d1d7d8;background:#fff}.metric{padding:24px;border-right:1px solid #d1d7d8}.metric:last-child{border:0}.metric strong{display:block;font-size:33px;line-height:1.2;letter-spacing:-.035em}.metric span{font-size:12px;color:#64717b}.note{border-left:3px solid #b47c36;background:#ebe7de;padding:14px 20px;color:#47515b;font-size:14px;margin:25px 0}.figure{margin:30px 0}.figure a{display:block;background:#000}.figure img{width:100%;height:auto;display:block}.figure figcaption{font-size:12px;color:#5b6872;border-bottom:1px solid #d8dbd8;padding:11px 0}.figure small{display:block}.split{display:grid;grid-template-columns:1fr 1fr;gap:40px}.split h3{font-size:20px;line-height:1.35}.architecture{margin:30px 0;padding:30px;background:#fff;border:1px solid #d1d7d8}.arch-row{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr;align-items:center;gap:9px}.arch-box{border:1px solid #c6ced4;padding:18px;text-align:center;font-size:13px;background:#f3f5f5;min-height:100px;display:flex;justify-content:center;flex-direction:column}.arch-box strong{display:block;color:#18364c}.arrow{text-align:center;color:#a4773d;font-size:24px}.feedback{border-top:1px dashed #a9b8c1;margin:23px 0 0;padding:15px 0 0;text-align:center;font-size:13px;color:#536575}.table-scroll{overflow-x:auto;margin:25px 0}table{width:100%;border-collapse:collapse;background:#fff;font-size:14px;min-width:580px}caption{text-align:left;font-weight:700;margin-bottom:10px}th{text-align:left;background:#e4eaeb;color:#273c4b}td,th{padding:14px 16px;border-bottom:1px solid #d9e0e1}td.num{font-variant-numeric:tabular-nums;white-space:nowrap}.pills{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.pill{border:1px solid #ccd4d5;padding:5px 10px;font-size:12px}.gallery{display:grid;grid-template-columns:1fr 1fr;gap:25px}.gallery .figure{margin:0}details{border-top:1px solid #cdd5d8;padding:17px 0}summary{cursor:pointer;font-weight:700;line-height:1.4}details p{max-width:850px;color:#53616b}.resource{padding:25px 0;border-bottom:1px solid #d5dbdd;display:flex;justify-content:space-between;gap:25px;align-items:center}.resource h3{margin:0}.resource p{margin:5px 0;font-size:14px;color:#65727b}.resource a{font-weight:700}.footer{background:#101d29;color:#b8c6d0;padding:34px 28px;font-size:13px}.footer a{color:#e5edf2}.fine{font-size:12px;color:#64717b}.button.dark{background:#19354a;border-color:#19354a;color:#fff}@media(max-width:760px){.nav-inner{padding:15px 20px;align-items:flex-start;flex-direction:column}.nav-links{gap:14px}.hero{padding:46px 22px 32px}.hero-bottom{gap:22px}.section{padding:43px 22px}.section-head{grid-template-columns:1fr;gap:0}.number{padding:0}.metrics{grid-template-columns:1fr 1fr}.metric:nth-child(2){border-right:0}.metric:nth-child(-n+2){border-bottom:1px solid #d1d7d8}.split,.gallery{grid-template-columns:1fr}.arch-row{grid-template-columns:1fr}.arrow{transform:rotate(90deg)}.resource{align-items:flex-start;flex-direction:column}.metric strong{font-size:29px}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-/* Match the existing engineering portfolio. */
-body{background:#eef2f6;color:#1f2937;font-family:Arial,Helvetica,sans-serif;line-height:1.7}
-nav,.footer{background:#0f172a}.nav-inner{max-width:1150px;width:90%;padding:18px 0}.brand{letter-spacing:0;font-size:18px}.nav-links a{color:#cbd5e1;font-size:14px}
-.hero{background:linear-gradient(135deg,rgba(8,20,39,.99),rgba(15,67,86,.97));padding:80px 20px 48px}.hero .wrap{max-width:1150px;width:90%}.hero h1{font-size:64px;letter-spacing:.02em;margin:23px 0}.hero .lead{font-size:30px;color:#fff}.hero p{color:#e2e8f0;font-size:17px}.hero .eyebrow{color:#cffafe;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.22);padding:8px 13px;border-radius:30px;display:inline-block;letter-spacing:.04em}.hero-bottom{border-color:rgba(255,255,255,.18);color:#cbd5e1}.hero-bottom strong{color:#a5f3fc}
-main{width:90%;max-width:1150px;margin:35px auto 45px}.section{padding:0;border:0;margin:0 0 30px}.section>.wrap{background:#fff;padding:34px;border-radius:16px;box-shadow:0 8px 26px rgba(15,23,42,.08)}.section h2{font-size:30px;color:#0f172a;letter-spacing:-.02em}.eyebrow{color:#155e75}.section-intro{color:#475569}.number{color:#64748b}.button{background:#0f172a;color:#fff;border-color:#0f172a;border-radius:9px}.button:hover{background:#155e75}.button.secondary{background:rgba(255,255,255,.09);color:#fff;border-color:rgba(255,255,255,.35)}.metrics{border-color:#dbe3ec;border-radius:12px;overflow:hidden;background:#f8fafc}.metric{border-color:#dbe3ec}.metric strong{color:#0f172a}.metric span{color:#64748b}.note{background:#e7eff1;border-left-color:#0f766e;border-radius:0 9px 9px 0;color:#334155}.architecture{background:#f8fafc;border-color:#dbe3ec;border-radius:14px}.arch-box{background:#fff;border-color:#dbe3ec;border-radius:10px}.arch-box strong{color:#0f172a}.arrow{color:#0f766e}.pill{background:#e2e8f0;color:#0f172a;border:0;border-radius:20px;padding:6px 12px}.figure img{border-radius:8px}.figure a{border-radius:8px;overflow:hidden}th{background:#e8eef4;color:#0f172a}td,th{border-color:#dbe3ec}.resource a,.split a{color:#155e75}.footer .wrap{max-width:1150px;width:90%}
-@media(max-width:760px){.nav-inner{padding:15px 0}.hero{padding:48px 20px 30px}.hero h1{font-size:48px}.hero .lead{font-size:25px}.hero .eyebrow{font-size:10px}main{width:92%;margin-top:25px}.section>.wrap{padding:24px}.section h2{font-size:27px}.metric{padding:18px}.metric strong{font-size:27px}}
-</style></head><body><nav aria-label="Main navigation"><div class="nav-inner"><a class="brand" href="index.html">NINAD BHAVE / SWARAJ</a><div class="nav-links"><a href="#architecture">Architecture</a><a href="#results">Results</a><a href="#gusts">Gust recovery</a><a href="#report">Report</a></div></div></nav>
-<header class="hero"><div class="wrap"><span class="eyebrow">Independent aerospace research / Preliminary Design Review / November 2026</span><h1>SWARAJ</h1><div class="lead">From mapped geometry to<br>coordinated autonomous flight.</div><p>A modular guidance and behavioural flight-control framework evaluated through nonlinear six-degree-of-freedom Cessna 182 simulation.</p><div class="buttons"><a class="button" href="assets/swaraj/SWARAJ_PDR.pdf" target="_blank" rel="noopener">Read the PDR ↗</a><a class="button secondary" href="#results">Explore the results ↓</a></div><div class="hero-bottom"><div><strong>6-DoF</strong>Nonlinear aircraft model</div><div><strong>MATLAB / Simulink</strong>Guidance and control development</div><div><strong>Ninad Samrat Bhave</strong>Project author</div></div></div></header>
-<main>
-<section class="section" id="overview"><div class="wrap"><div class="section-head"><span class="number">01 /</span><div><span class="eyebrow">The engineering question</span><h2>How does an aircraft prepare<br>for the next bend?</h2><p class="section-intro">SWARAJ investigates how route geometry, aircraft state and disturbance information can be coordinated to guide an aircraft through successive turns without continuous pilot steering. The PDR extends the earlier 3-DoF concept through a coupled nonlinear aircraft model, coordinated control and quantitative evaluation.</p><p class="section-intro">The demonstrated scope is autonomous guidance and flight control. Onboard terrain perception, reconnaissance functions and hardware evaluation remain future work.</p></div></div><div class="pills"><span class="pill">Mapped-route guidance</span><span class="pill">Behavioural supervision</span><span class="pill">Lateral / longitudinal coordination</span><span class="pill">Energy management</span><span class="pill">Disturbance recovery</span></div></div></section>
-<section class="section" id="architecture"><div class="wrap"><div class="section-head"><span class="number">02 /</span><div><span class="eyebrow">Control methodology</span><h2>Interpret. Prepare. Execute. Correct.</h2><p class="section-intro">A fixed mathematical map supplies the route. Look-Ahead and supervisory functions assess approaching curvature and current tracking. Banked Dynamics coordinates manoeuvre requirements before the lateral and longitudinal controllers generate surface and propulsion commands.</p></div></div><div class="architecture" role="group" aria-label="Simplified control architecture"><div class="arch-row"><div class="arch-box"><strong>Map + aircraft state</strong>Geometry, progress and feedback</div><div class="arrow" aria-hidden="true">→</div><div class="arch-box"><strong>Guidance + supervision</strong>Look-Ahead / Banked Dynamics</div><div class="arrow" aria-hidden="true">→</div><div class="arch-box"><strong>Control execution</strong>Aileron / rudder / elevator / throttle</div></div><div class="feedback">Aircraft response returns to guidance and control. Energy supervision and supplementary GRC corrections coordinate with the primary loops.</div></div><div class="split"><div><h3>Original contribution</h3><p>The project develops and integrates the supervisory logic, guidance interfaces and control coordination, then evaluates how those decisions affect the simulated aircraft. Established flight mechanics and control literature provide the physical foundation.</p></div><div><h3>Development from the concept</h3><p>The earlier project demonstrated behavioural changes using simplified aircraft dynamics. The PDR evaluates coupled motion, surface commands, propulsion response, tuning sensitivity and prescribed disturbances.</p><a href="uav.html">Read the earlier CDR project →</a></div></div></div></section>
-<section class="section" id="results"><div class="wrap"><div class="section-head"><span class="number">03 /</span><div><span class="eyebrow">Nominal simulation</span><h2>Tracking performance,<br>with the aircraft response in view.</h2><p class="section-intro">Final PDR run: 125 seconds, altitude reference 100 m, initial airspeed 67.089963 m/s, no external command perturbations or gusts, revised Energy/Throttle Controller, modular GRC disabled.</p></div></div><div class="metrics"><div class="metric"><strong>34.802 m</strong><span>Peak active-route CTE</span></div><div class="metric"><strong>1.000 m</strong><span>Peak absolute altitude error</span></div><div class="metric"><strong>27.347°</strong><span>Maximum absolute bank</span></div><div class="metric"><strong>66.888 m/s</strong><span>Minimum true airspeed</span></div></div>
-<figure class="figure"><a href="assets/swaraj/nominal-route.png" target="_blank" rel="noopener"><img src="assets/swaraj/nominal-route.png" alt="Nominal valley trajectory, cross-track error, mission progress and heading guidance" loading="lazy" width="1400" height="800"></a><figcaption>Figure 1. Aircraft route relative to the mapped centreline; active-route CTE is the tracking assessment signal. Select the plot to view at full size.</figcaption></figure>
-<div class="table-scroll"><table><caption>Nominal performance against project-defined requirements</caption><thead><tr><th scope="col">Measure</th><th scope="col">PDR result</th><th scope="col">Design criterion / interpretation</th></tr></thead><tbody><tr><td>Peak / RMS active CTE</td><td class="num">34.802 / 22.537 m</td><td>Peak ≤50 m preferred; ≤55 m maximum</td></tr><tr><td>Peak / RMS altitude error</td><td class="num">1.000 / 0.531 m</td><td>Peak ≤5 m</td></tr><tr><td>True airspeed range</td><td class="num">66.888–67.313 m/s</td><td>Minimum ≥58 m/s</td></tr><tr><td>Maximum aircraft bank</td><td class="num">27.347°</td><td>≤30° nominal target</td></tr><tr><td>Completion / map progress</td><td class="num">Flag = 1 / 98.51%</td><td>Completion remains qualified</td></tr></tbody></table></div><div class="note">The completion flag and geometric progress use different endpoint criteria. Automatic post-route guidance is not yet implemented. The simulation criteria are project design requirements, not certified aircraft limits.</div>
-<div class="gallery"><figure class="figure"><a href="assets/swaraj/lateral-response.png" target="_blank" rel="noopener"><img src="assets/swaraj/lateral-response.png" alt="Bank, surface, moment-command and yaw-rate responses" loading="lazy" width="1400" height="800"></a><figcaption>Figure 2. Lateral execution during successive turns. Select the plot to view at full size.</figcaption></figure><figure class="figure"><a href="assets/swaraj/altitude-response.png" target="_blank" rel="noopener"><img src="assets/swaraj/altitude-response.png" alt="Altitude, error, flight-path angle and pitch tracking" loading="lazy" width="1400" height="800"></a><figcaption>Figure 3. Altitude regulation through the nominal manoeuvres. Select the plot to view at full size.</figcaption></figure></div>
-<h3>Speed retention and command tracking are distinct findings</h3><p class="section-intro">Throttle follows its target and nominal airspeed remains bounded. Temporary reduced-speed commands are only partially reflected in actual airspeed before the reference recovers. This response motivates further lateral throttle and energy coordination.</p><figure class="figure"><a href="assets/swaraj/speed-throttle.png" target="_blank" rel="noopener"><img src="assets/swaraj/speed-throttle.png" alt="Actual airspeed versus effective speed target and throttle target tracking" loading="lazy" width="1400" height="800"></a><figcaption>Figure 4. Nominal speed and throttle behaviour; the short speed-target reductions are not fully achieved. Select the plot to view at full size.</figcaption></figure>
-</div></section>
-<section class="section" id="gusts"><div class="wrap"><div class="section-head"><span class="number">04 /</span><div><span class="eyebrow">Comparative disturbance testing</span><h2>Better lateral containment.<br>A visible vertical trade-off.</h2><p class="section-intro">Four prescribed wind schedules were simulated with GRC disabled and enabled. The largest lateral improvements occur in crosswind and combined disturbances. Vertical and combined cases exceed the gust-altitude criterion with GRC enabled.</p></div></div><div class="table-scroll"><table><caption>GRC OFF / ON comparisons reported in the PDR</caption><thead><tr><th scope="col">Wind case</th><th scope="col">Peak CTE OFF → ON</th><th scope="col">Reduction</th><th scope="col">Peak altitude error OFF → ON</th></tr></thead><tbody><tr><td>Longitudinal</td><td class="num">42.307 → 37.820 m</td><td>10.61%</td><td class="num">2.140 → 1.744 m</td></tr><tr><td>Lateral</td><td class="num">83.104 → 44.979 m</td><td>45.88%</td><td class="num">1.866 → 3.354 m</td></tr><tr><td>Vertical</td><td class="num">34.802 → 34.802 m</td><td>0.00%</td><td class="num">7.897 → 10.502 m</td></tr><tr><td>Combined</td><td class="num">91.526 → 37.820 m</td><td>58.68%</td><td class="num">8.672 → 11.333 m</td></tr></tbody></table></div>
-<figure class="figure"><a href="assets/swaraj/gust-combined.png" target="_blank" rel="noopener"><img src="assets/swaraj/gust-combined.png" alt="Combined wind schedule comparing GRC disabled and enabled" loading="lazy" width="1400" height="800"></a><figcaption>Figure 5. Combined gust response: improved lateral tracking alongside a larger peak altitude error. Select the plot to view at full size.</figcaption></figure>
-<div class="note">The GRC-enabled vertical and combined cases exceed the ±10 m altitude-error criterion. Recovery towards the reference does not remove those exceedances. The results establish trajectory-recovery behaviour, not structural gust-load alleviation.</div><details><summary>View the individual wind cases</summary><div class="gallery"><figure class="figure"><a href="assets/swaraj/gust-longitudinal.png" target="_blank" rel="noopener"><img src="assets/swaraj/gust-longitudinal.png" alt="Longitudinal wind case GRC comparison" loading="lazy" width="1400" height="800"></a><figcaption>Longitudinal disturbance. Select the plot to view at full size.</figcaption></figure><figure class="figure"><a href="assets/swaraj/gust-lateral.png" target="_blank" rel="noopener"><img src="assets/swaraj/gust-lateral.png" alt="Lateral wind case GRC comparison" loading="lazy" width="1400" height="800"></a><figcaption>Lateral disturbance. Select the plot to view at full size.</figcaption></figure><figure class="figure"><a href="assets/swaraj/gust-vertical.png" target="_blank" rel="noopener"><img src="assets/swaraj/gust-vertical.png" alt="Vertical wind case GRC comparison" loading="lazy" width="1400" height="800"></a><figcaption>Vertical disturbance. Select the plot to view at full size.</figcaption></figure></div></details></div></section>
-<section class="section" id="development"><div class="wrap"><div class="section-head"><span class="number">05 /</span><div><span class="eyebrow">Evidence and next steps</span><h2>A documented development baseline.</h2><p class="section-intro">The report brings together aircraft trim and response checks, controller sensitivity, nominal flight, command changes and disturbance comparisons. The current release presents that evidence and identifies what remains to be resolved.</p></div></div><details><summary>What did the tuning study establish?</summary><p>The 44 group-sensitivity cases show that suitable flight conditions do not automatically ensure satisfactory route tracking. MLA −10% reduced peak CTE from 37.005 m to 35.309 m, while RMS CTE increased from 21.083 m to 22.561 m. The final nominal run includes a later energy/throttle revision and should be distinguished from that tuning campaign.</p></details><details><summary>What is the current validation scope?</summary><p>Software simulation of a nonlinear C182 model on a prescribed mathematical route. The work does not yet demonstrate real terrain perception, sensor-based navigation, physical flight or hardware-in-the-loop performance. Handbook comparisons provide operating context; structural and complete flight-envelope compliance remain to be evaluated.</p></details><details><summary>What will be developed next?</summary><p>Transient speed tracking, lateral/longitudinal energy coordination, vertical gust damping, terminal mission management, aircraft-specific speed/load supervision, adaptable route mapping and progressive sensor/hardware evaluation.</p></details><details><summary>Report notation and reproducibility</summary><p>The supplied PDF is retained as the development record. Its density-ratio airspeed equation should identify EAS rather than CAS; a corrected edition is pending. The model files, source code and raw logs are not included in this documentation release, so the published figures are evidence from the report rather than a reproducible executable package.</p></details></div></section>
-<section class="section" id="report"><div class="wrap"><div class="section-head"><span class="number">06 /</span><div><span class="eyebrow">Read the research</span><h2>Report, evidence and development history.</h2></div></div><div class="resource"><div><h3>Personal PDR report</h3><p>November 2026 · 94 pages · supplied base edition · approximately 11 MB</p></div><a href="assets/swaraj/SWARAJ_PDR.pdf" target="_blank" rel="noopener">Open report ↗</a></div><div class="resource"><div><h3>Research documentation</h3><p>Overview, reported results, assessment qualifications and known issues.</p></div><a href="swaraj/README.md">Read project documentation →</a></div><div class="resource"><div><h3>Earlier conceptual design</h3><p>The original 3-DoF behavioural-control project and its results.</p></div><a href="uav.html">View CDR project →</a></div><p class="fine">Project author: Ninad Samrat Bhave. Foundational equations and external research are acknowledged in the report. No open-source licence is granted by this documentation release.</p></div></section>
-</main><footer class="footer"><div class="wrap">SWARAJ / Ninad Samrat Bhave · November 2026 <span aria-hidden="true"> / </span><a href="index.html">Engineering portfolio</a></div></footer></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#081b2b">
+  <meta name="description" content="SWARAJ is Ninad Bhave's independent aerospace research in near/far Look-Ahead guidance, banked dynamics and autonomous Cessna 182 flight control. Explore the diagrams, nonlinear simulation results and PDR.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SWARAJ | From Self-Governance to Autonomous Flight">
+  <meta property="og:description" content="An original approach to route-preview guidance, banked-turn coordination and nonlinear 6-DoF flight control by Ninad Samrat Bhave.">
+  <meta property="og:image" content="https://twistc900.github.io/engineering-portfolio/assets/swaraj/swaraj-emblem-v2.webp">
+  <meta property="og:url" content="https://twistc900.github.io/engineering-portfolio/swaraj.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://twistc900.github.io/engineering-portfolio/swaraj.html">
+  <link rel="icon" type="image/webp" href="assets/swaraj/swaraj-emblem-v2.webp">
+  <title>SWARAJ | Autonomous Flight-Control Research | Ninad Bhave</title>
+  <style>
+    :root {
+      --navy: #091b2b;
+      --navy-2: #123147;
+      --ink: #1a2936;
+      --muted: #526372;
+      --paper: #f5f5f1;
+      --white: #fff;
+      --saffron: #d78538;
+      --gold: #e7bc79;
+      --teal: #0d7b82;
+      --border: #dce3e7;
+      --shadow: 0 16px 50px rgba(10, 35, 50, .07);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: "Segoe UI", Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.7; }
+    a { color: inherit; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid var(--saffron); outline-offset: 4px; }
+    img { max-width: 100%; }
+    .shell { width: min(1160px, 90%); margin-inline: auto; }
+    .eyebrow { display: block; color: var(--teal); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .16em; }
+    .overline { font-size: 12px; letter-spacing: .17em; font-weight: 700; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h2 { font-size: clamp(30px, 3.5vw, 45px); line-height: 1.17; letter-spacing: -.032em; }
+    h3 { font-size: 21px; line-height: 1.3; }
+    p { color: var(--muted); }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 19px; border: 1px solid var(--navy); border-radius: 7px; background: var(--navy); color: #fff; text-decoration: none; font-weight: 750; font-size: 14px; transition: transform .2s ease, background .2s ease; }
+    .button:hover { transform: translateY(-2px); background: #1b4255; }
+    .button.light { background: transparent; border-color: rgba(255,255,255,.4); color: #fff; }
+    .button.light:hover { background: rgba(255,255,255,.12); }
+    nav { position: sticky; z-index: 20; top: 0; background: rgba(7,23,37,.97); color: white; border-bottom: 1px solid rgba(232,192,131,.20); backdrop-filter: blur(14px); }
+    .nav-inner { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .nav-brand { color: #f4f5f1; text-decoration: none; letter-spacing: .08em; font-weight: 800; font-size: 15px; }
+    .nav-brand span { font-weight: 400; color: #b6cad3; letter-spacing: .02em; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 21px; }
+    .nav-links a { color: #c9d5db; font-size: 13px; text-decoration: none; font-weight: 650; }
+    .nav-links a:hover { color: var(--gold); }
+    .hero { color: white; overflow: hidden; position: relative; background: radial-gradient(ellipse at 73% 40%, rgba(19,88,103,.8), transparent 47%), linear-gradient(125deg, #071827 8%, #0b2639 62%, #102c38 100%); border-bottom: 5px solid #b9783f; }
+    .hero:before { content: ""; position: absolute; inset: 0; opacity: .24; pointer-events: none; background-image: repeating-radial-gradient(ellipse at 75% 35%, transparent 0, transparent 35px, rgba(177,214,215,.23) 36px, transparent 37px), linear-gradient(90deg, transparent 99%, rgba(255,255,255,.12) 100%); background-size: auto, 88px 88px; mask-image: linear-gradient(90deg, transparent, #000 34%); }
+    .hero-grid { display: grid; grid-template-columns: 1fr .88fr; align-items: center; gap: 40px; min-height: 570px; padding: 65px 0 56px; position: relative; }
+    .hero-copy { position: relative; z-index: 1; }
+    .hero-copy .overline { color: #f0c18b; }
+    .hero h1 { font-size: clamp(68px, 8vw, 112px); line-height: .98; margin: 18px 0 14px; letter-spacing: -.065em; font-weight: 850; }
+    .hero .subtitle { color: #eec58d; font-size: 15px; max-width: 520px; line-height: 1.5; font-weight: 650; }
+    .hero .tagline { color: #fff; font-weight: 600; font-size: clamp(24px, 2.5vw, 36px); line-height: 1.2; letter-spacing: -.025em; max-width: 600px; margin: 28px 0 13px; }
+    .hero .hero-text { color: #c6d5db; max-width: 590px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 27px; }
+    .hero-actions .button { background: var(--saffron); color: #172536; border-color: var(--saffron); }
+    .hero-actions .button.light { background: transparent; color: #fff; border-color: rgba(255,255,255,.4); }
+    .emblem-stage { position: relative; display: grid; place-items: center; min-height: 430px; }
+    .emblem-stage:before { content: ""; position: absolute; width: 86%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(197,127,61,.22) 0, rgba(197,127,61,.08) 45%, transparent 69%); box-shadow: 0 0 0 1px rgba(227,179,109,.13), 0 0 0 26px rgba(255,255,255,.018), 0 0 0 53px rgba(255,255,255,.013); }
+    .emblem-stage img { z-index: 1; width: min(470px, 100%); filter: drop-shadow(0 28px 26px rgba(0,0,0,.4)); }
+    .emblem-label { z-index: 1; position: absolute; bottom: 0; color: #d7c4a6; font-size: 11px; text-align: center; text-transform: uppercase; letter-spacing: .15em; }
+    .hero-foot { position: relative; border-top: 1px solid rgba(255,255,255,.16); padding: 18px 0 23px; display: flex; gap: 40px; flex-wrap: wrap; color: #b5cbd2; font-size: 13px; }
+    .hero-foot strong { color: #fff; }
+    .page { padding: 48px 0 58px; }
+    .panel { margin-bottom: 28px; padding: clamp(25px, 4.5vw, 52px); background: var(--white); border: 1px solid #e6ebed; border-radius: 15px; box-shadow: var(--shadow); }
+    .section-heading { max-width: 900px; margin-bottom: 28px; }
+    .section-heading .eyebrow { margin-bottom: 12px; }
+    .section-heading p { max-width: 850px; font-size: 17px; }
+    .philosophy { background: #fcf9f2; border-left: 5px solid var(--saffron); display: grid; grid-template-columns: .7fr 1.3fr; align-items: center; gap: 36px; }
+    .philosophy h2 { margin-bottom: 0; }
+    .philosophy .eyebrow { color: #ae6426; margin-bottom: 10px; }
+    .philosophy p:last-child { margin-bottom: 0; }
+    .figure-wrap { background: #f9fbfb; padding: clamp(10px, 2.2vw, 25px); border: 1px solid var(--border); border-radius: 13px; margin: 24px 0 27px; }
+    .figure-wrap a { display: block; }
+    .figure-wrap img { display: block; width: 100%; border-radius: 5px; background: white; height: auto; }
+    figcaption { margin-top: 12px; font-size: 12px; color: #5d6b75; line-height: 1.55; }
+    .insight-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    .insight { background: #f4f7f7; padding: 22px; border-radius: 11px; border: 1px solid var(--border); }
+    .insight .label { color: #a56832; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
+    .insight h3 { margin: 9px 0 10px; }
+    .insight p { font-size: 14px; margin-bottom: 0; }
+    .mechanics-grid { display: grid; grid-template-columns: 1.3fr .85fr; align-items: center; gap: 34px; }
+    .mechanics-grid .figure-wrap { margin: 0; }
+    .mechanics-copy p { font-size: 15px; }
+    .equation { background: #122d41; border-left: 4px solid var(--saffron); color: #fff; border-radius: 7px; padding: 18px; margin: 17px 0; font-size: 25px; text-align: center; font-family: Georgia, "Times New Roman", serif; }
+    .equation small { display: block; color: #bfd0d5; font: 12px/1.5 "Segoe UI", Arial, sans-serif; margin-top: 6px; }
+    .architecture-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 11px; margin-top: 25px; }
+    .architecture-step { background: #102f43; color: white; padding: 23px 17px; border-radius: 10px; border-top: 4px solid #ce884b; }
+    .architecture-step span { display: block; color: #daa46b; font-size: 11px; font-weight: 800; letter-spacing: .12em; }
+    .architecture-step strong { display: block; font-size: 17px; margin: 8px 0; line-height: 1.25; }
+    .architecture-step p { color: #c4d4db; font-size: 13px; margin: 0; line-height: 1.55; }
+    .results-band { background: linear-gradient(120deg, #0b263b, #124155); border: 0; color: white; }
+    .results-band .eyebrow { color: #e3ad73; }
+    .results-band h2 { color: white; }
+    .results-band .section-heading p { color: #c4d4db; }
+    .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border: 1px solid rgba(255,255,255,.17); border-radius: 11px; overflow: hidden; margin-top: 25px; }
+    .metric { padding: 23px; border-right: 1px solid rgba(255,255,255,.17); background: rgba(255,255,255,.035); }
+    .metric:last-child { border-right: 0; }
+    .metric strong { display: block; font-size: clamp(25px, 2.65vw, 35px); line-height: 1.2; letter-spacing: -.04em; color: #f0c28d; }
+    .metric span { display: block; color: #c8d7df; font-size: 12px; margin-top: 7px; line-height: 1.5; }
+    .plot { margin-top: 27px; }
+    .plot img { width: 100%; display: block; border-radius: 9px; }
+    .plot figcaption { color: #c2d4d9; }
+    .two-plots { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
+    .two-plots .plot { margin-top: 18px; }
+    .table-scroll { overflow-x: auto; margin-top: 25px; border-radius: 10px; border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; min-width: 615px; font-size: 14px; }
+    th { background: #eaf0f2; color: #233b4b; text-align: left; font-weight: 800; }
+    td, th { padding: 14px 16px; border-bottom: 1px solid #dce5e8; }
+    tbody tr:last-child td { border-bottom: 0; }
+    td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .feature-stat { display: flex; gap: 22px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--border); }
+    .feature-stat strong { font-size: 40px; min-width: 145px; letter-spacing: -.045em; color: #0b6871; line-height: 1; }
+    .feature-stat p { margin: 0; }
+    .soft-note { font-size: 13px; color: #687782; margin-top: 15px; }
+    details { border-top: 1px solid var(--border); padding: 15px 0; }
+    summary { font-weight: 750; cursor: pointer; }
+    details p { margin: 13px 0 0; }
+    .roadmap { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; margin-top: 25px; }
+    .roadmap-item { border: 1px solid var(--border); border-radius: 11px; padding: 23px; background: #f7f9fa; }
+    .roadmap-item span { color: #c77f3b; font-size: 12px; font-weight: 850; }
+    .roadmap-item h3 { margin: 9px 0; }
+    .roadmap-item p { font-size: 14px; margin: 0; }
+    .resource-panel { background: #fdf7ed; border: 1px solid #f0dfc9; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 22px; }
+    .resource-panel h2 { margin-bottom: 10px; }
+    .resource-panel p { max-width: 720px; margin-bottom: 0; }
+    footer { background: #071827; color: #bdcbd2; padding: 32px 0; font-size: 13px; }
+    footer .shell { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    footer a { color: #f0c18b; }
+    @media (max-width: 950px) {
+      .hero-grid { grid-template-columns: 1fr .74fr; gap: 17px; }
+      .hero h1 { font-size: 75px; }
+      .emblem-stage { min-height: 340px; }
+      .mechanics-grid { grid-template-columns: 1fr; }
+      .mechanics-copy { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+      .architecture-row, .metrics { grid-template-columns: repeat(2,1fr); }
+      .metric:nth-child(2) { border-right: 0; }
+      .metric:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.17); }
+    }
+    @media (max-width: 700px) {
+      .nav-inner { align-items: flex-start; flex-direction: column; padding: 13px 0; gap: 8px; }
+      .nav-links { gap: 14px; }
+      .nav-links a { font-size: 12px; }
+      .hero-grid { grid-template-columns: 1fr; padding: 46px 0 28px; }
+      .hero h1 { font-size: clamp(65px, 15vw, 88px); }
+      .hero .tagline { font-size: 28px; }
+      .emblem-stage { min-height: 0; padding: 10px 0 27px; }
+      .emblem-stage img { width: min(370px, 75vw); }
+      .emblem-label { bottom: -6px; }
+      .hero-foot { gap: 9px 22px; font-size: 12px; }
+      .page { padding-top: 24px; }
+      .philosophy, .mechanics-copy, .resource-panel { grid-template-columns: 1fr; }
+      .insight-grid, .roadmap { grid-template-columns: 1fr; }
+      .two-plots { grid-template-columns: 1fr; }
+      .metric { padding: 17px; }
+      .metric strong { font-size: 28px; }
+      .architecture-row { gap: 9px; }
+      .architecture-step { padding: 18px 14px; }
+      .feature-stat { align-items: flex-start; gap: 11px; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
+  </style>
+</head>
+<body>
+  <nav aria-label="Main navigation">
+    <div class="shell nav-inner">
+      <a class="nav-brand" href="index.html">NINAD BHAVE <span>/ SWARAJ</span></a>
+      <div class="nav-links">
+        <a href="#philosophy">Philosophy</a>
+        <a href="#guidance">Look-Ahead</a>
+        <a href="#banking">Banking</a>
+        <a href="#performance">Results</a>
+        <a href="#future">What's next</a>
+        <a href="#report">PDR</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="shell hero-grid">
+      <div class="hero-copy">
+        <span class="overline">Independent aerospace research · Preliminary Design Review · 2026</span>
+        <h1>SWARAJ</h1>
+        <p class="subtitle">System for Warfare Autonomous Reconnaissance and Adaptive Judgment</p>
+        <p class="tagline">Self-governance, translated into autonomous flight.</p>
+        <p class="hero-text">An original integration of mapped-route anticipation, behavioural supervision, aircraft banking and energy-aware flight control—developed and evaluated using a nonlinear six-degree-of-freedom Cessna 182 model.</p>
+        <div class="hero-actions">
+          <a class="button" href="#guidance">Explore the engineering ↓</a>
+          <a class="button light" href="assets/swaraj/SWARAJ_PDR.pdf" target="_blank" rel="noopener">Read the 94-page PDR ↗</a>
+        </div>
+      </div>
+      <div class="emblem-stage">
+        <img src="assets/swaraj/swaraj-emblem-v2.webp" width="1100" height="1100" alt="SWARAJ's Maratha-inspired octagonal copper insignia with an engraved fort, saffron Bhagwa flag and fixed-wing reconnaissance UAV" fetchpriority="high">
+        <div class="emblem-label">Maratha heritage × aerospace autonomy</div>
+      </div>
+    </div>
+    <div class="shell hero-foot">
+      <div><strong>Researcher:</strong> Ninad Samrat Bhave</div>
+      <div><strong>Platform:</strong> Nonlinear C182 / 6-DoF</div>
+      <div><strong>Environment:</strong> MATLAB &amp; Simulink</div>
+    </div>
+  </header>
+
+  <main class="shell page">
+    <section class="panel philosophy" id="philosophy">
+      <div>
+        <span class="eyebrow">A name with a purpose</span>
+        <h2>Two philosophies.<br>One engineering vision.</h2>
+      </div>
+      <div>
+        <p>Inspired by <em>Hindavi Swarajya</em>, the idea of self-rule and independent decision-making, SWARAJ brings that philosophy into a modern flight-control problem: how can an aircraft interpret what lies ahead and coordinate its own response?</p>
+        <p>The heritage-inspired insignia brings a Maratha fort and Bhagwa together with an unmanned aircraft. The research itself focuses on the mathematics and engineering required to transform environmental information into controlled flight behaviour.</p>
+      </div>
+    </section>
+
+    <section class="panel" id="guidance">
+      <div class="section-heading">
+        <span class="eyebrow">01 / The central idea</span>
+        <h2>What if the aircraft could prepare for a turn before it reached one?</h2>
+        <p>SWARAJ's Look-Ahead formulation examines the mapped route at near and far preview positions. Their tangent directions describe both the immediate path requirement and the geometry that follows. Guidance can therefore prepare for changing curvature instead of waiting for the aircraft to drift off course.</p>
+      </div>
+      <figure class="figure-wrap">
+        <a href="assets/swaraj/lookahead-banking.webp" target="_blank" rel="noopener" aria-label="Open the full Look-Ahead and banked-turn figure">
+          <img src="assets/swaraj/lookahead-banking.webp" width="2200" height="1807" alt="Original PDR Figure 8: curved route with local, near and far path tangents; illustrative time-based preview distances; and banked-turn free-body diagram" loading="lazy">
+        </a>
+        <figcaption>Original PDR Figure 8. Route geometry, near/far preview and banked-turn force resolution. The displayed preview times are illustrative, not a statement of the controller's operational tuning. Select for full-resolution viewing.</figcaption>
+      </figure>
+      <div class="insight-grid">
+        <article class="insight"><span class="label">Geometry</span><h3>Read the route</h3><p>A mathematical environment map defines the centreline, cross-track displacement and approaching tangent headings.</p></article>
+        <article class="insight"><span class="label">Prediction</span><h3>Look further ahead</h3><p>Near and far preview horizons make the upcoming turn part of the present guidance decision.</p></article>
+        <article class="insight"><span class="label">Flight response</span><h3>Prepare the bank</h3><p>Banked Dynamics connects route anticipation to feasible heading, roll and vertical-support requirements.</p></article>
+      </div>
+    </section>
+
+    <section class="panel" id="banking">
+      <div class="section-heading">
+        <span class="eyebrow">02 / The physics beneath the guidance</span>
+        <h2>A turn is not just a change in heading.</h2>
+        <p>When the aircraft banks, the same lift vector must provide both lateral turning force and vertical support. SWARAJ coordinates these competing demands through Banked Dynamics and its lateral and longitudinal control paths.</p>
+      </div>
+      <div class="mechanics-grid">
+        <figure class="figure-wrap">
+          <a href="assets/swaraj/banked-vertical-force.webp" target="_blank" rel="noopener" aria-label="Open the full vertical-force free-body figure">
+            <img src="assets/swaraj/banked-vertical-force.webp" width="2200" height="1870" alt="Original PDR Figure 11: banked aircraft vertical free-body diagrams showing insufficient vertical force, restoring acceleration and illustrative altitude response" loading="lazy">
+          </a>
+          <figcaption>Original PDR Figure 11. Forces and vertical acceleration through a banked manoeuvre; the altitude trace is schematic rather than simulation data.</figcaption>
+        </figure>
+        <div class="mechanics-copy">
+          <div>
+            <h3>The lateral requirement</h3>
+            <p>Bank converts a component of lift into horizontal turning force. In the ideal coordinated, level-turn approximation, this is the basis of the turn-radius and bank-demand relationships used in guidance.</p>
+            <div class="equation"><i>L</i> sin φ<small>Horizontal lift component for a bank angle φ</small></div>
+          </div>
+          <div>
+            <h3>The vertical requirement</h3>
+            <p>Bank reduces the upward lift component. Longitudinal supervision anticipates this requirement, while pitch and energy control help regulate altitude and airspeed through successive turns.</p>
+            <div class="equation"><i>L</i> cos φ<small>Vertical lift component; actual vertical acceleration also depends on other forces and aircraft state</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel" id="architecture">
+      <div class="section-heading">
+        <span class="eyebrow">03 / A modular control system</span>
+        <h2>From environmental geometry to aircraft response.</h2>
+        <p>The project connects geometric guidance with behavioural decisions and the physical control of an aircraft. Each layer has a defined role, with aircraft-state feedback closing the loop.</p>
+      </div>
+      <div class="architecture-row" aria-label="Simplified SWARAJ architecture">
+        <div class="architecture-step"><span>01 / SENSE THE ROUTE</span><strong>Environment Map</strong><p>Centreline geometry, route progress and cross-track position</p></div>
+        <div class="architecture-step"><span>02 / ANTICIPATE</span><strong>Look-Ahead &amp; Supervisor</strong><p>Near/far preview, heading intent and behaviour selection</p></div>
+        <div class="architecture-step"><span>03 / COORDINATE</span><strong>Banked Dynamics</strong><p>Required turn response, bank support and manoeuvre preparation</p></div>
+        <div class="architecture-step"><span>04 / EXECUTE</span><strong>Aircraft Controllers</strong><p>Aileron, rudder, elevator and throttle with energy supervision</p></div>
+      </div>
+      <p class="soft-note">The architecture is a functional summary. Detailed controller equations, supervisory interfaces and gust-recovery logic are documented in the PDR.</p>
+    </section>
+
+    <section class="panel results-band" id="performance">
+      <div class="section-heading">
+        <span class="eyebrow">04 / Validated simulation results</span>
+        <h2>Measured across the complete valley-following manoeuvre.</h2>
+        <p>The selected configuration was evaluated for 125 seconds in the nonlinear Cessna 182 model at a 100 m altitude reference, with nominal atmospheric conditions and the revised Energy/Throttle Controller.</p>
+      </div>
+      <div class="metrics">
+        <div class="metric"><strong>34.802 m</strong><span>Peak active-route cross-track error</span></div>
+        <div class="metric"><strong>1.000 m</strong><span>Peak absolute altitude error</span></div>
+        <div class="metric"><strong>27.347°</strong><span>Maximum absolute bank angle</span></div>
+        <div class="metric"><strong>66.888 m/s</strong><span>Minimum true airspeed</span></div>
+      </div>
+      <figure class="plot">
+        <a href="assets/swaraj/nominal-route.png" target="_blank" rel="noopener"><img src="assets/swaraj/nominal-route.png" width="1400" height="800" alt="SWARAJ final nominal valley trajectory, active cross-track error, route progress and heading response" loading="lazy"></a>
+        <figcaption>Nominal valley trajectory and guidance response (PDR Figure 26). The peak CTE meets the project's preferred 50 m target.</figcaption>
+      </figure>
+      <div class="two-plots">
+        <figure class="plot"><a href="assets/swaraj/lateral-response.png" target="_blank" rel="noopener"><img src="assets/swaraj/lateral-response.png" width="1400" height="800" alt="Aircraft bank, control surface and yaw-rate responses" loading="lazy"></a><figcaption>Aircraft bank and lateral-control execution.</figcaption></figure>
+        <figure class="plot"><a href="assets/swaraj/altitude-response.png" target="_blank" rel="noopener"><img src="assets/swaraj/altitude-response.png" width="1400" height="800" alt="Nominal altitude, pitch and flight-path-angle regulation" loading="lazy"></a><figcaption>Longitudinal coordination and altitude regulation.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="panel" id="disturbances">
+      <div class="section-heading">
+        <span class="eyebrow">05 / Disturbance-response research</span>
+        <h2>Recovery behaviour across four wind environments.</h2>
+        <p>Atmospheric disturbance cases were run with supplementary Gust Recovery Controller (GRC) intervention disabled and enabled. The comparisons make its effect on trajectory tracking measurable across longitudinal, lateral, vertical and combined wind schedules.</p>
+      </div>
+      <div class="feature-stat"><strong>58.68%</strong><p><b>Reduction in peak cross-track error during the combined disturbance case</b><br>91.526 m without GRC → 37.820 m with GRC.</p></div>
+      <div class="feature-stat"><strong>45.88%</strong><p><b>Reduction in peak cross-track error during the lateral disturbance case</b><br>83.104 m without GRC → 44.979 m with GRC.</p></div>
+      <figure class="figure-wrap">
+        <a href="assets/swaraj/gust-combined.png" target="_blank" rel="noopener"><img src="assets/swaraj/gust-combined.png" width="1400" height="800" alt="Combined wind response with GRC OFF and ON, including tracking and altitude behaviour" loading="lazy"></a>
+        <figcaption>Combined disturbance comparison. Full gust tests include airspeed, altitude, bank and tracking histories; refer to the PDR for the complete assessment.</figcaption>
+      </figure>
+      <details>
+        <summary>View the complete peak-error comparison</summary>
+        <div class="table-scroll"><table>
+          <thead><tr><th>Wind schedule</th><th>Peak CTE, OFF → ON</th><th>Peak altitude error, OFF → ON</th></tr></thead>
+          <tbody>
+            <tr><td>Longitudinal</td><td class="num">42.307 → 37.820 m</td><td class="num">2.140 → 1.744 m</td></tr>
+            <tr><td>Lateral</td><td class="num">83.104 → 44.979 m</td><td class="num">1.866 → 3.354 m</td></tr>
+            <tr><td>Vertical</td><td class="num">34.802 → 34.802 m</td><td class="num">7.897 → 10.502 m</td></tr>
+            <tr><td>Combined</td><td class="num">91.526 → 37.820 m</td><td class="num">8.672 → 11.333 m</td></tr>
+          </tbody>
+        </table></div>
+        <p class="soft-note">All figures are reported PDR results. The vertical and combined GRC-enabled cases motivate the next phase of longitudinal recovery refinement.</p>
+      </details>
+    </section>
+
+    <section class="panel" id="future">
+      <div class="section-heading">
+        <span class="eyebrow">06 / The next development phase</span>
+        <h2>The PDR establishes a foundation. The next goal is adaptable autonomy.</h2>
+        <p>Future work grows the validated simulation framework toward a more capable and aircraft-aware guidance architecture.</p>
+      </div>
+      <div class="roadmap">
+        <article class="roadmap-item"><span>01 — GUIDANCE</span><h3>Broader environments</h3><p>Extend preview and mission management to diverse route geometries, terminal guidance and geographical terrain data.</p></article>
+        <article class="roadmap-item"><span>02 — FLIGHT PHYSICS</span><h3>Aircraft-aware authority</h3><p>Coordinate bank demand with speed, available load-factor margin, energy management and predictive gust response.</p></article>
+        <article class="roadmap-item"><span>03 — VALIDATION</span><h3>Sensors and hardware</h3><p>Progress from mapped mathematical routes toward sensor-integrated navigation, hardware-in-the-loop testing and aircraft adaptation.</p></article>
+      </div>
+    </section>
+
+    <section class="panel resource-panel" id="report">
+      <div>
+        <span class="eyebrow">07 / Explore the complete research</span>
+        <h2>Preliminary Design Review.</h2>
+        <p>Read the full 94-page personal PDR for methodology, free-body diagrams, mathematical derivations, controller tuning, validation histories, literature references and future development. The original academic report is preserved unchanged.</p>
+        <p style="font-size:13px; margin-top:13px;">Independent work by Ninad Samrat Bhave · November 2026 · MATLAB / Simulink</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <a class="button" href="assets/swaraj/SWARAJ_PDR.pdf" target="_blank" rel="noopener">Open the full PDR ↗</a>
+        <a class="button" style="background:#e3ecee;color:#133044;border-color:#d8e5e6;" href="swaraj/README.md">Technical documentation ↗</a>
+        <a class="button" style="background:transparent;color:#133044;" href="uav.html">Earlier CDR project ↗</a>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="shell"><span>SWARAJ © 2026 Ninad Samrat Bhave · Independent aerospace research</span><a href="index.html">Return to engineering portfolio →</a></div>
+  </footer>
+</body>
+</html>
