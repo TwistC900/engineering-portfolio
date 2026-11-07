@@ -1,0 +1,174 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#091b2b"><title>Parametric 6-DoF Aircraft Dynamics | Ninad Bhave</title><meta name="description" content="One nonlinear aircraft model. Three distinct airframes. Explore Ninad Bhave’s parametric MATLAB/Simulink flight-dynamics architecture, governing physics and cross-aircraft validation."><meta property="og:image" content="https://twistc900.github.io/engineering-portfolio/assets/6dof/6dof-emblem.webp"><meta property="og:title" content="One model. Three aircraft. | Ninad Bhave"><meta property="og:description" content="Parametric nonlinear 6-DoF aircraft dynamics, automatic trim and modal validation across an 89:1 mass range."><link rel="canonical" href="https://twistc900.github.io/engineering-portfolio/6dof.html"><link rel="icon" type="image/webp" href="assets/6dof/6dof-emblem.webp"><style>
+    :root {
+      --navy: #091b2b;
+      --navy-2: #123147;
+      --ink: #1a2936;
+      --muted: #526372;
+      --paper: #f5f5f1;
+      --white: #fff;
+      --saffron: #d78538;
+      --gold: #e7bc79;
+      --teal: #0d7b82;
+      --border: #dce3e7;
+      --shadow: 0 16px 50px rgba(10, 35, 50, .07);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body { margin: 0; color: var(--ink); background: var(--paper); font-family: "Segoe UI", Arial, Helvetica, sans-serif; font-size: 16px; line-height: 1.7; }
+    a { color: inherit; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid var(--saffron); outline-offset: 4px; }
+    img { max-width: 100%; }
+    .shell { width: min(1160px, 90%); margin-inline: auto; }
+    .eyebrow { display: block; color: var(--teal); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .16em; }
+    .overline { font-size: 12px; letter-spacing: .17em; font-weight: 700; text-transform: uppercase; }
+    h1, h2, h3, p { margin-top: 0; }
+    h2 { font-size: clamp(30px, 3.5vw, 45px); line-height: 1.17; letter-spacing: -.032em; }
+    h3 { font-size: 21px; line-height: 1.3; }
+    p { color: var(--muted); }
+    .button { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 12px 19px; border: 1px solid var(--navy); border-radius: 7px; background: var(--navy); color: #fff; text-decoration: none; font-weight: 750; font-size: 14px; transition: transform .2s ease, background .2s ease; }
+    .button:hover { transform: translateY(-2px); background: #1b4255; }
+    .button.light { background: transparent; border-color: rgba(255,255,255,.4); color: #fff; }
+    .button.light:hover { background: rgba(255,255,255,.12); }
+    nav { position: sticky; z-index: 20; top: 0; background: rgba(7,23,37,.97); color: white; border-bottom: 1px solid rgba(232,192,131,.20); backdrop-filter: blur(14px); }
+    .nav-inner { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .nav-brand { color: #f4f5f1; text-decoration: none; letter-spacing: .08em; font-weight: 800; font-size: 15px; }
+    .nav-brand span { font-weight: 400; color: #b6cad3; letter-spacing: .02em; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 21px; }
+    .nav-links a { color: #c9d5db; font-size: 13px; text-decoration: none; font-weight: 650; }
+    .nav-links a:hover { color: var(--gold); }
+    .hero { color: white; overflow: hidden; position: relative; background: radial-gradient(ellipse at 73% 40%, rgba(19,88,103,.8), transparent 47%), linear-gradient(125deg, #071827 8%, #0b2639 62%, #102c38 100%); border-bottom: 5px solid #b9783f; }
+    .hero:before { content: ""; position: absolute; inset: 0; opacity: .24; pointer-events: none; background-image: repeating-radial-gradient(ellipse at 75% 35%, transparent 0, transparent 35px, rgba(177,214,215,.23) 36px, transparent 37px), linear-gradient(90deg, transparent 99%, rgba(255,255,255,.12) 100%); background-size: auto, 88px 88px; mask-image: linear-gradient(90deg, transparent, #000 34%); }
+    .hero-grid { display: grid; grid-template-columns: 1fr .88fr; align-items: center; gap: 40px; min-height: 570px; padding: 65px 0 56px; position: relative; }
+    .hero-copy { position: relative; z-index: 1; }
+    .hero-copy .overline { color: #f0c18b; }
+    .hero h1 { font-size: clamp(68px, 8vw, 112px); line-height: .98; margin: 18px 0 14px; letter-spacing: -.065em; font-weight: 850; }
+    .hero .subtitle { color: #eec58d; font-size: 15px; max-width: 520px; line-height: 1.5; font-weight: 650; }
+    .hero .tagline { color: #fff; font-weight: 600; font-size: clamp(24px, 2.5vw, 36px); line-height: 1.2; letter-spacing: -.025em; max-width: 600px; margin: 28px 0 13px; }
+    .hero .hero-text { color: #c6d5db; max-width: 590px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 27px; }
+    .hero-actions .button { background: var(--saffron); color: #172536; border-color: var(--saffron); }
+    .hero-actions .button.light { background: transparent; color: #fff; border-color: rgba(255,255,255,.4); }
+    .emblem-stage { position: relative; display: grid; place-items: center; min-height: 430px; }
+    .emblem-stage:before { content: ""; position: absolute; width: 86%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, rgba(197,127,61,.22) 0, rgba(197,127,61,.08) 45%, transparent 69%); box-shadow: 0 0 0 1px rgba(227,179,109,.13), 0 0 0 26px rgba(255,255,255,.018), 0 0 0 53px rgba(255,255,255,.013); }
+    .emblem-stage img { z-index: 1; width: min(470px, 100%); height: auto; filter: drop-shadow(0 28px 26px rgba(0,0,0,.4)); }
+    .emblem-label { z-index: 1; position: absolute; bottom: 0; color: #d7c4a6; font-size: 11px; text-align: center; text-transform: uppercase; letter-spacing: .15em; }
+    .hero-foot { position: relative; border-top: 1px solid rgba(255,255,255,.16); padding: 18px 0 23px; display: flex; gap: 40px; flex-wrap: wrap; color: #b5cbd2; font-size: 13px; }
+    .hero-foot strong { color: #fff; }
+    .page { padding: 48px 0 58px; }
+    .panel { margin-bottom: 28px; padding: clamp(25px, 4.5vw, 52px); background: var(--white); border: 1px solid #e6ebed; border-radius: 15px; box-shadow: var(--shadow); }
+    .section-heading { max-width: 900px; margin-bottom: 28px; }
+    .section-heading .eyebrow { margin-bottom: 12px; }
+    .section-heading p { max-width: 850px; font-size: 17px; }
+    .philosophy { background: #fcf9f2; border-left: 5px solid var(--saffron); display: grid; grid-template-columns: .7fr 1.3fr; align-items: center; gap: 36px; }
+    .philosophy h2 { margin-bottom: 0; }
+    .philosophy .eyebrow { color: #ae6426; margin-bottom: 10px; }
+    .philosophy p:last-child { margin-bottom: 0; }
+    .figure-wrap { background: #f9fbfb; padding: clamp(10px, 2.2vw, 25px); border: 1px solid var(--border); border-radius: 13px; margin: 24px 0 27px; }
+    .figure-wrap a { display: block; }
+    .figure-wrap img { display: block; width: 100%; border-radius: 5px; background: white; height: auto; }
+    figcaption { margin-top: 12px; font-size: 12px; color: #5d6b75; line-height: 1.55; }
+    .insight-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+    .insight { background: #f4f7f7; padding: 22px; border-radius: 11px; border: 1px solid var(--border); }
+    .insight .label { color: #a56832; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .12em; }
+    .insight h3 { margin: 9px 0 10px; }
+    .insight p { font-size: 14px; margin-bottom: 0; }
+    .mechanics-grid { display: grid; grid-template-columns: 1.3fr .85fr; align-items: center; gap: 34px; }
+    .mechanics-grid .figure-wrap { margin: 0; }
+    .mechanics-copy p { font-size: 15px; }
+    .equation { background: #122d41; border-left: 4px solid var(--saffron); color: #fff; border-radius: 7px; padding: 18px; margin: 17px 0; font-size: 25px; text-align: center; font-family: Georgia, "Times New Roman", serif; }
+    .equation small { display: block; color: #bfd0d5; font: 12px/1.5 "Segoe UI", Arial, sans-serif; margin-top: 6px; }
+    .architecture-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 11px; margin-top: 25px; }
+    .architecture-step { background: #102f43; color: white; padding: 23px 17px; border-radius: 10px; border-top: 4px solid #ce884b; }
+    .architecture-step span { display: block; color: #daa46b; font-size: 11px; font-weight: 800; letter-spacing: .12em; }
+    .architecture-step strong { display: block; font-size: 17px; margin: 8px 0; line-height: 1.25; }
+    .architecture-step p { color: #c4d4db; font-size: 13px; margin: 0; line-height: 1.55; }
+    .results-band { background: linear-gradient(120deg, #0b263b, #124155); border: 0; color: white; }
+    .results-band .eyebrow { color: #e3ad73; }
+    .results-band h2 { color: white; }
+    .results-band .section-heading p { color: #c4d4db; }
+    .metrics { display: grid; grid-template-columns: repeat(4,1fr); gap: 0; border: 1px solid rgba(255,255,255,.17); border-radius: 11px; overflow: hidden; margin-top: 25px; }
+    .metric { padding: 23px; border-right: 1px solid rgba(255,255,255,.17); background: rgba(255,255,255,.035); }
+    .metric:last-child { border-right: 0; }
+    .metric strong { display: block; font-size: clamp(25px, 2.65vw, 35px); line-height: 1.2; letter-spacing: -.04em; color: #f0c28d; }
+    .metric span { display: block; color: #c8d7df; font-size: 12px; margin-top: 7px; line-height: 1.5; }
+    .plot { margin-top: 27px; }
+    .plot img { width: 100%; height: auto; display: block; border-radius: 9px; }
+    .plot figcaption { color: #c2d4d9; }
+    .two-plots { display: grid; grid-template-columns: repeat(2,1fr); gap: 18px; }
+    .two-plots .plot { margin-top: 18px; }
+    .table-scroll { overflow-x: auto; margin-top: 25px; border-radius: 10px; border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; min-width: 615px; font-size: 14px; }
+    th { background: #eaf0f2; color: #233b4b; text-align: left; font-weight: 800; }
+    td, th { padding: 14px 16px; border-bottom: 1px solid #dce5e8; }
+    tbody tr:last-child td { border-bottom: 0; }
+    td.num { white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .feature-stat { display: flex; gap: 22px; align-items: center; padding: 22px 0; border-bottom: 1px solid var(--border); }
+    .feature-stat strong { font-size: 40px; min-width: 145px; letter-spacing: -.045em; color: #0b6871; line-height: 1; }
+    .feature-stat p { margin: 0; }
+    .soft-note { font-size: 13px; color: #687782; margin-top: 15px; }
+    details { border-top: 1px solid var(--border); padding: 15px 0; }
+    summary { font-weight: 750; cursor: pointer; }
+    details p { margin: 13px 0 0; }
+    .roadmap { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; margin-top: 25px; }
+    .roadmap-item { border: 1px solid var(--border); border-radius: 11px; padding: 23px; background: #f7f9fa; }
+    .roadmap-item span { color: #c77f3b; font-size: 12px; font-weight: 850; }
+    .roadmap-item h3 { margin: 9px 0; }
+    .roadmap-item p { font-size: 14px; margin: 0; }
+    .resource-panel { background: #fdf7ed; border: 1px solid #f0dfc9; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 22px; }
+    .resource-panel h2 { margin-bottom: 10px; }
+    .resource-panel p { max-width: 720px; margin-bottom: 0; }
+    footer { background: #071827; color: #bdcbd2; padding: 32px 0; font-size: 13px; }
+    footer .shell { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+    footer a { color: #f0c18b; }
+    @media (max-width: 950px) {
+      .hero-grid { grid-template-columns: 1fr .74fr; gap: 17px; }
+      .hero h1 { font-size: 75px; }
+      .emblem-stage { min-height: 340px; }
+      .mechanics-grid { grid-template-columns: 1fr; }
+      .mechanics-copy { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+      .architecture-row, .metrics { grid-template-columns: repeat(2,1fr); }
+      .metric:nth-child(2) { border-right: 0; }
+      .metric:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.17); }
+    }
+    @media (max-width: 700px) {
+      .nav-inner { align-items: flex-start; flex-direction: column; padding: 13px 0; gap: 8px; }
+      .nav-links { gap: 14px; }
+      .nav-links a { font-size: 12px; }
+      .hero-grid { grid-template-columns: 1fr; padding: 46px 0 28px; }
+      .hero h1 { font-size: clamp(65px, 15vw, 88px); }
+      .hero .tagline { font-size: 28px; }
+      .emblem-stage { min-height: 0; padding: 10px 0 27px; }
+      .emblem-stage img { width: min(370px, 75vw); }
+      .emblem-label { bottom: -6px; }
+      .hero-foot { gap: 9px 22px; font-size: 12px; }
+      .page { padding-top: 24px; }
+      .philosophy, .mechanics-copy, .resource-panel { grid-template-columns: 1fr; }
+      .insight-grid, .roadmap { grid-template-columns: 1fr; }
+      .two-plots { grid-template-columns: 1fr; }
+      .metric { padding: 17px; }
+      .metric strong { font-size: 28px; }
+      .architecture-row { gap: 9px; }
+      .architecture-step { padding: 18px 14px; }
+      .feature-stat { align-items: flex-start; gap: 11px; flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .button { transition: none; } }
+  
+.hero h1{font-size:clamp(48px,5.8vw,78px);line-height:1.04;letter-spacing:-.05em}.hero-grid{grid-template-columns:1.15fr .85fr}.hero .tagline{font-size:25px}.emblem-stage img{filter:drop-shadow(0 20px 28px #0006)}.physics-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.physics{border-top:3px solid #c18a4d;padding:22px;background:#f5f8f9;border-radius:8px}.formula{font-family:Georgia,serif;font-size:clamp(19px,2.2vw,26px);color:#123147;line-height:1.65;margin:15px 0;overflow-wrap:anywhere}.formula small{display:block;font:12px/1.6 Arial,sans-serif;color:#526372}.fleet{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.fleet article{padding:24px;border:1px solid #dce3e7;border-radius:10px;background:#f7f9fa}.fleet b{color:#a56832;font-size:12px;letter-spacing:.1em}.fleet h3{margin-top:9px}.fleet p{font-size:14px}.result-table table{min-width:570px}.result-table th{background:#183c50;color:#fff}.result-table td{color:#d6e4eb;border-color:#345062}.result-table{border-color:#345062}.bar-row{display:grid;grid-template-columns:150px 1fr 85px;gap:12px;align-items:center;margin:20px 0;font-size:14px}.bar-track{height:24px;background:#e5ecef;border-radius:4px;overflow:hidden}.bar{height:100%;background:linear-gradient(90deg,#0d6572,#2b91a0);min-width:3px}.caption{font-size:12px;color:#637481}.contact-actions{display:flex;gap:10px;flex-wrap:wrap}@media(max-width:700px){.hero-grid,.physics-grid,.fleet{grid-template-columns:1fr}.hero h1{font-size:52px}.bar-row{grid-template-columns:95px 1fr 70px;font-size:12px}.emblem-stage img{width:80vw}.hero .tagline{font-size:23px}}.emblem-stage img{border-radius:50%}</style></head><body>
+<nav aria-label="Main navigation"><div class="shell nav-inner"><a class="nav-brand" href="index.html">NINAD BHAVE <span>/ AIRCRAFT DYNAMICS</span></a><div class="nav-links"><a href="#architecture">Architecture</a><a href="#physics">Physics</a><a href="#results">Results</a><a href="#contribution">Contribution</a><a href="#contact">Contact</a></div></div></nav>
+<header class="hero"><div class="shell hero-grid"><div class="hero-copy"><span class="overline">Built from scratch · Independent aerospace research</span><h1>One model.<br>Three aircraft.<br>Six degrees<br>of freedom.</h1><p class="tagline">Change the aircraft. Preserve the physics.</p><p class="hero-text">A nonlinear flight-dynamics plant built from the governing equations in MATLAB/Simulink. It carries the Cessna 182, Piper PA-28 and Aerosonde UAV through one shared set of rigid-body equations—then tests whether each aircraft behaves as its own.</p><div class="hero-actions"><a class="button" href="#results">Explore the results ↓</a><a class="button light" href="#physics">Inside the model ↗</a></div></div><div class="emblem-stage"><img src="assets/6dof/6dof-emblem.webp" width="1000" height="1000" alt="Metallic aircraft and gyroscope insignia inspired by six-degree-of-freedom motion" fetchpriority="high"></div></div><div class="shell hero-foot"><span><strong>Developed by:</strong> Ninad Samrat Bhave</span><span><strong>Discipline:</strong> Flight dynamics &amp; simulation</span><span><strong>Scope:</strong> Nonlinear fixed-wing aircraft modelling</span></div></header>
+<main class="shell page">
+<section class="panel philosophy"><div><span class="eyebrow">The engineering problem</span><h2>A new airframe should not mean starting again.</h2></div><div><p>Autonomous flight-control research needs a plant that responds to the aircraft being studied. Rebuilding that plant for every airframe makes comparisons harder and ties higher-level research to a single vehicle.</p><p>I separated aircraft data from the governing dynamics, developed a common nonlinear simulation architecture, and tested it across two general-aviation aircraft and a small UAV. The result is a reusable foundation for investigating flight control across different configurations.</p></div></section>
+<section class="panel" id="architecture"><div class="section-heading"><span class="eyebrow">01 / Parameterisation with purpose</span><h2>Aircraft-specific data.<br>A common dynamic backbone.</h2><p>An <code>Aircraft_ID</code> selects geometry, mass, inertia, aerodynamic derivatives, control effectiveness and propulsion parameters. These inputs change the response while the underlying six-degree-of-freedom plant remains common.</p></div><div class="architecture-row"><article class="architecture-step"><span>01 / CONFIGURE</span><strong>Aircraft database</strong><p>Wing geometry, mass properties, stability derivatives and control characteristics.</p></article><article class="architecture-step"><span>02 / RESOLVE</span><strong>Air data &amp; loads</strong><p>Relative airflow, aerodynamic coefficients, propulsion, forces and moments.</p></article><article class="architecture-step"><span>03 / PROPAGATE</span><strong>Nonlinear dynamics</strong><p>Coupled translation and rotation, attitude kinematics and position.</p></article><article class="architecture-step"><span>04 / VERIFY</span><strong>Trim &amp; dynamic response</strong><p>Independent equilibrium solutions, open-loop propagation and modal comparisons.</p></article></div><p class="soft-note">Aircraft-state feedback connects the dynamic plant to the air-data and load calculations at each simulation step.</p></section>
+<section class="panel"><div class="section-heading"><span class="eyebrow">Built from scratch / What that means here</span><h2>From equations on paper<br>to a working nonlinear plant.</h2><p>The contribution is the implementation and integration: a database-driven aerodynamic model, air-data calculations, forces and moments, propulsion, coupled rigid-body equations, attitude and position kinematics, plus a repeatable trim and validation workflow. Classical mechanics provides the governing physics; I built the reusable simulation around it.</p></div><div class="physics-grid"><div><h3>Three coupled translational equations</h3><div class="formula">u̇ = X/m + rv − qw<br>v̇ = Y/m + pw − ru<br>ẇ = Z/m + qu − pv</div><p class="caption">X, Y, Z include all external forces, including body-resolved weight. u, v, w are inertial velocity components in the rotating body frame; p, q, r are body angular rates.</p></div><div><h3>Three coupled rotational equations</h3><div class="formula">[ṗ, q̇, ṙ]ᵀ =<br>I⁻¹ (M<sub>b</sub> − ω × Iω)</div><p>Using the full inertia tensor retains rotational coupling, including products of inertia where present in the selected dataset. Euler attitude and navigation-frame position are then propagated alongside these dynamic states.</p></div></div></section><section class="panel" id="physics"><div class="section-heading"><span class="eyebrow">02 / The physics inside the plant</span><h2>Forces create motion.<br>Moments change orientation.</h2><p>The model combines aerodynamic loads, propulsion and gravity with coupled rigid-body dynamics. Its six degrees of freedom describe translation along three axes and rotation about them.</p></div><figure class="figure-wrap"><a href="assets/6dof/aircraft-free-body.svg" target="_blank" rel="noopener"><img src="assets/6dof/aircraft-free-body.svg" width="1200" height="660" alt="Two engineering diagrams: longitudinal free-body forces at steady level trim, and right-handed aircraft body axes with force, moment and angular-rate definitions" loading="lazy"></a><figcaption>Free-body and coordinate diagrams prepared for this portfolio. The left panel shows a steady, level, zero-sideslip force balance with thrust along the body axis; the right defines the common rotating body frame. Arrow lengths and aircraft geometry are illustrative. Open for a larger view.</figcaption></figure><div class="physics-grid">
+<article class="physics"><span class="eyebrow">Airflow → aerodynamic loading</span><h3>Resolve the local flight condition</h3><div class="formula">V = √(uᵣ² + vᵣ² + wᵣ²)<br>q̄ = ½ρV²<br>L = q̄SC<sub>L</sub>, D = q̄SC<sub>D</sub><small>uᵣ, vᵣ, wᵣ: air-relative body velocities · ρ: density · S: wing area</small></div><p>Angle of attack, sideslip, angular rates and control deflections determine the coefficients. Dynamic pressure and geometry convert those coefficients into physical forces and moments.</p></article>
+<article class="physics"><span class="eyebrow">Forces → translation</span><h3>Keep the rotating frame coupled</h3><div class="formula">m(v̇<sub>b</sub> + ω × v<sub>b</sub>) = F<sub>total,b</sub><small>v<sub>b</sub>: body-axis velocity · ω = [p, q, r]ᵀ · total force includes gravity</small></div><p>The cross-product term accounts for the rotating body axes. Aerodynamic forces, thrust and the body-axis components of weight jointly determine translational acceleration.</p></article>
+<article class="physics"><span class="eyebrow">Moments → rotation</span><h3>Let inertia shape the response</h3><div class="formula">Iω̇ + ω × (Iω) = M<sub>b</sub><small>I: inertia tensor · M<sub>b</sub>: applied body-axis moments</small></div><p>Roll, pitch and yaw are coupled through the aircraft’s inertia. Changing mass properties and aerodynamic derivatives therefore produces a different dynamic response within the same equations.</p></article>
+<article class="physics"><span class="eyebrow">Body motion → flight path</span><h3>Connect attitude to position</h3><div class="formula">ṙ<sub>n</sub> = R<sub>b→n</sub>(φ, θ, ψ)v<sub>b</sub><small>R<sub>b→n</sub>: body-to-navigation rotation · φ, θ, ψ: Euler attitude angles</small></div><p>Attitude kinematics relate body rates to orientation. The rotation matrix then maps body velocity into navigation-axis position rates, closing the chain from loads to trajectory.</p></article></div>
+<details><summary>How the architecture accommodates higher-fidelity physics</summary><p>The Cessna 182 investigation retained an optional higher-fidelity propulsion representation for throttle-sensitive work. For the PA-28, the pitching-moment formulation includes the angle-of-attack-rate derivative C<sub>mα̇</sub> where supported by the dataset. Both refinements add fidelity within the shared architecture.</p><p>The equations above summarise the governing mechanics; the implemented aerodynamic coefficients and subsystem fidelity depend on the selected aircraft dataset.</p></details></section>
+<section class="panel"><div class="section-heading"><span class="eyebrow">03 / Three distinct configurations</span><h2>From general aviation to a 13.5 kg UAV.</h2><p>The test set spans approximately 13.5–1201 kg, an 88.97:1 mass ratio. Each aircraft brings a different balance of geometry, inertia, aerodynamics and propulsion.</p></div><div class="fleet"><article><b>01 / CESSNA 182</b><h3>Establish the baseline</h3><p>Initial nonlinear implementation, trim assessment and lateral-directional validation. Propulsion refinement addresses the precision needed for throttle equilibrium.</p></article><article><b>02 / PIPER PA-28</b><h3>Test an independent dataset</h3><p>A second general-aviation airframe tests repeatability, including short-period dynamics and a parameterised angle-of-attack-rate pitching-moment term.</p></article><article><b>03 / AEROSONDE UAV</b><h3>Challenge the scale</h3><p>A much lighter unmanned aircraft tests the shared architecture with substantially different mass and inertia, alongside nonlinear-to-linear modal comparisons.</p></article></div></section>
+<section class="panel results-band" id="results"><div class="section-heading"><span class="eyebrow">04 / The decisive cross-aircraft test</span><h2>Same solver. Different equilibria.</h2><p>All three aircraft started from the same generic optimisation estimate: α = 3°, elevator = 0° and throttle = 0.4. Previously frozen trim solutions were withheld. Only the aircraft selection and reference operating condition changed.</p></div><div class="metrics"><div class="metric"><strong>3 aircraft</strong><span>One nonlinear dynamic architecture</span></div><div class="metric"><strong>89:1</strong><span>Approximate tested mass range</span></div><div class="metric"><strong>120 s</strong><span>Common open-loop trim verification</span></div><div class="metric"><strong>≈3.2 mm</strong><span>Largest reported final altitude drift in that test</span></div></div><div class="table-scroll result-table"><table><caption style="text-align:left;padding:14px;color:#c4d4db;font-size:13px">Automatically solved straight-and-level trim · cross-aircraft study</caption><thead><tr><th>Aircraft</th><th>Speed / altitude</th><th>α</th><th>Elevator</th><th>Throttle</th></tr></thead><tbody><tr><td>Cessna 182</td><td>67.09 m/s / 1524 m</td><td>−3.1900°</td><td>+0.9849°</td><td>0.6210</td></tr><tr><td>Piper PA-28</td><td>50.00 m/s / 1200 m</td><td>−0.2606°</td><td>+0.0805°</td><td>0.4516</td></tr><tr><td>Aerosonde</td><td>35.00 m/s / 1000 m</td><td>+6.4893°</td><td>−2.0036°</td><td>0.3103</td></tr></tbody></table></div><p style="color:#c4d4db;margin-top:22px">The independently solved trim states remained close to equilibrium during propagation. Reported final altitude changes were approximately +3.2 mm, +1.1 mm and −0.15 mm respectively. These distinct trim solutions demonstrate that aircraft-specific parameters drive the shared plant’s behaviour.</p><p style="color:#a9c0cc;font-size:12px">Results apply to the selected model datasets and reference conditions. Throttle is normalised from 0 to 1; signed angles follow the model convention. The 120 s comparison is separate from the individual-aircraft 600 s equilibrium studies.</p></section>
+<section class="panel" id="validation"><div class="section-heading"><span class="eyebrow">05 / Beyond holding a trim point</span><h2>Does the aircraft respond correctly when disturbed?</h2><p>Modal analysis checks the character of the dynamics: short-period pitching motion, coupled yaw–roll oscillation, rapid roll decay and slow spiral evolution. Published reference models and local linearisation provide the relevant comparison bases.</p></div><div class="physics-grid"><div><h3>Aerosonde: nonlinear versus local linearisation</h3><p>Maximum absolute discrepancy across the seven evaluated lateral modal quantities: <strong>1.8233%</strong>, within the study’s 5% numerical comparison criterion.</p><div class="bar-row"><span>Dutch-roll damping</span><div class="bar-track"><div class="bar" style="width:36.466%"></div></div><strong>1.8233%</strong></div><div class="bar-row"><span>Roll pole</span><div class="bar-track"><div class="bar" style="width:1.21%"></div></div><strong>0.0605%</strong></div><div class="bar-row"><span>Spiral pole</span><div class="bar-track"><div class="bar" style="width:27.174%"></div></div><strong>1.3587%</strong></div><p class="caption">Selected absolute differences from the reported comparison. Each bar uses the same 0–5% scale. These compare two representations of the selected model.</p></div><div><h3>Preserving the physical character</h3><p>The Aerosonde’s weakly unstable spiral mode appears in both the linear reference and the nonlinear response. The simulation reproduces the predicted instability rather than simply returning every disturbed state to equilibrium.</p><h3>Independent PA-28 comparison</h3><p>Against the published PA-28 reference, short-period natural frequency differs by 5.324%, Dutch-roll natural frequency by 2.042%, and Dutch-roll damping by 8.474%. The comparison distinguishes agreement in modal frequency from agreement in damping.</p><p class="caption">Local-linear consistency and published-model comparisons serve different validation purposes; neither is a flight-test measurement.</p></div></div></section>
+<section class="panel" id="contribution"><div class="section-heading"><span class="eyebrow">06 / What I bring as an aerospace engineer</span><h2>Physics, software architecture<br>and evidence in one workflow.</h2><p>I built the parametric 6-DoF plant from scratch in MATLAB/Simulink and connected its implementation to a repeatable validation process, from governing equations through trim and dynamic-response assessment.</p></div><div class="insight-grid"><article class="insight"><span class="label">Flight dynamics</span><h3>Translate mechanics into simulation</h3><p>Implement coupled nonlinear aircraft motion, aerodynamic load calculations and kinematic transformations in MATLAB/Simulink.</p></article><article class="insight"><span class="label">Engineering architecture</span><h3>Design for reuse</h3><p>Separate configuration data from common equations, with optional aerodynamic and propulsion refinements where the investigation requires them.</p></article><article class="insight"><span class="label">Verification &amp; judgement</span><h3>Test what the model claims</h3><p>Use independent trim initialisation, open-loop equilibrium checks and modal comparisons to assess parameterisation and dynamic behaviour.</p></article></div></section>
+<section class="panel"><div class="section-heading"><span class="eyebrow">07 / Where this leads</span><h2>A foundation for aircraft-adaptable autonomy.</h2><p>The next step is to connect the reusable plant with behavioural supervisory flight control, then investigate how guidance and control strategies transfer between airframes. Broader operating-envelope checks and higher-fidelity datasets can extend the validation.</p></div><a class="button" href="swaraj.html">Explore SWARAJ flight-control research →</a></section>
+<section class="panel resource-panel" id="contact"><div><span class="eyebrow">Discuss the engineering</span><h2>Contact the author for further details.</h2><p>For technical discussion, modelling methodology or collaboration enquiries, get in touch with Ninad Samrat Bhave.</p></div><a class="button" href="mailto:ninadbhave4100@gmail.com?subject=Parametric%206-DoF%20Aircraft%20Dynamics">Contact Ninad ↗</a></section>
+</main><footer><div class="shell"><span>© 2026 Ninad Samrat Bhave · Parametric nonlinear aircraft dynamics</span><a href="index.html">Return to engineering portfolio →</a></div></footer></body></html>
